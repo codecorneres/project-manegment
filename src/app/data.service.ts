@@ -72,8 +72,8 @@ export class DataService {
     return this.http.post('api/createassignuser/', JSON.stringify(assignuser), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
     }
-    deleteAssignUser(taskid, userassigned){     
-    return this.http.post('api/deleteAssignUser/',{'taskid': taskid, 'userassigned':userassigned})  
+    deleteAssignUser(taskid, userassigned, user, projectid){     
+    return this.http.post('api/deleteAssignUser/',{'taskid': taskid, 'userassigned':userassigned, 'user':user, 'projectid' : projectid})  
            .map((response: Response) =>response.json())           
     }
     GetassignUser(taskid,projectid){  

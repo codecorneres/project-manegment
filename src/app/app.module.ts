@@ -30,7 +30,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { AssingtaskComponent } from './assingtask/assingtask.component';
 
 import { PushNotificationsService } from './push-notifications.service';
-
+import { CookieService } from 'ngx-cookie-service';
 
  
 @NgModule({
@@ -57,7 +57,7 @@ import { PushNotificationsService } from './push-notifications.service';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   
   ],
-  providers: [AuthService, DataService, PushNotificationsService],
+  providers: [AuthService, DataService, PushNotificationsService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

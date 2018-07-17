@@ -6,6 +6,20 @@ hr{
 	margin-top: 0rem;
     margin-bottom: 1rem;
     border: 0;
-    border-top: 1px solid #7f7b7b;
+    border-top: 1px solid #000;
     width:100%;
+}
+  .dropdown-item{
+  	color: #117a8b;
+    font-family: Poppins-Regular;
+    font-size: 18px;
+  	}  
+  	.bgclr:hover{
+  		background: #fff6f0 !important;
+  	} 
+  	.dropdown-item:active {
+  	    background-color: transparent !important;
+}
+.dropdown-item:hover {
+  	   background: #fff6f0 !important;
 }

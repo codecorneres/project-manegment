@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {Md5} from "md5-typescript";
+import { CookieService } from 'ngx-cookie-service';
 
 import { Form } from '../form';
 import { DataService } from '../data.service';
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
 	form = new Form;
   datas;
   loginuser;
-  constructor(private dataService: DataService, private router: Router,public auth: AuthService) { }
+  cookieValue = 'UNKNOWN';
+  constructor(private dataService: DataService, private router: Router,public auth: AuthService, private cookieService: CookieService) { }
 
   singUp(form){
   	this.form.password = Md5.init(this.form.password);
@@ -32,12 +34,16 @@ export class RegisterComponent implements OnInit {
     }); 
   }
   ngOnInit() {
-     this.loginuser = sessionStorage.getItem("LoggedInUser");
+    this.cookieValue = this.cookieService.get('LoggedInUser'); 
+    if(this.cookieValue!=""){
+       this.router.navigate(['/home']);
+    }
+     /*this.loginuser = sessionStorage.getItem("LoggedInUser");
     if(!this.loginuser){
       console.log(this.loginuser);
     }
     else{
       this.router.navigate(['/home']);
-    }
+    }*/
   }
 }

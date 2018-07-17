@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-invite',
@@ -15,11 +16,12 @@ email;
 form;
 status;
 notificationid;
-  constructor(private dataService: DataService, private router: Router, private auth: AuthService) { }
+  constructor(private dataService: DataService, private router: Router, private auth: AuthService,
+    private cookieService: CookieService) { }
   ngOnInit() {
-    this.email = sessionStorage.getItem("LoggedInUser");
+   // this.email = sessionStorage.getItem("LoggedInUser");
+   this.email = this.cookieService.get('LoggedInUser');
     this.notificationid = sessionStorage.getItem("notificationid");
-    console.log(this.notificationid);
     if(this.notificationid == null)
     {
       this.GetAllInvitation();
@@ -30,6 +32,7 @@ notificationid;
     }
   }
   accept(createmember){
+    createmember.email = this.email;
   	this.dataService.acceptrequest(createmember).subscribe(data =>  {this.datas = data
     this.router.navigateByUrl('/home');
   });

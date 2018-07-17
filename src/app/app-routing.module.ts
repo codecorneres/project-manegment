@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service';
 import { AuthGuard } from './auth/auth.guard'; 
 
 import { AppComponent } from './app.component';

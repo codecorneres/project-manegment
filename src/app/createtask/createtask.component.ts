@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data.service'; 
 import {NgForm} from '@angular/forms';
 import * as $ from 'jquery';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-createtask',
   templateUrl: './createtask.component.html',
@@ -24,14 +25,15 @@ user;
 asign;
 createtasks;
 
-  constructor(private dataService: DataService, private router: Router,private auth: AuthService) { }
+  constructor(private dataService: DataService, private router: Router,private auth: AuthService, private cookieService: CookieService) { }
   datas;
   users;
-  
+
   ngOnInit() {
   	this.projectname = sessionStorage.getItem("projectname");
     this.projectid = sessionStorage.getItem("projectid");
-    this.user = sessionStorage.getItem("LoggedInUser");
+   // this.user = sessionStorage.getItem("LoggedInUser");
+   this.user = this.cookieService.get('LoggedInUser');
     this.createtasks = sessionStorage.getItem("createtask");
     console.log(this.createtasks);
       this.Gettasks(this.projectid);
@@ -86,7 +88,8 @@ createtasks;
   }
   createtask(createtasks){
   	this.dataService.createnewtasks(createtasks).subscribe(data => {this.datas = data.data
-  		this.Gettasks(this.projectid);
+      $("#email").val('');
+  		this.Gettasks(this.projectid);  
   	});
   }
   Setdescription(updatetask){
@@ -96,12 +99,14 @@ createtasks;
     });
   }
   createassignuser(assignuser){
+    assignuser.user = this.user;
     this.dataService.createassignuser(assignuser).subscribe(data => {
         this.GetassignUser(assignuser.projecttaskid);
     });
   }
   deleteUser(userassigned,taskid){
-     this.dataService.deleteAssignUser(taskid,userassigned).subscribe(data => {
+   
+     this.dataService.deleteAssignUser(taskid,userassigned, this.user,  this.projectid).subscribe(data => {
         this.GetassignUser(taskid);
     });
   }
@@ -110,7 +115,7 @@ createtasks;
     createmember.notify = ("You are invited by " +createmember.user+ " for " +createmember.projectname+" project");
     this.dataService.inviteprojectuser(createmember).subscribe(data =>  {this.datas = data.data  
    $("#error").show();
-      setTimeout(function() { $("#error").hide(); }, 5000);   
+      setTimeout(function() { $("#error").hide(); }, 3000);   
     });
     $("#email").val('');
   }

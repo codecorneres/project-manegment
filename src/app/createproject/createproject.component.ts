@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data.service';
 import { Form } from '../form';
 import { PushNotificationsService } from '../push-notifications.service';  
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-createproject',
   templateUrl: './createproject.component.html',
@@ -17,10 +18,11 @@ datas;
 email;
  private title: string = 'Browser Push Notifications!'; 
 constructor(private dataService: DataService, private router: Router,
-  public auth: AuthService, private _notificationService: PushNotificationsService) { 
+  public auth: AuthService, private _notificationService: PushNotificationsService,
+  private cookieService: CookieService) { 
     this._notificationService.requestPermission();
 }
- notify() {  
+ /*notify() {  
         let data: Array < any >= [];  
         data.push({  
             'title': 'Approval',  
@@ -43,7 +45,7 @@ constructor(private dataService: DataService, private router: Router,
             'alertContent': 'This is Fifth Alert'  
         }); 
         this._notificationService.generateNotification(data);  
-    } 
+    } */
 createproject(form){
   form.email = this.email;
 		this.dataService.createnewproject(form).subscribe(data => {
@@ -61,6 +63,7 @@ createmember(createmember){
 	console.log(createmember);
 }
   ngOnInit() {
-    this.email = sessionStorage.getItem("LoggedInUser");
+   // this.email = sessionStorage.getItem("LoggedInUser");
+    this.email = this.cookieService.get('LoggedInUser');
   }
 }

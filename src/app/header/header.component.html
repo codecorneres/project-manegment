@@ -81,7 +81,6 @@
         
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <div *ngFor="let notification of datas;let ind = index ">
-        <p>{{notification.length}}</p>
         <a class="dropdown-item" (click) = "asseptnotification(notification.projectid,notification._id)">{{notification.notify}}</a>
           <div class="dropdown-divider"></div>
           </div>

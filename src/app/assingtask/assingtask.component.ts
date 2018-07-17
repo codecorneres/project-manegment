@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data.service'; 
 import {NgForm} from '@angular/forms';
 import * as $ from 'jquery';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-assingtask',
   templateUrl: './assingtask.component.html',
@@ -13,7 +14,8 @@ import * as $ from 'jquery';
 })
 export class AssingtaskComponent implements OnInit {
 
-constructor(private dataService: DataService, private router: Router,private auth: AuthService) { }
+constructor(private dataService: DataService, private router: Router,private auth: AuthService,
+  private cookieService: CookieService) { }
 assingtaskform;
 projectname;
 projectid;
@@ -25,7 +27,8 @@ description;
   ngOnInit() {
   	this.projectname = sessionStorage.getItem("projectname");
     this.projectid = sessionStorage.getItem("projectid");
-    this.user = sessionStorage.getItem("LoggedInUser");
+   // this.user = sessionStorage.getItem("LoggedInUser");
+    this.user = this.cookieService.get('LoggedInUser');
     this.createtasks = sessionStorage.getItem("createtask");
     console.log(this.createtasks);
 

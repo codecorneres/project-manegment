@@ -38,6 +38,7 @@
     "mongodb": "^3.1.0",
     "mongoose": "^5.2.1",
     "ng-socket-io": "^0.2.4",
+    "ngx-cookie-service": "^1.0.10",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
     "socket.io": "^2.1.1",
@@ -65,7 +66,7 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1"
   },
-   "engines": {
+  "engines": {
     "node": "8.11.3",
     "npm": "6.1.0"
   }

@@ -4,6 +4,7 @@ import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { PushNotificationsService } from '../push-notifications.service'; 
 import * as $ from 'jquery'; 
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,7 +15,14 @@ forms;
 datas;
 email;
 createtask;
-  constructor(private dataService: DataService, private router: Router, private auth: AuthService, private _notificationService: PushNotificationsService) { 
+  cookieValue = 'UNKNOWN';
+
+  constructor(
+    private dataService: DataService, 
+    private router: Router, 
+    private auth: AuthService,
+    private _notificationService: PushNotificationsService, 
+    private cookieService: CookieService) { 
   }
    createTask = function(projectname, projectid) {
     sessionStorage.setItem('projectname', projectname);
@@ -54,17 +62,19 @@ createtask;
 
   }
   ngOnInit() {
-    this.email = sessionStorage.getItem("LoggedInUser");
+    this.cookieValue = this.cookieService.get('LoggedInUser');
+   // this.email = sessionStorage.getItem("LoggedInUser");
     let data: Array < any >= [];  
-        data.push({  
-            'title': 'Home Notification',  
-            'alertContent': 'This is Notification Service Alert'  
-        });  
-        this._notificationService.generateNotification(data);
-       this.getAllProject();
-    this.dataService.GetAcceptdProject(this.email).subscribe(data =>  this.datas = data); 
+      data.push({  
+          'title': 'Home Notification',  
+          'alertContent': 'This is Notification Service Alert'  
+      });  
+    this._notificationService.generateNotification(data);
+
+    this.getAllProject();
+    this.dataService.GetAcceptdProject(this.cookieValue).subscribe(data =>  this.datas = data); 
   }
   getAllProject(){
-    this.dataService.GetAllProject(this.email).subscribe(data =>  this.forms = data);
+    this.dataService.GetAllProject(this.cookieValue).subscribe(data =>  this.forms = data);
   }
 }

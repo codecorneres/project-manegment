@@ -35,10 +35,8 @@ var Schema = mongoose.Schema;
 
 var notificationschema = new Schema({ 
   projectid : { type: String},
-  projectname : { type: String},
   assignuser : { type: String},
   projecttaskid : { type: String},
-  projecttaskname: { type: String},
   user : { type: String},
   notify : { type: String},
   action :{ type: String}
@@ -254,18 +252,6 @@ app.post("/api/getTaskDescription",function(req,res){
      } 
    });
 })
-/*app.post("/api/GetUsers/",function(req,res){  
-    project_user.find().where({ projectid : req.body.projectid}).
-          exec(function(err, data){  
-              if(err){  
-                  res.send(err);  
-              }  
-              else{              
-                  res.send(data); 
-                  }  
-          });  
-});*/
-
 app.post("/api/Setdescription",function(req,res){ 
     task.findByIdAndUpdate(req.body.task, { description: req.body.description},  
    function(err,data) {  
@@ -325,23 +311,46 @@ app.post("/api/inviteprojectuser",function(req,res){
   })
 })
 app.post("/api/createassignuser",function(req,res){ 
+  console.log(req.body.user);
     var assignusertask = new task_user(req.body); 
     assignusertask.save(function(err,data){  
     if(err){  
          res.send(err);                
       }  
       else{        
-          res.send({data:"Record has been Inserted"});  
+            req.body.action = "unseen";
+            req.body.notify = ("Your are invited by "+req.body.user+" for "+req.body.projecttaskname+" task ");
+            var notifications = new notification(req.body); 
+            notifications.save(function(err,data){  
+            if(err){  
+               res.send(err);                
+            }  
+            else{
+              res.send({data:"Notification has been Inserted..!!"}); 
+            }
+          })
       }
     });
 })
 app.post("/api/deleteAssignUser",function(req,res){
+  console.log(req.body.projectid);
   task_user.remove({ "projecttaskid": req.body.taskid,"assignuser": req.body.userassigned }, function(err) {    
             if(err){    
                  res.send(err);    
             }    
-            else{      
-                res.send({data:"Record has been Deleted..!!"});               
+            else{    
+                req.body.assignuser = req.body.userassigned   
+                req.body.action = "unseen";
+                req.body.notify = ("Your are Deleted by "+req.body.user+" for task ");
+                var notifications = new notification(req.body); 
+                notifications.save(function(err,data){  
+                if(err){  
+                   res.send(err);                
+                }  
+                else{
+                  res.send({data:"Notification has been Inserted..!!"}); 
+                }
+              })               
             }    
           });
 })
@@ -485,6 +494,7 @@ app.post("/api/GetAcceptdProject/",function(req,res){
   });  
 }); 
 app.post("/api/acceptrequest",function(req,res){ 
+  req.body.status = "true";
   project_user.findByIdAndUpdate(req.body.id, { status: req.body.status},  
   function(err,data) {  
    if (err) {  
