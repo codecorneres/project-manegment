@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.green{
+	color: #109410;
+}

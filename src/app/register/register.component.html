@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="limiter" *ngIf="!auth.isLoggednIn()">
+    <div class="container-login100">
+     
+      <div class="wrap-login100">
+        <div class="login100-pic js-tilt" data-tilt>
+          <img src="assets/images/img-01.png" alt="IMG">
+        </div>
+
+        <form class="login100-form validate-form" #forms="ngForm" (ngSubmit)="singUp(form)">
+          <span class="login100-form-title">
+            Create New Account
+          </span>
+          <div class="wrap-input100 validate-input" [class.has-error]="name.invalid && name.touched">
+			 <input type="text" name="name" class="input100" placeholder="name" required #name="ngModel" [(ngModel)]="form.name" >
+			 <span class="symbol-input100">
+              <i class="fa fa-user-o" aria-hidden="true"></i>
+            </span>
+		 </div>
+		  <span class="help-block" *ngIf="name.invalid && name.touched">Name Is Required</span>
+          <div class="wrap-input100 validate-input" [class.has-error]="email.invalid && email.touched">
+            <input class="input100" type="email" name="email" placeholder="email@gmail.com" required #email="ngModel" [email]="form.email!==''" [(ngModel)]="form.email" >
+            <span class="symbol-input100">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+            </span>
+          </div>
+          <span class="help-block" *ngIf="email.errors?.email && email.touched"> Email Is Invalid</span>
+
+          <div class="wrap-input100 validate-input" [class.has-error]="password.invalid && password.touched"> 
+            <input class="input100" type="password" id="password" placeholder="Password"  #password="ngModel" [(ngModel)]="form.password"  name="password" value="" required minlength="4">
+            <span class="symbol-input100">
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </span>
+          </div>
+          <span class="help-block " id="errors" style="display: none;">{{errors}}</span>
+
+          <div class="container-login100-form-btn">
+            <button type="submit" class="login100-form-btn btn" [disabled]="!forms.valid">
+             Sign Up
+            </button>
+          </div>
+           <div class="text-center p-t-12">
+           
+            <p class="red" id="show">{{datas}}</p> 
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>

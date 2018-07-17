@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+<!--       <app-slidbar></app-slidbar> -->
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+      	<div class="col-md-3" *ngFor="let project of forms;let ind = index ">
+          <div class="col-sm-12 md3" >
+          <div [attr.class]="'hidediv' +ind">
+            <div (click)= "createTask(project.name,project._id)">
+        		<h5>{{project.name}}</h5>
+            <span class="pdng">Create New Task</span><br>
+          </div>
+            <span class="pdngs" (click) ="showtoggle(ind)">Edit</span>
+            <span class="right" (click) = "confirmdelete('demo' +ind)">Delete</span>
+            <div [attr.id]="'demo' +ind" class="collapse deletdm">
+                            <p>Are you sure you want to delete the comment?</p>
+                            <button type="submit" class="btn-danger" (click) ="deleteProject(project._id)">Yes</button>
+                            <button type="button" class="no" (click) = "nodelete('demo' +ind)">No</button>
+                         </div>
+            </div>
+            <div [attr.class]="'showclstdiv' +ind" style="display: none">
+              <form class="frmcls" id="commentform" #forms="ngForm" (ngSubmit)="updatproject(forms.value)">
+                  <div>
+                    <input type="hidden" id="id" name="id" [(ngModel)]="project._id"/>
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required [(ngModel)]="project.name"/>
+                    </div>
+                  </div>
+                  <div class="inln">
+                  <button type="submit" class="btn btn-primary cretsk" [disabled]="!forms.valid">Save</button>
+                  <span (click)="hidetoggle(ind)" id="bt" class="hideshow">
+                    <button type="button" class="close" style="font-size: 37px;">&times;</button>
+                </span>
+                </div>
+              </form>
+            </div>
+          </div>
+      	</div>
+      	<div class="col-md-3">
+          <div class="col-sm-12 md4">
+      	    <a class="navbar-link" routerLink = "/createproject" > + create New Project....</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let acceptproject of datas;let ind = index ">
+          <div class="col-sm-12 md3" (click)= "createAssignTask(acceptproject.projectname,acceptproject.projectid)">
+            <h5>{{acceptproject.projectname}}</h5>
+            <span class="pdng">Create New Task</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

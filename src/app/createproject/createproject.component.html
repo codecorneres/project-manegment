@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-2">
+    <!-- <app-slidbar></app-slidbar> -->
+  </div>
+  <div class="col-md-10">
+  		<div class="row mrgn">
+	  		<div class="col-md-3"></div>
+	  		<div class="col-md-6">
+				<form class="frmcls" #forms="ngForm" (ngSubmit)="createproject(form)">
+		          <span class="login100-form-title">
+		           Create new Project
+		          </span>
+		           <div class="form-group">
+					 	<input type="text" name="name" class="form-control" placeholder="Add project" required [(ngModel)]="form.name" >
+				 	</div>
+				 	<button type="submit" class="btn btn-primary" [disabled]="!forms.valid"> Add </button>
+				 	<span style="color: green;">{{datas}}</span>
+		        </form><!-- 
+		         <button (click)="notify()">Show Notiication</button> -->
+		        <!-- <div style="text-align:center">
+   <button (click)="sendNotification()">Send Notification</button>
+</div> -->
+	        </div>
+	        <div class="col-md-3"></div>
+        </div>
+	</div>
+</div>
+</div>

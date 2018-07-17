@@ -1,0 +1,193 @@
+.row{
+	    margin-right: 0px !important; 
+    	margin-left: 0px !important;
+}
+.margntp{
+	margin-top: 30px;
+}
+.md3{
+	background: #ccc;
+    padding: 10px;
+}
+.ssd{
+    float: right;
+    right: 0px;
+}
+.hideshow{
+	padding-right: 35px;
+}
+
+.frmcls1{
+	padding-top: 10px;
+}
+#bt{
+	margin-top: 10px;
+    margin-left: 12px;
+    font-size: 22px;
+    cursor: pointer;
+}
+#bt1, .ssd{
+	cursor: pointer;
+}
+.dropdown{
+	margin-bottom: 10px;
+}
+.dropdown-item{
+	    border: 1px solid #ccc;
+}
+.dropdown-item:hover{
+	 background: #eaeaea;
+}
+.dropdown-menu{
+	padding: 0px;
+}
+.modal-header {
+	border-bottom: 1px solid transparent !important;
+    padding-bottom: 0px !important;
+}
+.mdr4{
+	text-align: center;
+    padding-top: 15px;
+}
+.titlecl{
+margin-left: 8px;
+}
+.md8{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+#bt1{
+	margin-top: 0;
+    margin-bottom: 0 !important;
+}
+#bt1:hover{
+	color:#000;
+	text-decoration: underline;
+}
+.task{
+	font-size: 14px;
+    height: 32px;
+    border-radius: 3px;
+    padding: 3px;
+}
+.pop-over {
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #d6dadc;
+    border-bottom-color: #c4c9cc;
+    box-shadow: 0 1px 6px rgba(0,0,0,.15);
+    right: -9999px;
+    top: -9999px;
+    width: 304px;
+    z-index: 70;
+}
+.pcls{
+	background: #348fca;
+    padding: 5px;
+    color: #fff;
+    border: 1px solid;
+    margin: 10px;
+    width: 94%;
+}
+.pbtn{
+    padding: 5px;
+    color: #fff;
+    border: 1px solid;
+    margin: 10px;
+    width: 90%;
+    margin-right: 0px;
+    cursor: not-allowed;
+    margin-left: 2px;
+}
+.dspn{
+    padding: 8px 3px;
+    background: #ccc;
+    margin: 0px;
+}
+.pcls:hover{
+	background: #89bada;
+}
+#showbtn{
+	padding-left: 23px;
+    padding-right: 23px;
+}
+#btss{
+	margin-bottom: 1.5rem;
+}
+.modal-content {
+    width: 140% !important;
+}    
+.frmcolaps{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 3px;
+    background: #fff;
+}
+.btnss{
+    margin-top: 7px;
+}
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem transparent !important;
+}
+.adbtn{
+    background: #e2e4e6;
+    box-shadow: 0 1px 0 0 #c4c9cc;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 32px;
+    margin-top: 8px;
+    max-width: 300px;
+    overflow: hidden;
+    padding: 6px 8px 6px 11px;
+    position: relative;
+    text-decoration: none;
+}
+.marcltp{
+    margin-top: 40px;
+}
+.cmntclm{
+    border-bottom: 1px solid #ccc;
+        margin-top: 10px;
+}
+.cmntp{
+    padding: 8px 10px;
+    background: #eaeaea;
+}
+.cmntspn{
+    font-weight: bold;
+    margin: 10px;
+}
+.cmnth3{
+    margin: 0 0 0 11px;
+    font-size: 17px ;
+    font-weight: bold;
+}
+.inln{
+    display: inline-flex;
+}
+.cretsk{
+    margin-top:10px; 
+    padding: 0px 10px;
+}
+.fa-hashtag{
+    color:#949090;
+    font-size: 14px;
+}
+.btns{
+    margin-right: 10px;
+    text-decoration: underline;
+}
+.delet, .btns{
+    cursor: pointer;
+}
+.deletdm{
+    border: 1px solid rgb(204, 204, 204);
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+.btn-danger{
+    margin-right: 10px;
+}

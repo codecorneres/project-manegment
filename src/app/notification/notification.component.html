@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+<!--       <app-slidbar></app-slidbar> -->
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+      <h5>Notification</h5>
+      <hr>
+		<div class="col-md-12" *ngFor="let notification of datas;let ind = index ">
+		    <a  class="dropdown-item">{{notification.notify}}</a>
+		    <div class="dropdown-divider"></div>
+		</div>
+	</div>
+</div>
+</div>
+</div>

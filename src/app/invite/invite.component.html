@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+<!--       <app-slidbar></app-slidbar> -->
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-sm-12 md3" *ngIf="forms?.length <= 0;else assignTaskdiv">
+          <span> No Request Send</span> 
+        </div>
+        <ng-template #assignTaskdiv>
+      	<div class="col-md-3" *ngFor="let project of forms;let ind = index ">
+          <div class="col-sm-12 md3" data-toggle="collapse" [attr.data-target]="'s' +ind +1">
+        		<h5 >{{project.projectname}}</h5>
+            	<div>
+            		<!-- <span (click)="accept(project._id,project.projectid)" >Accept</span> -->
+                <form class="frmcls" id="commentform" #forms="ngForm" (ngSubmit)="accept(forms.value)">
+                  <div>
+                  <input type="hidden" id="id" name="id" [(ngModel)]="project._id"/>
+                    <input type="hidden" id="projectid" name="projectid" [(ngModel)]="project.projectid"/>
+                    <input type="hidden" id="projectname" name="projectname" [(ngModel)]="project.projectname"/>
+                    <input type="hidden" id="user" name="user" [(ngModel)]="project.assignuser"/>
+                  </div>
+                  <div class="inln">
+                  <span class="pdngs">Decline</span>
+                  <button type="submit" class="right" [disabled]="!forms.valid">Accept</button>
+                </div>
+              </form>
+            	</div>
+          </div>
+      </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+</div>

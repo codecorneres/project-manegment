@@ -1,0 +1,38 @@
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.row{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.md3{
+	height: 77px;
+    padding-top: 20px;
+    margin-top: 35px;
+    background: #f1f1f1;
+}
+.md4{
+	height: 77px;
+    margin-top: 35px;
+    background: #f1f1f1;
+    padding: 27px 15px;
+}
+ h5 {
+    font-size: 1.13rem !important;
+}
+.right{
+    float: right;
+    font-size: 12px;
+    text-decoration: underline;
+    border: 0px;
+    background: none;
+}
+.pdngs{
+    padding-top: 10px !important;
+    font-size: 12px;
+    text-decoration: underline;
+}
+.pdngs:hover, .right:hover{
+      color: #923a3a;
+}

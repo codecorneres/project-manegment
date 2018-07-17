@@ -1,0 +1,171 @@
+<app-header></app-header>
+<div class="container-fluid">
+<div class="row" *ngIf= "createtasks == 'createtask';else assignTaskdiv">
+  <div class="col-md-2">
+    <!-- <app-slidbar></app-slidbar> -->
+  </div>
+  <div class="col-md-8">
+  <div class="row margntp">
+  	<div class="col-sm-12">
+  		<h5>{{projectname}}</h5>
+	</div>
+	<div class="col-sm-2" *ngFor="let forms of form;let ind = index ">
+	  	<div class="col-sm-12 md3">
+		  	<span> {{forms.task}}</span> 
+		  	<span class="ssd" data-toggle="modal" [attr.data-target]="'#s' +ind +1" (click)="GetassignUser(forms._id)"><i class="fa fa-eye" aria-hidden="true" style="font-size: 12px;"></i></span>
+		  	<div class="modal fade" [attr.id]="'s' +ind +1" role="dialog">
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			      	<div class="modal-header">
+			      		<i class="fa fa-th" aria-hidden="true" style="margin-top: 5px;"></i>  <span class="titlecl">{{forms.task}}</span>
+			      		<span *ngFor="let asigns of asign;let ind = index " style="margin-left: 5px;">{{asigns.assignuser}}</span>
+			      		<button type="button" class="close" data-dismiss="modal">&times;</button>
+			      	</div>
+			      	<div class="modal-body">
+			      		<div class="row">
+			      			<div class="col-md-8 md8">
+						       <form class="frmcls" #setmembers="ngForm" (ngSubmit)="Setdescription(setmembers.value)">
+						        	<input type="hidden" id="task" name="task" [(ngModel)]="forms._id"/>
+						        	<div class="form-group">
+			       	 					<label for="description" class="control-label"><i class="fa fa-indent" aria-hidden="true"></i> Description:</label>
+						        		<textarea rows="4" cols="50" class="form-control" id="description" name="description" [(ngModel)]="forms.description" placeholder="Add description...." required> </textarea>
+						        	</div>
+						        	<button type="submit" [disabled]="!setmembers.valid" class="btn btn-primary"> Save</button>
+						        </form>	
+
+						        <form class="frmcls1" #comments="ngForm" (ngSubmit)="createcomments(comments.value)">
+						        	<input type="hidden" id="projectname" name="projectname" [(ngModel)]="projectname"/>
+						        	<input type="hidden" id="projectid" name="projectid" [(ngModel)]="projectid"/>
+						        	<input type="hidden" id="taskid" name="taskid" [(ngModel)]="forms._id"/>
+						        	<input type="hidden" id="task" name="task" [(ngModel)]="forms.task"/>
+						        	<input type="hidden" id="user" name="user" [(ngModel)]="user"/>
+						        	<div class="form-group">
+			       	 					<label for="comment" class="control-label"><i class="fa fa-comment-o" aria-hidden="true"></i> Add comment:</label>
+						        		<textarea rows="4" cols="50" class="form-control" id="comment" name="comment" [(ngModel)]="comment" placeholder="Add comment...." required value=""></textarea>
+						        	</div>
+						        	<button type="submit" [disabled]="!comments.valid" class="btn btn-primary"> Save</button>
+						        </form>
+
+						        <div class="row" style="margin: 15px 0px;">
+						        	<span><i class="fa fa-hashtag" aria-hidden="true"></i></span><p class="cmnth3">Activity</p>
+						        </div>
+						        <div class="row" *ngFor="let comments of commentdata;let ind = index ">
+						        	<div class="col-md-12 cmntclm"  *ngIf="comments.user == user;else nextdiv">
+						        		<span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn">{{comments.user}}</span>
+						        		<div [attr.class]="'hidediv' +ind">
+						        		<p class="cmntp">{{comments.comment}}</p>
+						        		<span class="btns" (click) ="showtoggle(ind)">edit</span>
+						        		<span class="delet" (click)="confirmdelete('demo' +ind)">Delete</span>
+						        		 <div [attr.class]="'demo' +ind" style="display: none;">
+						        		 		<p>Are you sure you want to delete the comment?</p>
+						        		 		<button type="submit" class="btn-danger" (click) ="deleteComment(comments._id,comments.taskid)">Yes</button>
+						        		 		<button type="button" class="no" (click) ="nodelete('demo' +ind)">No</button>
+						        		 </div>
+						        		</div>
+						        		<!-- <ng-container *ngIf="showuser[ind]"> -->
+										<div [attr.class]="'showclstdiv' +ind" style="display: none">
+											<form class="frmcls" id="commentform" #forms="ngForm" (ngSubmit)="updatcomment(forms.value)">
+											    <div>
+											    	<input type="hidden" id="id" name="id" [(ngModel)]="comments._id"/>
+											    	<input type="hidden" id="taskid" name="taskid" [(ngModel)]="comments.taskid"/>
+										        	<div class="form-group">
+										        		<textarea rows="2" cols="20" class="form-control" id="comments" name="comment" [(ngModel)]="comments.comment" ></textarea>
+										        	</div>
+											    </div>
+											    <div class="inln">
+											    <button type="submit" class="btn btn-primary cretsk" [disabled]="!forms.valid">Save</button>
+											    <span (click)="hidetoggle(ind)" id="bt" class="hideshow">
+									    			<button type="button" class="close" style="font-size: 37px;">&times;</button>
+												</span>
+												</div>
+											</form>
+										</div>
+										<!-- </ng-container> -->
+						        	</div>
+						        	<ng-template #nextdiv>
+						        	<div class="col-md-12 cmntclm">
+						        		<span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn">{{comments.user}}</span>
+						        		<p class="cmntp">{{comments.comment}}</p>
+						        	</div>
+						        	</ng-template>
+						        </div>
+						    </div>
+						    <div class="col-md-4 mdr4">
+					        	<button type="button" class="adbtn" (click)="showdiv()" id="showbtn">{{buttonsName}}</button>
+
+					        	<ng-container *ngIf="shows">
+					        	<div class="pop-over">
+					        		<p (click)="showdiv()" id="btss" class="btnshow">
+					        		<button type="button" class="close" data-dismiss="modal">&times;</button></p>
+					        		<div *ngFor="let assignuser of asign;let ind = index ">
+					        		 <div *ngIf= "assignuser.is_assigned == true;else second">
+					        			<button type="submit" disabled class="pbtn" style="background-color: #ccc;">{{assignuser.assignuserdata}}</button><span class="dspn" (click) = deleteUser(assignuser.assignuserdata,forms._id) ><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+						        	</div> 
+
+					        		<ng-template #second>
+					        		<form class="assignusr" #assignusr="ngForm" (ngSubmit)="createassignuser(assignusr.value)">
+					        			<input type="hidden"  name="projectid" [(ngModel)]="projectid">
+			   							<input type="hidden"  name="projectname" [(ngModel)]="projectname">
+			   							<input type="hidden" name="projecttaskid" class="task" [(ngModel)]="forms._id">
+			   							<input type="hidden" name="projecttaskname" class="task" [(ngModel)]="forms.task">
+			   							<input type="hidden" name="assignuser" class="task" [(ngModel)]= "assignuser.assignuserdata">
+			   							<button type="submit" class="pcls">{{assignuser.assignuserdata}}</button>
+					        		</form>
+			   						 </ng-template>
+
+					        		</div>				        		
+								</div>
+					        	</ng-container>
+					        </div>
+					    </div>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2" style="padding-right: 0px !important;">
+	  	<div class="col-sm-12 md3">
+	  		<p (click)="toggle()" id="bt1">{{buttonName}} </p>
+			<ng-container *ngIf="show">
+			<form class="frmcls" #forms="ngForm" (ngSubmit)="createtask(forms.value)">
+			    <div>
+			    	<input type="hidden" id="user" name="user" [(ngModel)]="user" />
+			    	<input type="hidden" id="projectid" name="projectid" [(ngModel)]="projectid" />
+			   		<input type="hidden" id="projectname" name="projectname" [(ngModel)]="projectname" />
+			       	<input id="tbname" name="task" class="form-control task" placeholder="Add Task" [(ngModel)]="taskname" required />
+			    </div>
+			    <div class="inln">
+			    <button type="submit" class="btn btn-primary cretsk" [disabled]="!forms.valid">Add Task</button>
+			    <span (click)="toggle()" id="bt" class="hideshow">
+	    			<button type="button" class="close" data-dismiss="modal" style="font-size: 37px;">&times;</button>
+				</span>
+				</div>
+			    </form>
+			</ng-container>
+		</div>
+	</div>
+  </div>		
+  </div>
+  <div class="col-md-2 marcltp">
+	<button type="button" class="adbtn" data-toggle="collapse" data-target="#demo">Invite User</button>
+	<div id="demo" class="collapse">
+		<form class="frmcolaps" #createNewUser="ngForm" (ngSubmit)="inviteuser(createNewUser.value)">
+			<!-- <button type="button" class="close" data-dismiss="collapse">&times;</button> -->
+		    <div>
+		    	<input type="hidden" id="user" name="user" [(ngModel)]="user"/>
+		    	<input type="hidden" id="projectname" name="projectname" [(ngModel)]="projectname"/>
+	            <input type="hidden" id="projectid" name="projectid" [(ngModel)]="projectid"/>
+	            <input type="email" id="email" name="assignuser" class="form-control" [(ngModel)]="assignuser" required placeholder="e.g. like23@gmail.com"> 
+		    </div>
+		    <span class="green" id="error">{{datas}}</span>
+	        <button type="submit" [disabled]="!createNewUser.valid" class="btn btn-primary form-control btnss"> Invite</button>
+		</form>
+	</div>
+  </div>
+</div>
+
+<ng-template #assignTaskdiv>
+<app-assingtask></app-assingtask>	 
+	</ng-template> 	
+</div>

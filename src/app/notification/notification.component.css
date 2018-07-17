@@ -1,0 +1,11 @@
+.row{
+	    margin-right: 0px !important; 
+    	margin-left: 0px !important;
+}
+hr{
+	margin-top: 0rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid #7f7b7b;
+    width:100%;
+}
