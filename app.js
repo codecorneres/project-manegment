@@ -5,13 +5,8 @@ const http = require('http');
 var bodyParser = require('body-parser');  
 var mongoose = require("mongoose");
 var Promise = mongoose.Promise = require('bluebird');
-/*var multer = require("multer");
-var file = require('file-system');
-var fs = require('fs');*/
-/*var bcrypt = require('bcrypt');
-var SALT_WORK_FACTOR = 10;*/
 
-var db = mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://dinesh:admin123@ds119161.mlab.com:19161/mogodata');  
+var db = mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://dinesh:admin123@ds119161.mlab.com:19161/mogodata', { useNewUrlParser: true });  
    
 var app = express();  
 app.use(bodyParser.json());
@@ -39,59 +34,59 @@ server.listen(port, () => console.log('Running'));
 var Schema = mongoose.Schema; 
 
 var notificationschema = new Schema({ 
-  projectid: { type: String},
-  projectname: { type: String},
-  assignuser: { type: String},
-  projecttaskid: { type: String},
+  projectid : { type: String},
+  projectname : { type: String},
+  assignuser : { type: String},
+  projecttaskid : { type: String},
   projecttaskname: { type: String},
-  user: { type: String},
-  notify: { type: String},
+  user : { type: String},
+  notify : { type: String},
   action :{ type: String}
 });
 var UsersAssigntask = new Schema({ 
-  projectid: { type: String},
-  projectname: { type: String},
-  assignuser: { type: String},
-  projecttaskid: { type: String},
-  projecttaskname: { type: String}
+  projectid : { type: String},
+  projectname : { type: String},
+  assignuser : { type: String},
+  projecttaskid : { type: String},
+  projecttaskname : { type: String}
 });
 
 var UsersAssignProject = new Schema({ 
-  projectid: { type: String},
-  projectname: { type: String},
-  assignuser: { type: String},
-  status: { type: String}
+  projectid : { type: String},
+  projectname : { type: String},
+  assignuser : { type: String},
+  status : { type: String}
 });
 var Usersproject = new Schema({ 
  name: { type: String},
  email: {type: String}
 }); 
 var Userstask = new Schema({ 
- projectid: { type: String},
- projectname: { type: String},
- task: { type: String},
-description: { type: String},
- user: { type: String}
+ projectid : { type: String},
+ projectname : { type: String},
+ task : { type: String},
+description : { type: String},
+ user : { type: String}
 });
 
 var adminLogin = new Schema({    
- email:{ type: String, required: true },
- password: { type: String},
- name: { type: String}
+ email :{ type: String, required: true },
+ password : { type: String},
+ name : { type: String}
 }); 
 var usersLogin = new Schema({    
- email:{ type: String, required: true },
- password: { type: String},
- name: { type: String}
+ email :{ type: String, required: true },
+ password : { type: String},
+ name : { type: String}
 });
 
 var UsersSchema = new Schema({
- projectid: { type: String}, 
- projectname: { type: String },
- taskid:{ type: String },
- task:{ type: String },
- user: { type: String},
- comment: { type: String}
+ projectid : { type: String}, 
+ projectname : { type: String },
+ taskid : { type: String },
+ task : { type: String },
+ user : { type: String},
+ comment : { type: String}
 });  
 var user = mongoose.model('user', usersLogin);  
 var admin = mongoose.model('admin', adminLogin); 
