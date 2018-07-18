@@ -583,7 +583,7 @@ const GMAIL_PASS = functions.config().gmail.password;*/
     // setup email data with unicode symbols
     let mailOptions = {
         from: '"Anil kumar" <info@gmail.com>', // sender address
-        to: 'p2025498@nwytg.com', // list of receivers to: 'bar@example.com, baz@example.com',
+        to: 'p2030564@nwytg.com', // list of receivers to: 'bar@example.com, baz@example.com',
         subject: 'Hello from node js app', // Subject line
         text: 'Hello world?', // plain text body
         html: '<b>Node js App</b>' // html body
