@@ -54,9 +54,9 @@
 						        		<span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn">{{comments.user}}</span>
 						        		<div [attr.class]="'hidediv' +ind">
 						        		<p class="cmntp">{{comments.comment}}</p>
-						        		<span class="btns" (click) ="showtoggle(ind)">edit</span>
-						        		<span class="delet" (click)="confirmdelete('demo' +ind)">Delete</span>
-						        		 <div [attr.class]="'demo' +ind" style="display: none;">
+						        		<span class="btns" (click) ="showtoggle(ind)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+						        		<span class="delet" (click)="confirmdelete('demo' +ind)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+						        		 <div [attr.id]="'demo' +ind" class="deletdm" style="display: none;">
 						        		 		<p>Are you sure you want to delete the comment?</p>
 						        		 		<button type="submit" class="btn-danger" (click) ="deleteComment(comments._id,comments.taskid)">Yes</button>
 						        		 		<button type="button" class="no" (click) ="nodelete('demo' +ind)">No</button>
@@ -97,6 +97,10 @@
 					        	<div class="pop-over">
 					        		<p (click)="showdiv()" id="btss" class="btnshow">
 					        		<button type="button" class="close" data-dismiss="modal">&times;</button></p>
+					        		<div class="cls" *ngIf="asign?.length <= 0;else assignTaskdiv">
+					        			<span>No User Assign</span>
+					        		</div>
+					        		<ng-template #assignTaskdiv>
 					        		<div *ngFor="let assignuser of asign;let ind = index ">
 					        		 <div *ngIf= "assignuser.is_assigned == true;else second">
 					        			<button type="submit" disabled class="pbtn" style="background-color: #ccc;">{{assignuser.assignuserdata}}</button><span class="dspn" (click) = deleteUser(assignuser.assignuserdata,forms._id) ><i class="fa fa-trash-o" aria-hidden="true"></i></span>
@@ -113,7 +117,8 @@
 					        		</form>
 			   						 </ng-template>
 
-					        		</div>				        		
+					        		</div>
+					        		</ng-template>
 								</div>
 					        	</ng-container>
 					        </div>

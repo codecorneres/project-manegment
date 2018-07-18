@@ -5,7 +5,8 @@ const http = require('http');
 var bodyParser = require('body-parser');  
 var mongoose = require("mongoose");
 var Promise = mongoose.Promise = require('bluebird');
-
+require('dotenv').config();
+const nodemailer = require('nodemailer');
 var db = mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://dinesh:admin123@ds119161.mlab.com:19161/mogodata', { useNewUrlParser: true });  
    
 var app = express();  
@@ -390,7 +391,7 @@ var users = [];
   });
 })
   app.post("/api/getComments",function(req,res){     
-       comment.find().where({ projectid : req.body.projectid, taskid : req.body.taskid}).
+       comment.find().where({ projectid : req.body.projectid, taskid : req.body.taskid}).sort({_id: -1}).
           exec(function(err, data){ 
    if (err) {  
    res.send(err);         
@@ -423,8 +424,9 @@ app.post("/api/updateComment",function(req,res){
      })
 /*----end Comments-----------*/
  /*---get Notifications-----------*/
- app.post("/api/Getnotification",function(req,res){    
-  notification.find().where({ assignuser : req.body.email}).
+ app.post("/api/Getnotification",function(req,res){
+ var mysort = { _id: -1 };    
+  notification.find().where({ assignuser : req.body.email}).sort(mysort).
   exec(function(err, data){ 
    if (err) {  
     res.send(err);         
@@ -434,8 +436,8 @@ app.post("/api/updateComment",function(req,res){
      } 
   });
 }) 
- app.post("/api/GetUnseenNotification",function(req,res){    
-  notification.find().where({ assignuser : req.body.email, action : "unseen"}).
+ app.post("/api/GetUnseenNotification",function(req,res){  
+  notification.find().where({ assignuser : req.body.email, action : "unseen"}).sort({_id: -1}).
   exec(function(err, data){ 
    if (err) {  
     res.send(err);         
@@ -513,14 +515,7 @@ app.post("/api/acceptrequest",function(req,res){
                res.send(err);                
             }  
             else{
-                    res.send({data:"Notification has been Inserted..!!"}); 
-              /*notification.remove({ projectid: req.body.projectid, assignuser: req.body.user}, function(err) {    
-              if(err){    
-                   res.send(err);    
-              }    
-              else{                
-              }      
-              }) */  
+              res.send({data:"Notification has been Inserted..!!"});   
             }
           })
       });
@@ -529,14 +524,20 @@ app.post("/api/acceptrequest",function(req,res){
 })
 app.post("/api/deleteProject",function(req,res){
   project.remove({ "_id": req.body.id }, function(err) {    
-    if(err){    
-         res.send(err);    
-    }    
-    else{      
-        res.send({data:"Record has been Deleted..!!"});               
-    }    
+    project_user.remove({ "projectid": req.body.id }, function(err) { 
+     task.remove({ "projectid": req.body.id }, function(err) { 
+     comment.remove({ "projectid": req.body.id }, function(err) {
+     notification.remove({ "projectid": req.body.id }, function(err) { 
+      task_user.remove({ "projectid": req.body.id }, function(err) { 
+       res.send({data:"Record has been Deleted..!!"});       
+  });      
+  });        
+  });       
+  });       
   });
+});
 })
+  
 app.post("/api/updatproject",function(req,res){ 
     project.findByIdAndUpdate(req.body.id, { name: req.body.name},  
    function(err,data) {  
@@ -548,6 +549,59 @@ app.post("/api/updatproject",function(req,res){
      } 
    });
      })
+
+app.post("/api/deleteNotification",function(req,res){
+  notification.remove({ "_id": req.body.id }, function(err) {    
+    if(err){    
+         res.send(err);    
+    }    
+    else{  
+     res.send({data:"Notification has been Deleted..!!"});              
+    }     
+
+    })
+})
+// Generate test SMTP service account from ethereal.email
+// Only needed if you don't have a real mail account for testing
+nodemailer.createTestAccount((err, account) => {
+    // create reusable transporter object using the default SMTP transport
+/*const GMAIL_USER = functions.config().gmail.email;
+const GMAIL_PASS = functions.config().gmail.password;*/
+
+    let transporter = nodemailer.createTransport({
+      
+        /*host: 'smtp.ethereal.email',
+        port: 587,
+        secure: false,*/ // true for 465, false for other ports
+        service:"Gmail",
+        auth: {
+            user: 'anniat44@gmail.com', // generated ethereal user
+            pass: '9418165286' // generated ethereal password process.env.GMAIL_PASS
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Anil kumar" <anniat44@gmail.com>', // sender address
+        to: 'p2015091@nwytg.com', // list of receivers to: 'bar@example.com, baz@example.com',
+        subject: 'Hello from node js', // Subject line
+        text: 'Hello world?', // plain text body
+        html: '<b>Hello world?</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    });
+});
 /***********/
 /********/
 /*****/

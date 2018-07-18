@@ -64,12 +64,12 @@ createtask;
   ngOnInit() {
     this.cookieValue = this.cookieService.get('LoggedInUser');
    // this.email = sessionStorage.getItem("LoggedInUser");
-    let data: Array < any >= [];  
+   /* let data: Array < any >= [];  
       data.push({  
           'title': 'Home Notification',  
           'alertContent': 'This is Notification Service Alert'  
       });  
-    this._notificationService.generateNotification(data);
+    this._notificationService.generateNotification(data);*/
 
     this.getAllProject();
     this.dataService.GetAcceptdProject(this.cookieValue).subscribe(data =>  this.datas = data); 

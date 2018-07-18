@@ -8,10 +8,17 @@
       <div class="row">
       <h5>Notification</h5>
       <hr>
+      <div class="cls" *ngIf="datas?.length <= 0;else assignTaskdiv">
+      <a  class="dropdown-item">No Notification</a>
+        <div class="dropdown-divider"></div>
+      </div>
+      <ng-template #assignTaskdiv>
 		<div class="col-md-12 bgclr" *ngFor="let notification of datas;let ind = index ">
 		    <a  class="dropdown-item">{{notification.notify}}</a>
+        <span (click) = "deleteNotification(notification._id)"><i class="fa fa-trash" aria-hidden="true"></i></span>
 		    <div class="dropdown-divider"></div>
 		</div>
+    </ng-template>
 	</div>
 </div>
 </div>

@@ -23,3 +23,6 @@ hr{
 .dropdown-item:hover {
   	   background: #fff6f0 !important;
 }
+.bgclr{
+  display: inline-flex;
+}

@@ -30,7 +30,6 @@ description;
    // this.user = sessionStorage.getItem("LoggedInUser");
     this.user = this.cookieService.get('LoggedInUser');
     this.createtasks = sessionStorage.getItem("createtask");
-    console.log(this.createtasks);
 
       this.GetAssigntasks(this.projectid, this.user);
   }
@@ -48,17 +47,24 @@ GetAssigntasks(projectid,user){
   }
 
   GetassignUser(taskid){
-  	this.dataService.GetTaskDescription(taskid).subscribe(form => {this.description = form.data	
+  	this.dataService.GetTaskDescription(taskid).subscribe(form => {
+      if(!form.data){
+        this.description = "No Description Here.......";
+      }
+      else{
+        this.description = form.data
+      }
+      	
   	});
   	this.getcomments(taskid);
   }
   
   confirmdelete(id){
-  	$("."+ id).show();
+  	$("#"+ id).show();
   }
   nodelete(id){
   	console.log(id);
-  	$("."+ id).hide();
+  	$("#"+ id).hide();
 
   }
   /*----comments------0*/

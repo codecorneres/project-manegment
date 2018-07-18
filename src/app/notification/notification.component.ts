@@ -16,7 +16,14 @@ export class NotificationComponent implements OnInit {
   ngOnInit() {
       this.email = this.cookieService.get('LoggedInUser');
   	//this.email = sessionStorage.getItem("LoggedInUser");
-  		this.dataService.Getnotification(this.email).subscribe(data =>  this.datas = data);
+  	this.getnotification()	
   }
-
+  deleteNotification(id){
+    console.log(id);
+    
+    this.dataService.deleteNotification(id).subscribe(data =>  {this.getnotification()});
+  }
+  getnotification(){
+    this.dataService.Getnotification(this.email).subscribe(data =>  this.datas = data);
+  }
 }

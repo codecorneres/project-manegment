@@ -57,11 +57,11 @@ createtasks;
   }
 
   confirmdelete(id){
-    $("."+ id).show();
+    $("#"+ id).show();
   }
   nodelete(id){
     console.log(id);
-    $("."+ id).hide();
+    $("#"+ id).hide();
 
   } 
   hidetoggle(arr) {
