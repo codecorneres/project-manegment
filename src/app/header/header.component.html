@@ -1,17 +1,18 @@
 
 <!-- <app-slidbar></app-slidbar>
- --><nav class="navbar navbar-expand-md bg-dark navbar-dark" >
+ -->
+<!--  <nav class="navbar navbar-expand-md bg-dark navbar-dark" >
   <a class="navbar-brand" ></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar1">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar"> 
+  <div class="collapse navbar-collapse" id="collapsibleNavbar1"> 
     <ul class="navbar-nav">
       <div class="wrapper" *ngIf="auth.isLoggednIn()" >
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/images/sidebar-1.jpg">
       <div class="logo">
         <a  class="simple-text logo-normal">
-          Creative Tim
+          {{headername}}
         </a>
       </div>
       <div class="sidebar-wrapper">
@@ -45,7 +46,103 @@
     </div>
  </div>
     </ul>
+</div>
+</nav>   -->  
+ <nav class="navbar navbar-expand-md bg-dark navbar-dark" >
+  
+ <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar1"> -->
+    <span class="" (click)="showNav()">&#9776;</span>
+  <!-- </button> -->
+  <a class="navbar-brand" ></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar1"> 
+
+    <ul class="navbar-nav">
+      <div class="wrapper" *ngIf="auth.isLoggednIn()" >
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/images/sidebar-1.jpg">
+      <div class="logo">
+      <a class="closebtn" (click)="closeNav()" style="display: none;">&times;</a>
+        <a  class="simple-text logo-normal">
+          {{headername}}
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+
+        <ul class="nav">
+          <li class="nav-item   ">
+            <a class="nav-link" href="">
+            <i class="fa fa-home" aria-hidden="true"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" routerLink = "/createproject">
+              <i class="fa fa-id-card-o" aria-hidden="true"></i>
+              <p>Add Project</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/invite">
+            <i class="fa fa-bullhorn" aria-hidden="true"></i>
+              <p>Invites</p>
+            </a>
+          </li> 
+          <li class="nav-item ">
+            <a class="nav-link" routerLink = "/notification">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+              <p>Notifications</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+ </div>
+    </ul>
+</div>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar"> 
+    <!-- <ul class="navbar-nav">
+      <div class="wrapper" *ngIf="auth.isLoggednIn()" >
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/images/sidebar-1.jpg">
+      <div class="logo">
+        <a  class="simple-text logo-normal">
+          {{headername}}
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item   ">
+            <a class="nav-link" href="">
+            <i class="fa fa-home" aria-hidden="true"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" routerLink = "/createproject">
+              <i class="fa fa-id-card-o" aria-hidden="true"></i>
+              <p>Add Project</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/invite">
+            <i class="fa fa-bullhorn" aria-hidden="true"></i>
+              <p>Invites</p>
+            </a>
+          </li> 
+          <li class="nav-item ">
+            <a class="nav-link" routerLink = "/notification">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+              <p>Notifications</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+ </div>
+    </ul> -->
   <ul class="navbar-nav logout">
+
    <li class="nav-item">
         <a class="nav-link btns" *ngIf="!auth.isLoggednIn()" routerLink="/register">Sign Up</a>
       </li>
@@ -70,7 +167,7 @@
         <div class="dropdown-divs"><i class="fa fa-bell notybelll" aria-hidden="true"></i></div>
         </a> 
          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         <p class="notifp">No Notification</p>
+         <p class="notifp" style="font-family: Poppins-Regular !important;">No Notification</p>
          </div>
         </div>
         <ng-template #assignTaskdiv>

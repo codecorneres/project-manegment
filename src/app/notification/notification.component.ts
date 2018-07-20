@@ -14,6 +14,7 @@ export class NotificationComponent implements OnInit {
 	email;
 	datas;
   ngOnInit() {
+    sessionStorage.setItem('headername', 'Notification');
       this.email = this.cookieService.get('LoggedInUser');
   	//this.email = sessionStorage.getItem("LoggedInUser");
   	this.getnotification()	

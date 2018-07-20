@@ -201,3 +201,7 @@ margin-left: 8px;
     background: #ece6e6 !important;
     padding: 8px 10px;
 }
+.anyClass {
+  height:250px;
+  overflow-y: scroll;
+}

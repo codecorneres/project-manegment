@@ -7,7 +7,6 @@
     margin-left: 0px !important;
 }
 .md3{
-	height: 77px;
     padding-top: 20px;
     margin-top: 35px;
     background: #f1f1f1;
@@ -18,12 +17,9 @@
     background: #f1f1f1;
     padding: 27px 15px;
 }
- h5 {
-    font-size: 1.13rem !important;
-}
 .right{
     float: right;
-    font-size: 12px;
+    font-size: 16px;
     text-decoration: underline;
     border: 0px;
     background: none;
@@ -34,5 +30,5 @@
     text-decoration: underline;
 }
 .pdngs:hover, .right:hover{
-      color: #923a3a;
+      color: #47c7f7;
 }

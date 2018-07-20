@@ -363,7 +363,7 @@ app.post("/api/inviteprojectuser",function(req,res){
                       to: req.body.assignuser, // list of receivers to: 'bar@example.com, baz@example.com',
                       subject: 'Notification', // Subject line
                       text: 'Node js App', // plain text body
-                      html: '<b style="color: #080808;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-family: Helvetica,Arial,sans-serif; font-size: 15px; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:10px; width:30%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><b style="padding-bottom:10px;">Do you want to accept a request?</b><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 1px 10px 1px 10px; text-decoration: none; color: #fff; background: red;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:20px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 1px 10px 1px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>' // html body
+                      html: '<b style="color: #080808; font-size:17px;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-size:16px; font-family: Helvetica,Arial,sans-serif; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:20px; width:40%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><p>Do you want to accept a request?</p><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: red;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:20px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>' // html body
                   };
                   // send mail with defined transport object
                   transporter.sendMail(mailOptions, (error, info) => {
@@ -465,7 +465,7 @@ var users = [];
   });
 })
   app.post("/api/getComments",function(req,res){     
-       comment.find().where({ projectid : req.body.projectid, taskid : req.body.taskid}).sort({_id: -1}).limit(5).
+       comment.find().where({ projectid : req.body.projectid, taskid : req.body.taskid}).sort({_id: -1}).
           exec(function(err, data){ 
    if (err) {  
    res.send(err);         
@@ -654,70 +654,21 @@ app.post("/api/declinerequest",function(req,res){
   })   
 })
 
-app.post("/api/sendMail",function(req,res){
-
-    // create reusable transporter object using the default SMTP transport
-//console.log(req.body);
-    /*let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        secure: false,
-        port: 25,
-        auth: {
-          user: 'anniat44@gmail.com',
-          pass: '9418165286'
-        },
-        tls: {
-          rejectUnauthorized: false
-        }
-    });
-
-    let mailOptions = {
-        from: '"Admin" <dinesh.codecorners@gmail.com>', // sender address
-        to: req.body.assignuser, // list of receivers to: 'bar@example.com, baz@example.com',
-        subject: 'Notification', // Subject line
-        text: 'Node js App', // plain text body
-        html: '<b style="color: #080808;">'+req.body.notify+'</b>' // html body
-    };
-
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log(info);
-        
-    });*/
-})
-/*const sendmail = require('sendmail')({
-  logger: {
-    debug: console.log,
-    info: console.info,
-    warn: console.warn,
-    error: console.error
-  },
-  silent: false,
-  dkim: { // Default: False
-    privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
-    keySelector: 'mydomainkey'
-  },
-  devPort: 1025, // Default: False
-  devHost: 'localhost', // Default: localhost
-  smtpPort: 2525, // Default: 25
-  smtpHost: 'localhost' // Default: -1 - extra smtp host after resolveMX
-})
- 
-sendmail({
-    from: 'anniat44@gmail.com',
-    to: 'p2072627@nwytg.com',
-    subject: 'test sendmail',
-    html: 'Mail of test sendmail ',
-  }, function(err, reply) {
-    console.log(err && err.stack);
-    console.dir(reply);
-});*/
 /***********/
 /********/
 /*****/
+/*---------------For Limit in a query-----------*/
+/*app.post("/api/getComments",function(req,res){     
+       comment.find().where({ projectid : req.body.projectid, taskid : req.body.taskid}).sort({_id: -1}).limit(25).
+          exec(function(err, data){ 
+   if (err) {  
+   res.send(err);         
+   }  
+   else{        
+        res.send(data);  
+     } 
+   });
+})*/
 /*app.post("/api/SaveUser",function(req,res){
 model.update({"email": req.body.email }, {$set:{"projectname": req.body.projectname,"date": req.body.date,"starttime": req.body.starttime,"endtime": req.body.endtime}}, function(err, result){
     if (err) {

@@ -63,6 +63,7 @@ createmember(createmember){
 	console.log(createmember);
 }
   ngOnInit() {
+    sessionStorage.setItem('headername', 'Add Project');
    // this.email = sessionStorage.getItem("LoggedInUser");
     this.email = this.cookieService.get('LoggedInUser');
   }

@@ -28,6 +28,8 @@ export class AuthService {
     sessionStorage.removeItem("createtask");
     sessionStorage.removeItem("notificationid");
     sessionStorage.removeItem("useremail");
+    sessionStorage.removeItem("headername");
+    sessionStorage.removeItem("user");
     this.cookieService.delete('LoggedInUser');
     this.myRoute.navigate(["/login"]);
   }

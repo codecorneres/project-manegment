@@ -13,12 +13,14 @@ import { PushNotificationsService } from '../push-notifications.service';
 export class HeaderComponent implements OnInit {
 datas;
 length;
+headername;
   constructor(public auth: AuthService, private dataService: DataService, private router: Router,
    private cookieService: CookieService,
    private _notificationService: PushNotificationsService) { }
   email : string;
   i : any;
   ngOnInit() {
+      this.headername = sessionStorage.getItem("headername");
   		//this.email = sessionStorage.getItem("LoggedInUser");
       this.email = this.cookieService.get('LoggedInUser');
   		this.dataService.GetUnseenNotification(this.email).subscribe(res=> { this.datas = res
@@ -38,7 +40,14 @@ length;
         }*/
       });
   }
-  
+  showNav(){
+    $("#collapsibleNavbar1").show();
+    $(".closebtn").show();
+  }
+  closeNav(){
+     $("#collapsibleNavbar1").hide();
+     $(".closebtn").hide();
+  }
   asseptnotification(user,projectid, id,invite){
     if(!invite){
        this.dataService.Setnotification(id).subscribe(data =>  this.datas = data);

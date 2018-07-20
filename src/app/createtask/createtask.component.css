@@ -1,3 +1,7 @@
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
 .row{
 	    margin-right: 0px !important; 
     	margin-left: 0px !important;
@@ -6,8 +10,9 @@
 	margin-top: 30px;
 }
 .md3{
-	background: #ccc;
+	background: #eae9e9;
     padding: 10px;
+    margin-top: 10px;
 }
 .ssd{
     float: right;
@@ -59,9 +64,10 @@ margin-left: 8px;
 #bt1{
 	margin-top: 0;
     margin-bottom: 0 !important;
+    font-size: 16px;
 }
 #bt1:hover{
-	color:#000;
+	color:#47c7f7;
 	text-decoration: underline;
 }
 .task{
@@ -115,7 +121,7 @@ margin-left: 8px;
 	margin-bottom: 1.5rem;
 }
 .modal-content {
-    width: 140% !important;
+    width: 140%;
 }    
 .frmcolaps{
     border: 1px solid #ccc;
@@ -169,8 +175,10 @@ margin-left: 8px;
     display: inline-flex;
 }
 .cretsk{
+    background-color: #47c7f7 !important;
+    border-color: #47c7f7 !important;
     margin-top:10px; 
-    padding: 0px 10px;
+    padding: 0px 15px;
 }
 .fa-hashtag{
     color:#949090;
@@ -201,4 +209,26 @@ margin-left: 8px;
 .cmp{
     background: #ece6e6 !important;
     padding: 8px 10px;
+}
+.spnsiz{
+    font-size: 16px !important; 
+}
+.cls{
+    border: 1px solid #47c7f7;
+    padding: 6px;
+    margin: 6px;
+    background: #47c7f7;
+    color: #fff;
+    font-size: 16px;
+}
+.eys{
+    font-size: 16px;
+}
+.eys:hover{
+    color: #47c7f7;
+}
+@media (max-width: 768px) {
+.modal-content {
+    width: 100% !important;
+}
 }

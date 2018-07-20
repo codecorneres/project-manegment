@@ -6,7 +6,7 @@ hr{
 	margin-top: 0rem;
     margin-bottom: 1rem;
     border: 0;
-    border-top: 1px solid #000;
+    border-top: 1px solid #47c7f7;
     width:100%;
 }
   .dropdown-item{
@@ -25,4 +25,11 @@ hr{
 }
 .bgclr{
   display: inline-flex;
+}
+h5 {
+    margin-left: 15px;
+    margin-top: 20px;
+}
+.dropdown-divider {
+    border-top: 1px solid #47c7f7 !important;
 }

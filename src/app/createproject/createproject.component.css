@@ -7,3 +7,10 @@
 .mrgn{
 	margin-top: 30px;
 }
+.form-control:focus {
+    border-color: #ccc !important;
+    box-shadow: 0 0 0 0 rgb(71, 199, 247) !important;
+}
+.login100-form-title{
+	font-size: 18px;
+}

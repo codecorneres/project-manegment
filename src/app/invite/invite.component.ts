@@ -21,6 +21,7 @@ assignuser;
   constructor(private dataService: DataService, private router: Router, private auth: AuthService,
     private cookieService: CookieService) { }
   ngOnInit() {
+    sessionStorage.setItem('headername', 'Invite');
    // this.email = sessionStorage.getItem("LoggedInUser");
    this.email = this.cookieService.get('LoggedInUser');
     this.notificationid = sessionStorage.getItem("notificationid");

@@ -12,40 +12,39 @@
     background: #f1f1f1;
 }
 .md4{
-    margin-top: 35px;
+    margin-top: 45px;
     background: #f1f1f1;
     padding: 27px 15px;
 }
 a:hover {
-    color: #923a3a;
+    color: #47c7f7;
     text-decoration: none;
 }
 a{
-	color: #6b6c6d;
+	color: #000;
     text-decoration: none;
+    font-size: 20px;
 }
- h5 {
-    font-size: 1.13rem !important;
-}
+
 .right{
     cursor: pointer;
     text-decoration: underline;
-    font-size: 12px;
+    font-size: 16px;
     right:0px !important;
 }
 .pdngs{
     padding-right: 10px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 16px;
     text-decoration: underline;
 }
 .pdng{
     padding-top: 10px !important;
-    font-size: 12px;
+    font-size: 16px;
     text-decoration: underline;
 }
 .pdngs:hover, .right:hover{
-      color: #923a3a;
+      color: #47c7f7;
 }
 .green{
     padding-right: 22px;

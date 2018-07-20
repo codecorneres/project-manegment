@@ -29,9 +29,11 @@ import { InviteComponent } from './invite/invite.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AssingtaskComponent } from './assingtask/assingtask.component';
 import { AcceptComponent } from './accept/accept.component';
+import { SettingComponent } from './setting/setting.component';
 
 import { PushNotificationsService } from './push-notifications.service';
 import { CookieService } from 'ngx-cookie-service';
+
 
 
  
@@ -48,7 +50,8 @@ import { CookieService } from 'ngx-cookie-service';
     InviteComponent,
     NotificationComponent,
     AssingtaskComponent,
-    AcceptComponent
+    AcceptComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

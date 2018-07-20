@@ -9,11 +9,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.8c91e5ae98b2ee1554d5.js",
+        "/main.014d7c91f539657db54b.js",
         "/polyfills.b3499ebfac9adf753b7a.js",
         "/runtime.a66f828dca56eeb90e02.js",
         "/scripts.806effac119676237f10.js",
-        "/styles.3fa83cf21f3f852ad36d.css"
+        "/styles.4f5478bb4e79a171a663.css"
       ],
       "patterns": []
     },
@@ -51,12 +51,12 @@
     "/assets/images/ninja-avatar-96x96.png": "d53c47d223c7d7144518ddda2912a6e8e278f78f",
     "/assets/images/sidebar-1.jpg": "7e52f4c80ffbc51540150bd8a2f99e7851e6636b",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "40b626db5f4f44516d5b39b8c7dfacc6e1f0abaa",
-    "/main.8c91e5ae98b2ee1554d5.js": "e6cb046bc47719eea8ab26408f7ebf7d228f7c19",
+    "/index.html": "0618e20b4d0d3b5eb0e2a3d2bd06281c684c43e6",
+    "/main.014d7c91f539657db54b.js": "eec14a07fa476bfe6690ca30d628903d0655e31f",
     "/polyfills.b3499ebfac9adf753b7a.js": "32f45599e3c015a129302f438912b862a39e376a",
     "/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
     "/scripts.806effac119676237f10.js": "fde1e2ca22b32566f40e13fc1a318a0ec481bc5e",
-    "/styles.3fa83cf21f3f852ad36d.css": "b1b845f06c6e057df8a7fb7b3e4d5cce8e440f38"
+    "/styles.4f5478bb4e79a171a663.css": "2a7341d00d9d59afbd3ba497e7185f40e39edd68"
   },
   "navigationUrls": [
     {

@@ -30,12 +30,13 @@ maildata;
   users;
 
   ngOnInit() {
+     sessionStorage.setItem('headername', 'Create Tast');
+
   	this.projectname = sessionStorage.getItem("projectname");
     this.projectid = sessionStorage.getItem("projectid");
    // this.user = sessionStorage.getItem("LoggedInUser");
    this.user = this.cookieService.get('LoggedInUser');
     this.createtasks = sessionStorage.getItem("createtask");
-    console.log(this.createtasks);
       this.Gettasks(this.projectid);
     /****For Email ID OF users***/
   	//this.dataService.GetUsers(this.projectid).subscribe(data => {this.assignusers = data});  
@@ -110,11 +111,20 @@ maildata;
     });
   }
   inviteuser = function(createmember){
-    this.dataService.inviteprojectuser(createmember).subscribe(data =>  {this.datas = data.data  
-   $("#error").show();
-      setTimeout(function() { $("#error").hide(); }, 3000);   
-    });
-    $("#email").val('');
+    if(this.user == createmember.assignuser){
+      this.datas = "You can't send invitation for project";
+      $("#error").show();
+          setTimeout(function() { $("#error").hide(); }, 3000);
+        $("#email").val('');
+    }
+    else{
+        this.dataService.inviteprojectuser(createmember).subscribe(data =>  {this.datas = data.data  
+       $("#error").show();
+          setTimeout(function() { $("#error").hide(); }, 3000);   
+        });
+        $("#email").val('');
+    }
+    
   }
 
    /*Comments */

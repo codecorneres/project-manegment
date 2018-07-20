@@ -11,8 +11,8 @@
 	</div>
 	<div class="col-sm-2" *ngFor="let forms of form;let ind = index ">
 	  	<div class="col-sm-12 md3">
-		  	<span> {{forms.task}}</span> 
-		  	<span class="ssd" data-toggle="modal" [attr.data-target]="'#s' +ind +1" (click)="GetassignUser(forms._id)"><i class="fa fa-eye" aria-hidden="true" style="font-size: 12px;"></i></span>
+		  	<span class="spnsiz"> {{forms.task}}</span> 
+		  	<span class="ssd" data-toggle="modal" [attr.data-target]="'#s' +ind +1" (click)="GetassignUser(forms._id)"><i class="fa fa-eye eys" aria-hidden="true"></i></span>
 		  	<div class="modal fade" [attr.id]="'s' +ind +1" role="dialog">
 			    <div class="modal-dialog">
 			      <div class="modal-content">

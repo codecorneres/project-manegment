@@ -25,11 +25,7 @@ createtask;
     private cookieService: CookieService,
     private activatedRoute: ActivatedRoute)
     { 
-      /*this.activatedRoute.queryParams.subscribe(params => {
-          let id = params['id'];
-
-          console.log(id); // Print the parameter to the console. 
-      });*/
+      
   }
    createTask = function(projectname, projectid) {
     sessionStorage.setItem('projectname', projectname);
@@ -70,6 +66,7 @@ createtask;
   }
   ngOnInit() {
     this.cookieValue = this.cookieService.get('LoggedInUser');
+    sessionStorage.setItem('headername', 'Dashboard');
    // this.email = sessionStorage.getItem("LoggedInUser");
    /* let data: Array < any >= [];  
       data.push({  

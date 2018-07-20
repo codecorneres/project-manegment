@@ -15,6 +15,7 @@ import { InviteComponent } from './invite/invite.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AssingtaskComponent } from './assingtask/assingtask.component';
 import { AcceptComponent } from './accept/accept.component';
+import { SettingComponent } from './setting/setting.component';
 const routes: Routes = [
   {
     path: '',
@@ -63,6 +64,11 @@ const routes: Routes = [
   {
     path: 'accept',
     component: AcceptComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'setting',
+    component: SettingComponent,
     canActivate: [AuthGuard]
   }
   

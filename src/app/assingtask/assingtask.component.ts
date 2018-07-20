@@ -25,6 +25,7 @@ commentdata;
 description;
 
   ngOnInit() {
+    sessionStorage.setItem('headername', 'Add Task');
   	this.projectname = sessionStorage.getItem("projectname");
     this.projectid = sessionStorage.getItem("projectid");
    // this.user = sessionStorage.getItem("LoggedInUser");
