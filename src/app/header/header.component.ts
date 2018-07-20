@@ -23,7 +23,7 @@ length;
       this.email = this.cookieService.get('LoggedInUser');
   		this.dataService.GetUnseenNotification(this.email).subscribe(res=> { this.datas = res
         this.length = res.length;
-      /*  if(this.length <= '0' ){
+        /*if(this.length <= '0' ){
           console.log(this.length);
         }
         else{
@@ -39,10 +39,17 @@ length;
       });
   }
   
-  asseptnotification(projectid, id){
-    this.dataService.Setnotification(id).subscribe(data =>  this.datas = data);
-    sessionStorage.setItem('notificationid', projectid);
-    this.router.navigateByUrl('/invite');
+  asseptnotification(projectid, id,invite){
+    if(!invite){
+       this.dataService.Setnotification(id).subscribe(data =>  this.datas = data);
+    this.router.navigateByUrl('/notification');
+    }
+    else{
+      this.dataService.Setnotification(id).subscribe(data =>  this.datas = data);
+      sessionStorage.setItem('notificationid', projectid);
+      this.router.navigateByUrl('/invite');
+    }
+    
   }
   showtoggle(arr) {
     /*$(".hidediv"+ arr).hide();*/

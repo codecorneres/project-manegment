@@ -23,7 +23,7 @@
                     <input type="hidden" id="user" name="user" [(ngModel)]="project.assignuser"/>
                   </div>
                   <div class="inln">
-                  <span class="pdngs">Decline</span>
+                  <span class="pdngs" (click) ="decline(project._id,project.assignuser,project.projectid,project.projectname)">Decline</span>
                   <button type="submit" class="right" [disabled]="!forms.valid">Accept</button>
                 </div>
               </form>

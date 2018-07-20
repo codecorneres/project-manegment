@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params} from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {Md5} from "md5-typescript";
@@ -18,14 +18,54 @@ export class LoginComponent implements OnInit {
   datas;
   loginuser;
   cookieValue = 'UNKNOWN';
-  constructor(private dataService: DataService, private router: Router,public auth: AuthService, private cookieService: CookieService) { }
+  notificationid;
+  id;
+  useremail;
+  sessionid;
+  sessionemail;
+  action;
+  projectname;
+  sesaction;
+  sesprojectname;
+  //projectid;
+  constructor(private dataService: DataService,
+  private router: Router,
+  public auth: AuthService,
+  private cookieService: CookieService,
+  private activatedRoute: ActivatedRoute) {
+  this.activatedRoute.queryParams.subscribe(params => {
+        this.id = params['projectid'];
+        this.useremail = params['user'];
+        this.action = params['action'];
+        this.projectname = params['projectname'];
+        //this.projectid = params['projectid'];
+         // Print the parameter to the console. 
+    }); 
+  }
 
   login(form) {
+    console.log(this.sessionemail);
     this.form.password = Md5.init(this.form.password);
     this.dataService.login(this.form).subscribe(data =>  {
       if(data.data == "Matching"){
         this.auth.sendToken(this.form.email);
-        this.router.navigate(['/home']);
+        if(this.sessionemail != null){
+          sessionStorage.setItem('notificationid', this.sessionid);
+          sessionStorage.setItem('useremail', this.sessionemail);
+          sessionStorage.setItem('action', this.sesaction);
+          sessionStorage.setItem('projectname', this.sesprojectname);
+          this.router.navigate(['/accept']);
+        }
+        else if(this.id != undefined){
+          sessionStorage.setItem('notificationid', this.id);
+          sessionStorage.setItem('useremail', this.useremail);
+          sessionStorage.setItem('action', this.action);
+          sessionStorage.setItem('projectname', this.projectname);
+          this.router.navigate(['/accept']);
+        }
+        else{
+          this.router.navigate(['/home']);
+        }
       }
       else{
         this.datas = data.data;
@@ -33,11 +73,25 @@ export class LoginComponent implements OnInit {
     }); 
   }
 
-  ngOnInit() {
+  ngOnInit() { 
+      this.sessionemail = sessionStorage.getItem('useremail');
+      this.sessionid = sessionStorage.getItem('notificationid');
+      this.sesaction = sessionStorage.getItem("action");
+      this.sesprojectname = sessionStorage.getItem("projectname");
+     // console.log(this.sessionemail);
     this.loginuser = sessionStorage.getItem("LoggedInUser");
     this.cookieValue = this.cookieService.get('LoggedInUser'); 
     if(this.cookieValue!=""){
+      if(this.id != undefined){
+        sessionStorage.setItem('notificationid', this.id);
+        sessionStorage.setItem('useremail', this.useremail);
+        sessionStorage.setItem('action', this.action);
+        sessionStorage.setItem('projectname', this.projectname);
+        this.router.navigate(['/accept']);
+      }
+      else{
        this.router.navigate(['/home']);
+      }
+      }
     }
-  }
 }

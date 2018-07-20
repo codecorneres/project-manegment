@@ -72,8 +72,8 @@ export class DataService {
     return this.http.post('api/createassignuser/', JSON.stringify(assignuser), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
     }
-    deleteAssignUser(taskid, userassigned, user, projectid){     
-    return this.http.post('api/deleteAssignUser/',{'taskid': taskid, 'userassigned':userassigned, 'user':user, 'projectid' : projectid})  
+    deleteAssignUser(taskid, userassigned, user, projectid, taskname){     
+    return this.http.post('api/deleteAssignUser/',{'taskid': taskid, 'userassigned':userassigned, 'user':user, 'projectid' : projectid, 'taskname': taskname})  
            .map((response: Response) =>response.json())           
     }
     GetassignUser(taskid,projectid){  
@@ -104,6 +104,10 @@ export class DataService {
     return this.http.post('api/acceptrequest/', JSON.stringify(createmember), {headers: this.headers})
            .map((response: Response) =>response.json())           
     }
+    declinerequest(createmember){     
+    return this.http.post('api/declinerequest/',JSON.stringify(createmember), {headers: this.headers})  
+           .map((response: Response) =>response.json())           
+    }
     deleteProject(id){     
     return this.http.post('api/deleteProject/',{'id': id})  
            .map((response: Response) =>response.json())           
@@ -128,6 +132,10 @@ export class DataService {
       return this.http.post('api/deleteNotification/',{'id': id})  
         .map((response: Response) =>response.json())
     }
+   /* sendMail(createmember){
+      return this.http.post('api/sendMail/', JSON.stringify(createmember), {headers: this.headers})   
+            .map((response: Response) =>response.json())
+    }*/
 /******/
 /****/
 /**/

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params} from '@angular/router';
 import { PushNotificationsService } from '../push-notifications.service'; 
 import * as $ from 'jquery'; 
 import { CookieService } from 'ngx-cookie-service';
@@ -22,7 +22,14 @@ createtask;
     private router: Router, 
     private auth: AuthService,
     private _notificationService: PushNotificationsService, 
-    private cookieService: CookieService) { 
+    private cookieService: CookieService,
+    private activatedRoute: ActivatedRoute)
+    { 
+      /*this.activatedRoute.queryParams.subscribe(params => {
+          let id = params['id'];
+
+          console.log(id); // Print the parameter to the console. 
+      });*/
   }
    createTask = function(projectname, projectid) {
     sessionStorage.setItem('projectname', projectname);

@@ -1,0 +1,35 @@
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.row{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.md3{
+    padding-top: 20px;
+    margin-top: 35px;
+    background: #f1f1f1;
+    padding-bottom: 20px;
+}
+.acptcls{
+	color: #fff;
+    background-color: #ec7a35;
+    border-color: #ce7d1e;
+    padding: 9px 25px;
+    border-radius: 3px;
+}
+.acptcls:hover{
+	color: #000;
+    background-color: #ec7a35;
+    border-color: #ce7d1e;
+    text-decoration: none;
+}
+/*.btn-primary:active{
+	color: #fff;
+    background-color: #ec7a35 !important;
+    border-color: #ce7d1e !important;
+}
+ .btn-primary:focus, .btn-primary:active {
+    box-shadow: 0 0 0 0.2rem transparent !important;
+}*/

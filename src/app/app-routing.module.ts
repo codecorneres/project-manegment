@@ -14,6 +14,7 @@ import { CreatetaskComponent } from './createtask/createtask.component';
 import { InviteComponent } from './invite/invite.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AssingtaskComponent } from './assingtask/assingtask.component';
+import { AcceptComponent } from './accept/accept.component';
 const routes: Routes = [
   {
     path: '',
@@ -57,6 +58,11 @@ const routes: Routes = [
   {
     path: 'assigntask',
     component: AssingtaskComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'accept',
+    component: AcceptComponent,
     canActivate: [AuthGuard]
   }
   

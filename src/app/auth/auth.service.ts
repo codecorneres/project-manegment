@@ -26,6 +26,8 @@ export class AuthService {
     sessionStorage.removeItem("projectname");
     sessionStorage.removeItem("projectid");
     sessionStorage.removeItem("createtask");
+    sessionStorage.removeItem("notificationid");
+    sessionStorage.removeItem("useremail");
     this.cookieService.delete('LoggedInUser');
     this.myRoute.navigate(["/login"]);
   }

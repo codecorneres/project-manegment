@@ -28,9 +28,11 @@ import { environment } from '../environments/environment';
 import { InviteComponent } from './invite/invite.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AssingtaskComponent } from './assingtask/assingtask.component';
+import { AcceptComponent } from './accept/accept.component';
 
 import { PushNotificationsService } from './push-notifications.service';
 import { CookieService } from 'ngx-cookie-service';
+
 
  
 @NgModule({
@@ -45,7 +47,8 @@ import { CookieService } from 'ngx-cookie-service';
     CreatetaskComponent,
     InviteComponent,
     NotificationComponent,
-    AssingtaskComponent
+    AssingtaskComponent,
+    AcceptComponent
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,7 @@ form;
 user;
 asign;
 createtasks;
-
+maildata;
   constructor(private dataService: DataService, private router: Router,private auth: AuthService, private cookieService: CookieService) { }
   datas;
   users;
@@ -104,15 +104,12 @@ createtasks;
         this.GetassignUser(assignuser.projecttaskid);
     });
   }
-  deleteUser(userassigned,taskid){
-   
-     this.dataService.deleteAssignUser(taskid,userassigned, this.user,  this.projectid).subscribe(data => {
+  deleteUser(userassigned,taskid,taskname){
+     this.dataService.deleteAssignUser(taskid,userassigned, this.user,  this.projectid, taskname).subscribe(data => {
         this.GetassignUser(taskid);
     });
   }
   inviteuser = function(createmember){
-    createmember.status = "false";
-    createmember.notify = ("You are invited by " +createmember.user+ " for " +createmember.projectname+" project");
     this.dataService.inviteprojectuser(createmember).subscribe(data =>  {this.datas = data.data  
    $("#error").show();
       setTimeout(function() { $("#error").hide(); }, 3000);   

@@ -16,12 +16,14 @@ email;
 form;
 status;
 notificationid;
+useremail;
   constructor(private dataService: DataService, private router: Router, private auth: AuthService,
     private cookieService: CookieService) { }
   ngOnInit() {
    // this.email = sessionStorage.getItem("LoggedInUser");
    this.email = this.cookieService.get('LoggedInUser');
     this.notificationid = sessionStorage.getItem("notificationid");
+   
     if(this.notificationid == null)
     {
       this.GetAllInvitation();
@@ -30,9 +32,20 @@ notificationid;
       this.dataService.GetOneInvitation(this.email,this.notificationid).subscribe(data =>  this.forms = data);
       sessionStorage.removeItem("notificationid");
     }
+   } 
+  decline(id,user,projectid,projectname){
+    var createmember = {
+              projectname : projectname,
+              projectid: projectid,
+              id: id,
+              user: user,   
+            };
+    this.dataService.declinerequest(createmember).subscribe(data =>  {this.datas = data
+    this.router.navigateByUrl('/home');
+  });
   }
   accept(createmember){
-    createmember.email = this.email;
+    createmember.user = this.email;
   	this.dataService.acceptrequest(createmember).subscribe(data =>  {this.datas = data
     this.router.navigateByUrl('/home');
   });

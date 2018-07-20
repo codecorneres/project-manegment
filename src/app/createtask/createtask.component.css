@@ -156,7 +156,8 @@ margin-left: 8px;
     background: #eaeaea;
 }
 .cmntspn{
-    font-weight: bold;
+    font-weight: 500;
+    font-family: sans-serif;
     margin: 10px;
 }
 .cmnth3{
@@ -190,4 +191,14 @@ margin-left: 8px;
 }
 .btn-danger{
     margin-right: 10px;
+}
+.colr{
+    color: #ce6c00;  
+}
+.clrs{
+    color: currentColor;
+}
+.cmp{
+    background: #ece6e6 !important;
+    padding: 8px 10px;
 }
