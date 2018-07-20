@@ -19,8 +19,6 @@ export class NotificationComponent implements OnInit {
   	this.getnotification()	
   }
   deleteNotification(id){
-    console.log(id);
-    
     this.dataService.deleteNotification(id).subscribe(data =>  {this.getnotification()});
   }
   getnotification(){

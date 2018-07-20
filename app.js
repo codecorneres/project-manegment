@@ -27,12 +27,12 @@ app.use(function (req, res, next) {
      next();  
  });  
 
-app.use(express.static(__dirname + '/dist/ProjectManegment'));
+/*app.use(express.static(__dirname + '/dist/ProjectManegment'));
 
 app.get('/', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/ProjectManegment/index.html'));
-});
+});*/
 
 const port = process.env.PORT || 8181;
 app.set('port', port);
@@ -98,7 +98,8 @@ var UsersAssignProject = new Schema({
   projectid : { type: String},
   projectname : { type: String},
   assignuser : { type: String},
-  status : { type: String}
+  status : { type: String},
+  user : { type: String}
 });
 var Usersproject = new Schema({ 
  name: { type: String},
@@ -349,7 +350,7 @@ app.post("/api/inviteprojectuser",function(req,res){
                       port: 25,
                       auth: {
                         user: 'anniat44@gmail.com',
-                        pass: '9418165286'
+                        pass: 'annyattri@#1'
                       },
                       tls: {
                         rejectUnauthorized: false
@@ -362,7 +363,7 @@ app.post("/api/inviteprojectuser",function(req,res){
                       to: req.body.assignuser, // list of receivers to: 'bar@example.com, baz@example.com',
                       subject: 'Notification', // Subject line
                       text: 'Node js App', // plain text body
-                      html: '<b style="color: #080808;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-family: Helvetica,Arial,sans-serif; font-size: 15px; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:10px; width:30%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><b style="padding-bottom:10px;">Do you want to accept a request?</b><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 1px 10px 1px 10px; text-decoration: none; color: #fff; background: red;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:20px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 1px 10px 1px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>' // html body
+                      html: '<b style="color: #080808;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-family: Helvetica,Arial,sans-serif; font-size: 15px; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:10px; width:30%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><b style="padding-bottom:10px;">Do you want to accept a request?</b><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 1px 10px 1px 10px; text-decoration: none; color: #fff; background: red;" href="http://localhost:4200/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:20px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 1px 10px 1px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="http://localhost:4200/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>' // html body
                   };
                   // send mail with defined transport object
                   transporter.sendMail(mailOptions, (error, info) => {
@@ -573,27 +574,23 @@ app.post("/api/acceptrequest",function(req,res){
   req.body.status = "true";
   project_user.findByIdAndUpdate(req.body.id, { status: req.body.status},  
   function(err,data) {  
-   if (err) {  
-    res.send(err);         
-   }  
-   else{
-     notification.find().where({ projectid : req.body.projectid, assignuser: req.body.user}).
-          exec(function(err, data){
-            req.body.assignuser = data[0].user;
-            req.body.action = "unseen";
-            req.body.status = "true";
-            req.body.notify = ("Your request has been accepted by " +req.body.user+ " for " +req.body.projectname+" project");
-            var notifications = new notification(req.body); 
-            notifications.save(function(err,data){  
-            if(err){  
-               res.send(err);                
-            }  
-            else{
-              res.send({data:"Accepted successfully"});   
-            }
-          })
-      });
-     } 
+    if (err) {  
+      res.send(err);         
+    }  
+    else{
+      req.body.action = "unseen";
+      req.body.status = "true";
+      req.body.notify = ("Your request has been accepted by " +req.body.user+ " for " +req.body.projectname+" project");
+      var notifications = new notification(req.body); 
+      notifications.save(function(err,data){  
+        if(err){  
+           res.send(err);                
+        }  
+        else{
+          res.send({data:"Accepted successfully"});   
+        }
+      })
+    } 
   });
 })
 
@@ -637,28 +634,23 @@ app.post("/api/deleteNotification",function(req,res){
   })
 })
 app.post("/api/declinerequest",function(req,res){
-    notification.find().where({ projectid : req.body.projectid, assignuser: req.body.user}).
-    exec(function(err, data){
-      //req.body.user = req.body.assignuser;
-      req.body.assignuser = data[0].user;
-      req.body.action = "unseen";
-      req.body.notify = ("Your request are decline by "+req.body.user+" for "+req.body.projectname+" project");
-      var notifications = new notification(req.body); 
-      notifications.save(function(err,data){  
-      if(err){  
-         res.send(err);                
-      }  
-      else{
-        project_user.remove({ "_id": req.body.id }, function(err) {    
-          if(err){    
-               res.send(err);    
-          }    
-          else{
+  project_user.remove({ "_id": req.body.id }, function(err) {    
+    if(err){    
+         res.send(err);    
+    }    
+    else{
+        req.body.action = "unseen";
+        req.body.notify = ("Your request are decline by "+req.body.user+" for "+req.body.projectname+" project");
+        var notifications = new notification(req.body); 
+        notifications.save(function(err,data){  
+        if(err){  
+           res.send(err);                
+        }  
+        else{
             res.send({data:"Declined successfully"});
-          }
-        })   
-      }
-    })               
+          }  
+        })
+    }              
   })   
 })
 

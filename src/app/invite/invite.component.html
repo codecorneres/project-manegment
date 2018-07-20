@@ -21,9 +21,10 @@
                     <input type="hidden" id="projectid" name="projectid" [(ngModel)]="project.projectid"/>
                     <input type="hidden" id="projectname" name="projectname" [(ngModel)]="project.projectname"/>
                     <input type="hidden" id="user" name="user" [(ngModel)]="project.assignuser"/>
+                    <input type="hidden" id="assignuser" name="assignuser" [(ngModel)]="project.user"/>
                   </div>
                   <div class="inln">
-                  <span class="pdngs" (click) ="decline(project._id,project.assignuser,project.projectid,project.projectname)">Decline</span>
+                  <span class="pdngs" (click) ="decline(project._id,project.assignuser,project.projectid,project.projectname,project.user)">Decline</span>
                   <button type="submit" class="right" [disabled]="!forms.valid">Accept</button>
                 </div>
               </form>

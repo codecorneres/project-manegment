@@ -42,7 +42,8 @@ export class AcceptComponent implements OnInit {
 	    				projectname : this.projectname,
 					    projectid: this.notificationid,
 					    id: data[0]._id,
-					    user: this.email,		
+					    user: this.email,	
+              assignuser: data[0].user	
 				    };
 	    		if(this.action == "accept"){
 

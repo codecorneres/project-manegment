@@ -39,7 +39,7 @@ length;
       });
   }
   
-  asseptnotification(projectid, id,invite){
+  asseptnotification(user,projectid, id,invite){
     if(!invite){
        this.dataService.Setnotification(id).subscribe(data =>  this.datas = data);
     this.router.navigateByUrl('/notification');
@@ -47,6 +47,7 @@ length;
     else{
       this.dataService.Setnotification(id).subscribe(data =>  this.datas = data);
       sessionStorage.setItem('notificationid', projectid);
+      sessionStorage.setItem('user', user);
       this.router.navigateByUrl('/invite');
     }
     

@@ -19,121 +19,121 @@ export class DataService {
   	} 
 
   	login(form : Form){     
-    return this.http.post('api/login/', JSON.stringify(form), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/login/', JSON.stringify(form), {headers: this.headers}) 
            .map((response: Response) =>response.json())              
   	}
   	singUp(form : Form){     
-    return this.http.post('api/singUp/', JSON.stringify(form), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/singUp/', JSON.stringify(form), {headers: this.headers}) 
            .map((response: Response) =>response.json())              
     }
 
   	createnewproject(create : String){     
-    return this.http.post('api/createnewproject/', JSON.stringify(create), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/createnewproject/', JSON.stringify(create), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
   	} 
 
     createnewtasks(createtask : String){     
-    return this.http.post('api/createnewtasks/', JSON.stringify(createtask), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/createnewtasks/', JSON.stringify(createtask), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
     }
   	GetAllProject(email : String){       
-    return this.http.post('api/GetAllProject/',{'email': email})  
+    return this.http.post('http://localhost:8181/api/GetAllProject/',{'email': email})  
            .map((response: Response) => response.json())              
   	} 
     GetAllInvitation(email : String){       
-    return this.http.post('api/GetAllInvitation/',{'email': email})  
+    return this.http.post('http://localhost:8181/api/GetAllInvitation/',{'email': email})  
            .map((response: Response) => response.json())              
     } 
     GetOneInvitation(email,projectid){       
-    return this.http.post('api/GetOneInvitation/',{'email': email,'projectid': projectid})  
+    return this.http.post('http://localhost:8181/api/GetOneInvitation/',{'email': email,'projectid': projectid})  
            .map((response: Response) => response.json())              
     }
     Gettasks(projectid){  
-     return this.http.post('api/getbyprojectid/',{'projectid': projectid})  
+     return this.http.post('http://localhost:8181/api/getbyprojectid/',{'projectid': projectid})  
             .map((response: Response) =>response.json())               
     }
     GetAssigntasks(projectid,user){  
-     return this.http.post('api/getbyassinedprojectid/',{'projectid': projectid, 'user': user})  
+     return this.http.post('http://localhost:8181/api/getbyassinedprojectid/',{'projectid': projectid, 'user': user})  
             .map((response: Response) =>response.json())               
     }
     GetAcceptdProject(email : String){       
-    return this.http.post('api/GetAcceptdProject/',{'email': email})  
+    return this.http.post('http://localhost:8181/api/GetAcceptdProject/',{'email': email})  
            .map((response: Response) => response.json())              
     } 
     Setdescription(updatetask : String){     
-    return this.http.post('api/Setdescription/', JSON.stringify(updatetask), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/Setdescription/', JSON.stringify(updatetask), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
     }
     inviteprojectuser(newuser : String){     
-    return this.http.post('api/inviteprojectuser/', JSON.stringify(newuser), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/inviteprojectuser/', JSON.stringify(newuser), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
     } 
     createassignuser(assignuser : String){     
-    return this.http.post('api/createassignuser/', JSON.stringify(assignuser), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/createassignuser/', JSON.stringify(assignuser), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
     }
     deleteAssignUser(taskid, userassigned, user, projectid, taskname){     
-    return this.http.post('api/deleteAssignUser/',{'taskid': taskid, 'userassigned':userassigned, 'user':user, 'projectid' : projectid, 'taskname': taskname})  
+    return this.http.post('http://localhost:8181/api/deleteAssignUser/',{'taskid': taskid, 'userassigned':userassigned, 'user':user, 'projectid' : projectid, 'taskname': taskname})  
            .map((response: Response) =>response.json())           
     }
     GetassignUser(taskid,projectid){  
-     return this.http.post('api/getbytaskid/',{'taskid': taskid, 'projectid':projectid})  
+     return this.http.post('http://localhost:8181/api/getbytaskid/',{'taskid': taskid, 'projectid':projectid})  
             .map((response: Response) =>response.json())               
     }
     createcomment(comments : String){     
-    return this.http.post('api/createcomment/', JSON.stringify(comments), {headers: this.headers}) 
+    return this.http.post('http://localhost:8181/api/createcomment/', JSON.stringify(comments), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
     }
     getComments(taskid,projectid){  
-     return this.http.post('api/getComments/',{'taskid': taskid, 'projectid':projectid})  
+     return this.http.post('http://localhost:8181/api/getComments/',{'taskid': taskid, 'projectid':projectid})  
             .map((response: Response) =>response.json())               
     }
     deleteComment(commentid){     
-    return this.http.post('api/deleteComment/',{'commentid': commentid})  
+    return this.http.post('http://localhost:8181/api/deleteComment/',{'commentid': commentid})  
            .map((response: Response) =>response.json())           
     }
     updateComment(update ){   
-     return this.http.post('api/updateComment/', JSON.stringify(update), {headers: this.headers})   
+     return this.http.post('http://localhost:8181/api/updateComment/', JSON.stringify(update), {headers: this.headers})   
             .map((response: Response) =>response.json())               
     }
     Getnotification(email){  
-     return this.http.post('api/Getnotification/',{'email': email})  
+     return this.http.post('http://localhost:8181/api/Getnotification/',{'email': email})  
             .map((response: Response) =>response.json())               
     }
     acceptrequest(createmember){     
-    return this.http.post('api/acceptrequest/', JSON.stringify(createmember), {headers: this.headers})
+    return this.http.post('http://localhost:8181/api/acceptrequest/', JSON.stringify(createmember), {headers: this.headers})
            .map((response: Response) =>response.json())           
     }
     declinerequest(createmember){     
-    return this.http.post('api/declinerequest/',JSON.stringify(createmember), {headers: this.headers})  
+    return this.http.post('http://localhost:8181/api/declinerequest/',JSON.stringify(createmember), {headers: this.headers})  
            .map((response: Response) =>response.json())           
     }
     deleteProject(id){     
-    return this.http.post('api/deleteProject/',{'id': id})  
+    return this.http.post('http://localhost:8181/api/deleteProject/',{'id': id})  
            .map((response: Response) =>response.json())           
     }
     updatproject(update){   
-     return this.http.post('api/updatproject/', JSON.stringify(update), {headers: this.headers})   
+     return this.http.post('http://localhost:8181/api/updatproject/', JSON.stringify(update), {headers: this.headers})   
             .map((response: Response) =>response.json())               
     }
     GetTaskDescription(taskid){  
-     return this.http.post('api/getTaskDescription/',{'taskid': taskid})  
+     return this.http.post('http://localhost:8181/api/getTaskDescription/',{'taskid': taskid})  
             .map((response: Response) =>response.json())               
     }
     Setnotification(id){  
-     return this.http.post('api/Setnotification/',{'id': id})  
+     return this.http.post('http://localhost:8181/api/Setnotification/',{'id': id})  
             .map((response: Response) =>response.json())               
     }
     GetUnseenNotification(email){  
-     return this.http.post('api/GetUnseenNotification/',{'email': email})  
+     return this.http.post('http://localhost:8181/api/GetUnseenNotification/',{'email': email})  
             .map((response: Response) =>response.json())               
     }
     deleteNotification(id){
-      return this.http.post('api/deleteNotification/',{'id': id})  
+      return this.http.post('http://localhost:8181/api/deleteNotification/',{'id': id})  
         .map((response: Response) =>response.json())
     }
    /* sendMail(createmember){
-      return this.http.post('api/sendMail/', JSON.stringify(createmember), {headers: this.headers})   
+      return this.http.post('http://localhost:8181/api/sendMail/', JSON.stringify(createmember), {headers: this.headers})   
             .map((response: Response) =>response.json())
     }*/
 /******/
@@ -141,11 +141,11 @@ export class DataService {
 /**/
 /*
 GetUsers(projectid){  
-     return this.http.post('api/GetUsers/',{'projectid': projectid}) 
+     return this.http.post('http://localhost:8181/api/GetUsers/',{'projectid': projectid}) 
             .map((response: Response) =>response.json())               
     }*/
     /*uploadimage(fd){  
-    return this.httpclient.post('api/uploadImage/', fd) 
+    return this.httpclient.post('http://localhost:8181/api/uploadImage/', fd) 
            .map((response: Response) =>response.json()) 
 
     } */ 
