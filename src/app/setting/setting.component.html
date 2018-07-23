@@ -1,12 +1,29 @@
 <app-header></app-header>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-5">
 <!--       <app-slidbar></app-slidbar> -->
     </div>
-    <div class="col-md-10">
+    <div class="col-md-7">
       <div class="row">
-      
+      <!-- <p>{{email}}</p> -->
+      <form class="frmcls" #forms="ngForm" (ngSubmit)="changepassword(form)">
+		          <span class="login100-form-title">
+		           Change Password
+		          </span>
+		          <input type="hidden" name="email" class="form-control" [(ngModel)]="form.email" >
+		           <div class="form-group">
+					 	<input type="password" name="password" class="form-control" placeholder="Old password" required [(ngModel)]="form.password" >
+				 	</div>
+				 	<div class="form-group">
+					 	<input type="password" name="newpassword" class="form-control" placeholder="new password" required [(ngModel)]="form.newpassword" >
+				 	</div>
+				 	<div class="form-group">
+					 	<input type="password" name="confirmpassword" class="form-control" placeholder="confirm password" required [(ngModel)]="form.confirmpassword" >
+				 	</div>
+				 	<button type="submit" class="btn btn-primary" [disabled]="!forms.valid"> Change Password </button>
+				 	<span style="color: green; margin-left: 36px;">{{datas}}</span>
+		        </form>
       </div>
     </div>
   </div>

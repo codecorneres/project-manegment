@@ -10,9 +10,10 @@
 	margin-top: 30px;
 }
 .md3{
-	background: #eae9e9;
-    padding: 10px;
+	background: #f8f9fa;
+    padding: 19px 12px;
     margin-top: 10px;
+    box-shadow: 0 0 1px 1px #c1b9b9;
 }
 .ssd{
     float: right;
@@ -65,6 +66,7 @@ margin-left: 8px;
 	margin-top: 0;
     margin-bottom: 0 !important;
     font-size: 16px;
+    font-family: cursive;
 }
 #bt1:hover{
 	color:#47c7f7;
@@ -88,7 +90,7 @@ margin-left: 8px;
     z-index: 70;
 }
 .pcls{
-	background: #348fca;
+	background: #9643bb;
     padding: 5px;
     color: #fff;
     border: 1px solid;
@@ -152,10 +154,12 @@ margin-left: 8px;
 }
 .marcltp{
     margin-top: 40px;
+    border-left: 1px solid;
+    height: 20rem;
 }
 .cmntclm{
     border-bottom: 1px solid #ccc;
-        margin-top: 10px;
+    margin-top: 10px;
 }
 .cmntp{
     padding: 8px 10px;
@@ -175,9 +179,9 @@ margin-left: 8px;
     display: inline-flex;
 }
 .cretsk{
-    background-color: #47c7f7 !important;
-    border-color: #47c7f7 !important;
-    margin-top:10px; 
+    background-color: #9743bb !important;
+    border-color: #9643bb !important;
+    margin-top: 10px;
     padding: 0px 15px;
 }
 .fa-hashtag{
@@ -214,10 +218,10 @@ margin-left: 8px;
     font-size: 16px !important; 
 }
 .cls{
-    border: 1px solid #47c7f7;
+    border: 1px solid #9643bb;
     padding: 6px;
     margin: 6px;
-    background: #47c7f7;
+    background: #9643bb;
     color: #fff;
     font-size: 16px;
 }
@@ -227,8 +231,17 @@ margin-left: 8px;
 .eys:hover{
     color: #47c7f7;
 }
+.anyClass {
+  height:250px;
+  overflow-y: scroll;
+}
 @media (max-width: 768px) {
 .modal-content {
     width: 100% !important;
+}
+.marcltp{
+    margin-top: 40px;
+    border-left: none;
+    height: auto !important;
 }
 }

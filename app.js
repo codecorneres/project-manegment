@@ -617,8 +617,14 @@ app.post("/api/updatproject",function(req,res){
    if (err) {  
    res.send(err);         
    }  
-   else{        
-          res.send({data:"Record has been Updated..!!"});  
+   else{
+        project_user.update({"projectid": req.body.id }, {$set:{"projectname": req.body.name}}, function(err, result){
+          if (err) {
+              res.send({err});
+          } else {
+              res.send({data:"Project Name has been Updated..!!"});
+          }
+        });    
      } 
    });
      })
@@ -654,6 +660,29 @@ app.post("/api/declinerequest",function(req,res){
   })   
 })
 
+app.post("/api/changepassword",function(req,res){
+  user.find().where({"email": req.body.email, "password": req.body.password})
+    .count(function(err,count, data){  
+    if(err){  
+       res.send(err);                
+    }  
+    else{    
+      if(count == "1")
+      {
+        user.update({"email": req.body.email }, {$set:{"password": req.body.confirmpassword}}, function(err, result){
+          if (err) {
+              res.send({err});
+          } else {
+              res.send({data:"Password has been Updated..!!"});
+          }
+        });
+      }   
+      else{
+        res.send({data:"Invalide Old Password "});  
+      }  
+    } 
+  }); 
+})
 /***********/
 /********/
 /*****/

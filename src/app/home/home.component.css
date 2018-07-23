@@ -9,12 +9,14 @@
 .md3{
     padding-top: 20px;
     margin-top: 35px;
-    background: #f1f1f1;
+    background: #f8f9fa;
+    box-shadow: 0 0 1px 1px #c1b9b9;
 }
 .md4{
     margin-top: 45px;
-    background: #f1f1f1;
+    background: #f8f9fa;
     padding: 27px 15px;
+    box-shadow: 0 0 1px 1px #c1b9b9;
 }
 a:hover {
     color: #47c7f7;
@@ -23,7 +25,8 @@ a:hover {
 a{
 	color: #000;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
+    font-family: cursive;
 }
 
 .right{
@@ -42,6 +45,7 @@ a{
     padding-top: 10px !important;
     font-size: 16px;
     text-decoration: underline;
+    font-family: cursive;
 }
 .pdngs:hover, .right:hover{
       color: #47c7f7;
@@ -58,4 +62,7 @@ a{
 }
 .btn-danger{
     margin-right: 10px;
+}
+.cretsk{
+    margin-bottom: 10px;
 }

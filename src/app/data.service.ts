@@ -132,6 +132,10 @@ export class DataService {
       return this.http.post('api/deleteNotification/',{'id': id})  
         .map((response: Response) =>response.json())
     }
+    changepassword(form){  
+     return this.http.post('api/changepassword/', JSON.stringify(form), {headers: this.headers}) 
+            .map((response: Response) =>response.json())               
+    }
    /* sendMail(createmember){
       return this.http.post('api/sendMail/', JSON.stringify(createmember), {headers: this.headers})   
             .map((response: Response) =>response.json())

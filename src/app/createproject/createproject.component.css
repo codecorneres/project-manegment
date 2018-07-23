@@ -14,3 +14,7 @@
 .login100-form-title{
 	font-size: 18px;
 }
+.form-control {
+    background-color: transparent !important;
+    border: 1px solid #aba8a6 !important;
+}

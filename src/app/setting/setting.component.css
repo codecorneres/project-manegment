@@ -1,0 +1,28 @@
+.frmcls{
+	width: 60%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 2px;
+    margin-top: 100px;
+    box-shadow: 0 16px 38px -12px rgba(218, 212, 212, 0.56), 0 4px 25px 0px rgba(16, 16, 16, 0.12), 0 8px 10px -5px rgba(243, 236, 236, 0.2);}
+.form-control:focus {
+    border-color: #ccc !important;
+    box-shadow: 0 0 0 0 rgb(71, 199, 247) !important;
+}
+.login100-form-title{
+	font-size: 18px;
+}
+.form-control{
+	margin-top: 15px !important;
+    background-color: transparent !important;
+    border: 1px solid #aba8a6 !important;
+}
+.row{
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+}
+@media (max-width: 768px) {
+.frmcls{
+    width: 100% !important;
+}
+}

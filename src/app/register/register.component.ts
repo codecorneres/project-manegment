@@ -22,8 +22,8 @@ export class RegisterComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router,public auth: AuthService, private cookieService: CookieService) { }
 
   singUp(form){
-  	this.form.password = Md5.init(this.form.password);
-   this.dataService.singUp(this.form).subscribe(data =>  {
+    this.form.password = Md5.init(this.form.password);
+    this.dataService.singUp(this.form).subscribe(data =>  {
       if(data.data == "Record has been Inserted"){
         this.auth.sendToken(this.form.email);
         this.router.navigate(['/home']);
