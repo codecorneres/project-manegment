@@ -1,3 +1,7 @@
+.row{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
 .frmcls{
 	border: 1px solid #ccc;
     padding: 10px;
@@ -11,9 +15,7 @@
     border-color: #ccc !important;
     box-shadow: 0 0 0 0 rgb(71, 199, 247) !important;
 }
-.login100-form-title{
-	font-size: 18px;
-}
+
 .form-control {
     background-color: transparent !important;
     border: 1px solid #aba8a6 !important;

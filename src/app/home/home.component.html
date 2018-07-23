@@ -13,8 +13,8 @@
             		<h5>{{project.name}}</h5>
                 <span class="pdng">Create New Task</span><br>
               </div>
-              <span class="pdngs" (click) ="showtoggle(ind)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-              <span class="right" (click) = "confirmdelete('demo' +ind)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+              <span class="pdngs" (click) ="showtoggle(ind)"><i class="fa fa-pencil-square-o" aria-hidden="true" title="edit"></i></span>
+              <span class="right" (click) = "confirmdelete('demo' +ind)"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></span>
               <div [attr.id]="'demo' +ind" class="collapse deletdm">
                 <p>Are you sure you want to delete the comment?</p>
                 <button type="submit" class="btn-danger" (click) ="deleteProject(project._id)">Yes</button>

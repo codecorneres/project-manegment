@@ -54,47 +54,7 @@
     </ul>
 </div>
   <div class="collapse navbar-collapse" id="collapsibleNavbar"> 
-    <!-- <ul class="navbar-nav">
-      <div class="wrapper" *ngIf="auth.isLoggednIn()" >
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/images/sidebar-1.jpg">
-      <div class="logo">
-        <a  class="simple-text logo-normal">
-          {{headername}}
-        </a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item   ">
-            <a class="nav-link" href="">
-            <i class="fa fa-home" aria-hidden="true"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" routerLink = "/createproject">
-              <i class="fa fa-id-card-o" aria-hidden="true"></i>
-              <p>Add Project</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="/invite">
-            <i class="fa fa-bullhorn" aria-hidden="true"></i>
-              <p>Invites</p>
-            </a>
-          </li> 
-          <li class="nav-item ">
-            <a class="nav-link" routerLink = "/notification">
-            <i class="fa fa-bell" aria-hidden="true"></i>
-              <p>Notifications</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
- </div>
-    </ul> -->
   <ul class="navbar-nav logout">
-
    <li class="nav-item">
         <a class="nav-link btns" *ngIf="!auth.isLoggednIn()" routerLink="/register">Sign Up</a>
       </li>
@@ -129,9 +89,11 @@
         
         
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <div class="table-responsive">
         <div *ngFor="let notification of datas;let ind = index ">
 <a class="dropdown-item" (click)="asseptnotification(notification.user,notification.projectid,notification._id, notification.invite)"> {{notification.notify}}</a>
           <div class="dropdown-divider"></div>
+          </div>
           </div>
         </div>
         </ng-template>

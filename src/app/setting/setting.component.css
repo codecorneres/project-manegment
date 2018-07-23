@@ -9,9 +9,6 @@
     border-color: #ccc !important;
     box-shadow: 0 0 0 0 rgb(71, 199, 247) !important;
 }
-.login100-form-title{
-	font-size: 18px;
-}
 .form-control{
 	margin-top: 15px !important;
     background-color: transparent !important;
@@ -20,6 +17,19 @@
 .row{
 	margin-right: 0px !important;
 	margin-left: 0px !important;
+}
+.form-group {
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.1rem rgb(150, 67, 187) !important;
+}
+.danger{
+    color: #dc3545;
+}
+label {
+    margin-bottom: 1px !important;
 }
 @media (max-width: 768px) {
 .frmcls{

@@ -13,11 +13,13 @@
         <div class="dropdown-divider"></div>
       </div>
       <ng-template #assignTaskdiv>
+      <div class="table-responsive">
 		<div class="col-md-12 bgclr" *ngFor="let notification of datas;let ind = index ">
 		    <a  class="dropdown-item">{{notification.notify}}</a>
-        <span (click) = "deleteNotification(notification._id)"><i class="fa fa-trash" aria-hidden="true"></i></span>
+        <span class="spncls" (click) = "deleteNotification(notification._id)"><i class="fa fa-trash" aria-hidden="true"></i></span>
 		    <div class="dropdown-divider"></div>
 		</div>
+    </div>
     </ng-template>
 	</div>
 </div>

@@ -30,16 +30,14 @@ maildata;
   users;
 
   ngOnInit() {
-     sessionStorage.setItem('headername', 'Create Tast');
+     sessionStorage.setItem('headername', 'Create Task');
 
   	this.projectname = sessionStorage.getItem("projectname");
     this.projectid = sessionStorage.getItem("projectid");
    // this.user = sessionStorage.getItem("LoggedInUser");
    this.user = this.cookieService.get('LoggedInUser');
     this.createtasks = sessionStorage.getItem("createtask");
-      this.Gettasks(this.projectid);
-    /****For Email ID OF users***/
-  	//this.dataService.GetUsers(this.projectid).subscribe(data => {this.assignusers = data});  
+      this.Gettasks(this.projectid); 
   }
   toggle() {
     this.show = !this.show;

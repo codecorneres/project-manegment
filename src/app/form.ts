@@ -3,5 +3,5 @@ export class Form {
 	email: string;
   	password: string;
   	newpassword: string;
-  	confirmpassword: string;
+  	repeatPassword: string;
 }

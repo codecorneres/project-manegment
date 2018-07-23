@@ -2,28 +2,39 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-5">
-<!--       <app-slidbar></app-slidbar> -->
     </div>
     <div class="col-md-7">
       <div class="row">
-      <!-- <p>{{email}}</p> -->
-      <form class="frmcls" #forms="ngForm" (ngSubmit)="changepassword(form)">
-		          <span class="login100-form-title">
+      	<form class="frmcls" #forms="ngForm" [formGroup]="registrationFormGroup" (ngSubmit)="changepassword(forms.value)">
+ 			<h5 class="login100-form-title">
 		           Change Password
-		          </span>
-		          <input type="hidden" name="email" class="form-control" [(ngModel)]="form.email" >
-		           <div class="form-group">
-					 	<input type="password" name="password" class="form-control" placeholder="Old password" required [(ngModel)]="form.password" >
-				 	</div>
-				 	<div class="form-group">
-					 	<input type="password" name="newpassword" class="form-control" placeholder="new password" required [(ngModel)]="form.newpassword" >
-				 	</div>
-				 	<div class="form-group">
-					 	<input type="password" name="confirmpassword" class="form-control" placeholder="confirm password" required [(ngModel)]="form.confirmpassword" >
-				 	</div>
-				 	<button type="submit" class="btn btn-primary" [disabled]="!forms.valid"> Change Password </button>
-				 	<span style="color: green; margin-left: 36px;">{{datas}}</span>
-		        </form>
+		          </h5>
+		    <div class="form-group">
+		        <label for="password">Old Password</label>
+		        <input class="form-control" type="password" name="oldpassword" formControlName="oldpassword"/>
+			</div>
+			<p class="danger" *ngIf="registrationFormGroup.controls.oldpassword.errors?.required && registrationFormGroup.controls.oldpassword.touched">Old password is required</p>
+		 
+	    	<div [formGroup]="passwordFormGroup">
+		        <div class="form-group">
+		            <label for="newpassword">New Password</label>
+		            <input class="form-control" type="password" name="newpassword" formControlName="newpassword" minlength="6">
+		        </div>
+		        <p class="danger" *ngIf="passwordFormGroup.controls.newpassword.errors?.required && passwordFormGroup.controls.newpassword.touched">new password is required</p>
+		 		<p class="danger" *ngIf="passwordFormGroup.errors?.minlength && passwordFormGroup.controls.newpassword.touched">Password must be at least 6 characters long.</p>
+		        <div class="form-group">
+		            <label for="repeatPassword">Repeat Password</label>
+		            <input class="form-control" type="password" name="repeatPassword" formControlName="repeatPassword" >
+		        </div>
+		        <p class="danger" *ngIf="passwordFormGroup.controls.repeatPassword.errors?.required && passwordFormGroup.controls.repeatPassword.touched">Repeat password is required</p>
+		        <p class="danger" *ngIf="passwordFormGroup.errors?.doesMatchPassword">Password does not match</p>
+	    	</div>
+		    <div class="form-group">
+		        <button class="btn btn-primary" type="submit" [disabled]="!registrationFormGroup.valid" >Change Password</button>
+		        <span style="color: green; margin-left: 36px; font-size: 20px;" id="error">{{datas}}</span>
+		    </div>
+		 
+		</form>
       </div>
     </div>
   </div>
