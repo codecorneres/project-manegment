@@ -39,6 +39,7 @@ maildata;
     this.createtasks = sessionStorage.getItem("createtask");
       this.Gettasks(this.projectid); 
   }
+  
   toggle() {
     this.show = !this.show;
     if(this.show) { 
@@ -76,6 +77,10 @@ maildata;
       this.buttonsName = "Add Users";
     }
   }
+  showDescriptionDiv(){
+    $(".divd").show();
+    $(".divs").hide();
+  }
   
   Gettasks(projectid){
   	this.dataService.Gettasks(projectid).subscribe(form => {this.form = form});
@@ -93,10 +98,20 @@ maildata;
   }
   Setdescription(updatetask){
   	this.dataService.Setdescription(updatetask).subscribe(data =>{
-      //this.Gettasks(this.projectid);
-      
+      /*this.GettaskDescription(updatetask.task);*/
+      $(".divd").hide();
+      $(".divs").show();
     });
   }
+  /*GettaskDescription(taskid){
+    var forms = {
+              description : ""
+            };
+    this.dataService.GetTaskDescription(taskid).subscribe(form => {forms.description = form.data
+      console.log(forms.description);
+      console.log(form.data);
+    });
+  }*/
   createassignuser(assignuser){
     assignuser.user = this.user;
     this.dataService.createassignuser(assignuser).subscribe(data => {
@@ -110,7 +125,7 @@ maildata;
   }
   inviteuser = function(createmember){
     if(this.user == createmember.assignuser){
-      this.datas = "You can't send invitation for project";
+      this.datas = "You can't send invitation on own project";
       $("#error").show();
           setTimeout(function() { $("#error").hide(); }, 3000);
         $("#email").val('');

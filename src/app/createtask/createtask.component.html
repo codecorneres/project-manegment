@@ -26,11 +26,27 @@
 			      			<div class="col-md-8 md8">
 						       <form class="frmcls" #setmembers="ngForm" (ngSubmit)="Setdescription(setmembers.value)">
 						        	<input type="hidden" id="task" name="task" [(ngModel)]="forms._id"/>
+
+						        	<div class="" *ngIf="forms.description?.length <= 0;else descreptiondiv">
 						        	<div class="form-group">
+			       	 					<label for="description" class="control-label"><i class="fa fa-indent" aria-hidden="true"></i> Description:</label>
+						        		<textarea rows="4" cols="50" class="form-control" id="description" name="description" [(ngModel)]="description" placeholder="Add description...." required> </textarea>
+						        	</div>
+						        	<button type="submit" [disabled]="!setmembers.valid" class="btn btn-primary"> Save</button>
+						        	</div>
+						        	<ng-template #descreptiondiv>
+						        	<div class="form-group divs">
+			       	 					<label for="description" class="control-label"><i class="fa fa-indent" aria-hidden="true"></i> Description:</label><span class="desedit" (click)="showDescriptionDiv()"> edit </span>
+						        		<textarea rows="4" cols="50" class="form-control" id="description" name="description" [(ngModel)]="forms.description" placeholder="Add description...." readonly> </textarea>
+						        	</div>
+						        	<div class="divd" style="display:none;">
+						        		<div class="form-group">
 			       	 					<label for="description" class="control-label"><i class="fa fa-indent" aria-hidden="true"></i> Description:</label>
 						        		<textarea rows="4" cols="50" class="form-control" id="description" name="description" [(ngModel)]="forms.description" placeholder="Add description...." required> </textarea>
 						        	</div>
-						        	<button type="submit" [disabled]="!setmembers.valid" class="btn btn-primary"> Save</button>
+						        	<button type="submit" class="btn btn-primary"> Save</button>
+						        	</div>
+						        	</ng-template>
 						        </form>	
 
 						        <form class="frmcls1" #comments="ngForm" (ngSubmit)="createcomments(comments.value)">

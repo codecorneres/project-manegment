@@ -205,7 +205,8 @@ app.post("/api/getbyassinedprojectid",function(req,res){
      } 
    });
 })
-app.post("/api/getTaskDescription",function(req,res){     
+app.post("/api/getTaskDescription",function(req,res){    
+console.log(req.body.taskid); 
        task.findOne().where({ _id : req.body.taskid}).
           exec(function(err, data){ 
    if (err) {  

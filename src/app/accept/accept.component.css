@@ -14,15 +14,15 @@
 }
 .acptcls{
 	color: #fff;
-    background-color: #ec7a35;
-    border-color: #ce7d1e;
+    background-color: #c27dd2;
+    border-color: #c080d4;
     padding: 9px 25px;
     border-radius: 3px;
 }
 .acptcls:hover{
 	color: #000;
-    background-color: #47c7f7;
-    border-color: #47c7f7;
+    background-color: #90aae1;
+    border-color: #91a9e1;
     text-decoration: none;
 }
 /*.btn-primary:active{
