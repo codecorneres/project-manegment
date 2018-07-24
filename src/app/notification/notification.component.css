@@ -9,7 +9,7 @@ hr{
     border-top: 1px solid #47c7f7;
     width:100%;
 }
-.dropdown-item{
+.dropdowns{
 	color: #117a8b;
   font-family: Poppins-Regular;
   font-size: 18px;
@@ -17,10 +17,10 @@ hr{
 .bgclr:hover{
 		background: #fff6f0 !important;
 	} 
-.dropdown-item:active {
+.dropdowns:active {
   background-color: transparent !important;
 }
-.dropdown-item:hover {
+.dropdowns:hover {
   	   background: #fff6f0 !important;
 }
 /*.bgclr{
@@ -38,6 +38,4 @@ h5 {
 }
 .spncls{
     float: right;
-    margin-top: -16px !important;
-    right: 0px;
 }

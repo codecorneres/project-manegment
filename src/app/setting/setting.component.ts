@@ -38,25 +38,17 @@ registrationFormGroup: FormGroup;
       passwordFormGroup: this.passwordFormGroup
     });
   }
-form = new Form;
-changepassword(form){
-	form.password = Md5.init(form.oldpassword); 
-  console.log(form.oldpassword);
-	form.confirmpassword = Md5.init(form.passwordFormGroup.repeatPassword);
-  console.log(form.confirmpassword);
-  form.email = this.email;
-  console.log(form);
-	this.dataService.changepassword(form).subscribe(data => this.datas = data.data)
-	$("#error").show();
-          setTimeout(function() { $("#error").hide(); }, 3000);
-          form.reset();
-	
-}
-  ngOnInit() {
-  	sessionStorage.setItem('headername', 'Setting');
-  	this.email = this.cookieService.get('LoggedInUser');
-  	//this.form.email = this.email;
+  form = new Form;
+  changepassword(form){
+  	form.password = Md5.init(form.oldpassword); 
+  	form.confirmpassword = Md5.init(form.passwordFormGroup.repeatPassword);
+    form.email = this.email;
+  	this.dataService.changepassword(form).subscribe(data => this.datas = data.data)
+  	$("#error").show();
+      setTimeout(function() { $("#error").hide(); }, 5000);
   }
-  
-
+  ngOnInit() {
+  	sessionStorage.setItem('headername', 'Account Setting');
+  	this.email = this.cookieService.get('LoggedInUser');
+  } 
 }

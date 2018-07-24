@@ -9,8 +9,7 @@ export class AuthService {
   constructor(private myRoute: Router, private cookieService: CookieService) { }
   sendToken(token: string) {
     sessionStorage.setItem("LoggedInUser", token)
-    this.cookieService.set( 'LoggedInUser', token );
-    this.cookieService.set('LoggedInUser',token,0.8);
+    this.cookieService.set('LoggedInUser',token,0.25);
   }
   getToken() {
    //return sessionStorage.getItem("LoggedInUser")

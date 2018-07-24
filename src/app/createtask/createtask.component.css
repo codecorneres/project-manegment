@@ -166,8 +166,7 @@ margin-left: 8px;
     background: #eaeaea;
 }
 .cmntspn{
-    font-weight: 500;
-    font-family: sans-serif;
+    font-weight: 600;
     margin: 10px;
 }
 .cmnth3{
@@ -234,6 +233,9 @@ margin-left: 8px;
 .anyClass {
   height:250px;
   overflow-y: scroll;
+}
+p {
+    font-family: cursive;
 }
 @media (max-width: 768px) {
 .modal-content {

@@ -4,7 +4,7 @@ export class Registration {
         let newpassword = registrationFormGroup.controls.newpassword.value;
         let repeatPassword = registrationFormGroup.controls.repeatPassword.value;
 
- 		if (newpassword.length <= 5) {
+ 		if (newpassword.length <= 5 && newpassword.length >= 1  ) {
 
             return {
                 minlength: true

@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { CommonModule } from '@angular/common';
 
 import { DataService } from './data.service';
 import { AuthService } from './auth/auth.service';
@@ -50,6 +51,7 @@ import { CookieService } from 'ngx-cookie-service';
     SettingComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,

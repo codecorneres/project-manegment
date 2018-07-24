@@ -24,5 +24,10 @@
     margin-top: 1rem !important;
 }
 .btn{
-    padding: 5px 20px !important;
+    padding: 5px 35px !important;
+}
+.btn-primary:disabled {
+    color: #989797 !important;
+    background-color: transparent !important;
+    border-color: #b9b9b9 !important;
 }

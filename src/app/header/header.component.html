@@ -9,50 +9,81 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar1"> 
-
+  <div class="collapse navbar-collapse" id="collapsibleNavbar1">
     <ul class="navbar-nav">
       <div class="wrapper" *ngIf="auth.isLoggednIn()" >
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/images/sidebar-1.jpg">
-      <div class="logo">
-      <a class="closebtn" (click)="closeNav()" style="display: none;">&times;</a>
-        <a  class="simple-text logo-normal">
-          {{headername}}
-        </a>
+        <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/images/sidebar-1.jpg">
+          <div class="logo">
+            <a class="closebtn" (click)="closeNav()" style="display: none;">&times;</a>
+            <a  class="simple-text logo-normal">
+              {{headername}}
+            </a>
+            <hr>
+          </div>
+          <div class="sidebar-wrapper">
+            <ul class="nav">
+              <li class="nav-item active" *ngIf="headername === 'Dashboard';else deactive">
+                <a class="nav-link" routerLink = "/home">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <ng-template #deactive>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink = "/home">
+                  <i class="fa fa-home" aria-hidden="true"></i>
+                    <p>Dashboard</p>
+                  </a>
+                </li>
+              </ng-template>
+              <li class="nav-item active" *ngIf="headername === 'Add Project';else deactiveadd">
+                <a class="nav-link" routerLink = "/createproject">
+                  <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                  <p>Add Project</p>
+                </a>
+              </li>
+              <ng-template #deactiveadd>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink = "/createproject">
+                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                    <p>Add Project</p>
+                  </a>
+                </li>
+              </ng-template>
+              <li class="nav-item active" *ngIf="headername === 'Invite';else deactiveinv">
+                <a class="nav-link" routerLink="/invite">
+                  <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                  <p>Invites</p>
+                </a>
+              </li> 
+              <ng-template #deactiveinv>
+                  <li class="nav-item ">
+                  <a class="nav-link" routerLink="/invite">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    <p>Invites</p>
+                  </a>
+                </li> 
+              </ng-template>
+              <li class="nav-item active" *ngIf="headername === 'Notification';else deactivenoty">
+                <a class="nav-link" routerLink = "/notification">
+                  <i class="fa fa-bell" aria-hidden="true"></i>
+                  <p>Notifications</p>
+                </a>
+              </li>
+              <ng-template #deactivenoty>
+                  <li class="nav-item ">
+                  <a class="nav-link" routerLink = "/notification">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    <p>Notifications</p>
+                  </a>
+                </li>
+              </ng-template>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="sidebar-wrapper">
-
-        <ul class="nav">
-          <li class="nav-item   ">
-            <a class="nav-link" href="">
-            <i class="fa fa-home" aria-hidden="true"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" routerLink = "/createproject">
-              <i class="fa fa-id-card-o" aria-hidden="true"></i>
-              <p>Add Project</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="/invite">
-            <i class="fa fa-bullhorn" aria-hidden="true"></i>
-              <p>Invites</p>
-            </a>
-          </li> 
-          <li class="nav-item ">
-            <a class="nav-link" routerLink = "/notification">
-            <i class="fa fa-bell" aria-hidden="true"></i>
-              <p>Notifications</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
- </div>
     </ul>
-</div>
+  </div>
   <div class="collapse navbar-collapse" id="collapsibleNavbar"> 
   <ul class="navbar-nav logout">
    <li class="nav-item">
@@ -89,12 +120,14 @@
         
         
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         <div class="table-responsive">
+         
         <div *ngFor="let notification of datas;let ind = index ">
-<a class="dropdown-item" (click)="asseptnotification(notification.user,notification.projectid,notification._id, notification.invite)"> {{notification.notify}}</a>
+        <div class="table-responsive">
+<a class="dropdown-item fntsz" (click)="asseptnotification(notification.user,notification.projectid,notification._id, notification.invite)"> {{notification.notify}}</a>
           <div class="dropdown-divider"></div>
           </div>
           </div>
+          
         </div>
         </ng-template>
       </li>
@@ -115,5 +148,5 @@
         </div>
       </li>
     </ul> 
-    </div> 
+  </div> 
 </nav>

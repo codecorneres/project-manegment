@@ -1,5 +1,8 @@
 
-
+hr {
+    margin-top: 0.34rem !important;
+    margin-bottom: 0rem !important;
+}
 #collapsibleNavbar .logout{
 	float: right !important;
 	margin-bottom: 0;
@@ -46,7 +49,7 @@
 }
 .dropdown-menu {
 	font-size: 18px;
-  font-family: Poppins-Regular;
+    font-family: Poppins-Regular;
 	right: 0 !important;
     left: auto !important;
     border: 1px solid rgb(71, 199, 247) !important;
@@ -99,21 +102,23 @@
     z-index: 2;
     width: 260px;
     background: #fff;
+    background-image: url("/assets/images/sky-background-unsplash.jpg");
     box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 .sidebar .logo {
-    padding: 15px 0px;
+    padding: 15px 0px 0px 0px;
     margin: 0;
     display: block;
     position: relative;
     z-index: 4;
+    background: linear-gradient(-135deg, #d46ecd, #71cbec);
 }
 .sidebar .logo .simple-text {
     text-transform: uppercase;
     padding: 5px 0px;
     display: inline-block;
-    font-size: 18px;
-    color: #3C4858;
+    font-size: 20px;
+    color: #f8f9fa;
     white-space: nowrap;
     font-weight: 400;
     line-height: 30px;
@@ -138,6 +143,7 @@
 .sidebar[data-color="purple"] li.active > a {
     background-color: #9c27b0;
     box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+    color:#fff !important;
 }
 .sidebar .nav li a, .sidebar .nav li .dropdown-menu a {
     margin: 10px 15px 0;
@@ -254,7 +260,24 @@ a .material-icons {
 #collapsibleNavbar1 .closebtn {
     position: absolute;
     top: 0;
-    right: 25px;
+    right: 9px;
     font-size: 36px;
     margin-left: 50px;
+}
+@media (max-width: 768px){
+   .dropdown {
+    text-align: right !important;
+} 
+.dropdown-menu {
+    position: absolute !important;
+    
+}
+.dropdown-menu .fntsz{
+    font-size: 18px !important; 
+    white-space: normal !important;
+}
+.notispn{
+    right: 2px !important;
+    z-index: 0 !important;
+}
 }
