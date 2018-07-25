@@ -9,6 +9,10 @@
         "/index.html",
         "/*.css",
         "/*.js"
+      ],
+      "urls":[
+        "https://fonts.googleapis.com/...",
+        "https://fonts.gstatic.com/s/..."
       ]
     }
   }, {
@@ -20,5 +24,17 @@
         "/assets/**"
       ]
     }
-  }]
+  }],
+   "dataGroups": [
+    {
+      "name": "posts",
+      "urls": [ "https://project-managment-ap.herokuapp.com/"],
+      "cacheConfig":{
+        "maxSize": 5,
+        "maxAge": "6h",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    }
+  ]
 }
