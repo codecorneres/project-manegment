@@ -21,12 +21,14 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'login',
@@ -39,37 +41,44 @@ const routes: Routes = [
   {
     path: 'createproject',
     component: CreateprojectComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'createtast',
     component: CreatetaskComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'invite',
     component: InviteComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'notification',
     component: NotificationComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'assigntask',
     component: AssingtaskComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'accept',
     component: AcceptComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'setting',
     component: SettingComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   }
   
 ]; 

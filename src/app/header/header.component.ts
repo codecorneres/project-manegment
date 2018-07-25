@@ -26,7 +26,7 @@ headername;
   		//this.email = sessionStorage.getItem("LoggedInUser");
       this.email = this.cookieService.get('LoggedInUser');
   		this.dataService.GetUnseenNotification(this.email).subscribe(res=> { this.datas = res
-        this.length = res.length;
+        /*this.length = res.length;
         if(this.length <= '0' ){
         }
         else{
@@ -39,7 +39,7 @@ headername;
             });  
             this._notificationService.generateNotification(data);
           }
-        }
+        }*/
         });
   }
 
