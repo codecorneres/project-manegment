@@ -9,7 +9,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.3cd32fad90882cae23b1.js",
+        "/main.c28acf2123f416bfd5a2.js",
         "/polyfills.b3499ebfac9adf753b7a.js",
         "/runtime.a66f828dca56eeb90e02.js",
         "/scripts.806effac119676237f10.js",
@@ -42,7 +42,19 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "posts",
+      "patterns": [
+        "https:\\/\\/project-managment-ap\\.herokuapp\\.com\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 5,
+      "maxAge": 21600000,
+      "timeoutMs": 10000,
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
@@ -58,8 +70,8 @@
     "/assets/images/sidebar-1.jpg": "7e52f4c80ffbc51540150bd8a2f99e7851e6636b",
     "/assets/images/sky-background-unsplash.jpg": "469de67d1e227151ed58f4518ff7e73e5ee41bd6",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "d3a5f1f2c6d7fb37d04c0cfc34013658df6a2478",
-    "/main.3cd32fad90882cae23b1.js": "58d4ef249c6e756d6181cd5d6be60e2331f9bd0a",
+    "/index.html": "6c4f645e7f1dec8cbf11321f3a0ec88a06718894",
+    "/main.c28acf2123f416bfd5a2.js": "a7982aee2ee033bdb1f138d29c4239efd7f1ac9a",
     "/polyfills.b3499ebfac9adf753b7a.js": "32f45599e3c015a129302f438912b862a39e376a",
     "/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
     "/scripts.806effac119676237f10.js": "fde1e2ca22b32566f40e13fc1a318a0ec481bc5e",

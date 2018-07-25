@@ -45,7 +45,7 @@ export class PushNotificationsService {
                     event: e  
                 });  
             };  
-            _notify.onerror = function(e) {  
+            _notify.onerror = function(e) { 
                 return obs.error({  
                     notification: _notify,  
                     event: e  
@@ -62,9 +62,7 @@ export class PushNotificationsService {
             let options = {  
                 body: item.alertContent,  
                 icon: "../assets/icons/icon-96x96.png", 
-                onClick: function onNotificationClicked() {
-                    console.log('Notification clicked.');
-                },
+                onClick: "function onNotificationClicked() {console.log('Notification');}",
                 autoClose: 4000
             };  
             let notify = self.create(item.title, options).subscribe();  
