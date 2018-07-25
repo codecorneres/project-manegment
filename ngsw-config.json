@@ -27,8 +27,8 @@
   }],
    "dataGroups": [
     {
-      "name": "posts",
-      "urls": [ "https://project-managment-ap.herokuapp.com/* "],
+      "name": "offline",
+      "urls": [ "https://project-managment-ap.herokuapp.com/**"],
       "cacheConfig":{
         "maxSize": 5,
         "maxAge": "6h",
