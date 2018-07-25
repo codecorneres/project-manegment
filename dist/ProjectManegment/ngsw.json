@@ -15,10 +15,7 @@
         "/scripts.806effac119676237f10.js",
         "/styles.427365f1d87749b3a265.css"
       ],
-      "patterns": [
-        "https:\\/\\/fonts\\.googleapis\\.com\\/\\.\\.\\.",
-        "https:\\/\\/fonts\\.gstatic\\.com\\/s\\/\\.\\.\\."
-      ]
+      "patterns": []
     },
     {
       "name": "assets",
@@ -42,19 +39,7 @@
       "patterns": []
     }
   ],
-  "dataGroups": [
-    {
-      "name": "posts",
-      "patterns": [
-        "https:\\/\\/project-managment-ap\\.herokuapp\\.com\\/"
-      ],
-      "strategy": "freshness",
-      "maxSize": 5,
-      "maxAge": 21600000,
-      "timeoutMs": 10000,
-      "version": 1
-    }
-  ],
+  "dataGroups": [],
   "hashTable": {
     "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
