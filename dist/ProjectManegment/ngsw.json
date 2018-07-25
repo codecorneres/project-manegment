@@ -46,7 +46,7 @@
     {
       "name": "posts",
       "patterns": [
-        "https:\\/\\/project-managment-ap\\.herokuapp\\.com\\/.*"
+        "https:\\/\\/project-managment-ap\\.herokuapp\\.com\\/"
       ],
       "strategy": "freshness",
       "maxSize": 5,
