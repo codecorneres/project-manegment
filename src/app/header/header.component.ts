@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { CookieService } from 'ngx-cookie-service';
 import { PushNotificationsService } from '../push-notifications.service'; 
+import { PushNotificationService } from 'ng-push-notification';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,6 +17,7 @@ length;
 headername;
   constructor(public auth: AuthService, private dataService: DataService, private router: Router,
    private cookieService: CookieService,
+   private pushNotification: PushNotificationService,
    private _notificationService: PushNotificationsService) { }
   email : string;
   i : any;
@@ -25,21 +27,22 @@ headername;
       this.email = this.cookieService.get('LoggedInUser');
   		this.dataService.GetUnseenNotification(this.email).subscribe(res=> { this.datas = res
         this.length = res.length;
-        /*if(this.length <= '0' ){
-          console.log(this.length);
+        if(this.length <= '0' ){
         }
         else{
           for(this.i='0'; this.i<this.length; this.i++ ){
             let data: Array < any >= [];  
             data.push({  
                 'title': res[this.i].assignuser,  
-                'alertContent': res[this.i].notify 
+                'alertContent': res[this.i].notify
+           
             });  
             this._notificationService.generateNotification(data);
           }
-        }*/
-      });
+        }
+        });
   }
+
   showNav(){
     $("#collapsibleNavbar1").show();
     $(".closebtn").show();

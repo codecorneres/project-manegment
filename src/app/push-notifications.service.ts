@@ -61,7 +61,11 @@ export class PushNotificationsService {
         source.forEach((item) => {  
             let options = {  
                 body: item.alertContent,  
-                icon: "../assets/icons/icon-96x96.png"  
+                icon: "../assets/icons/icon-96x96.png", 
+                onClick: function onNotificationClicked() {
+                    console.log('Notification clicked.');
+                },
+                autoClose: 4000
             };  
             let notify = self.create(item.title, options).subscribe();  
         })  

@@ -41,6 +41,7 @@
     "md5-typescript": "^1.0.5",
     "mongodb": "^3.1.0",
     "mongoose": "^5.2.1",
+    "ng-push-notification": "^1.1.0",
     "ng-socket-io": "^0.2.4",
     "ngx-cookie-service": "^1.0.10",
     "node-mailer": "^0.1.1",

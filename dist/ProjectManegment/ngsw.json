@@ -9,13 +9,16 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.70a8496101dc33cdd25f.js",
+        "/main.f8f7c86c9839dee871a5.js",
         "/polyfills.b3499ebfac9adf753b7a.js",
         "/runtime.a66f828dca56eeb90e02.js",
         "/scripts.806effac119676237f10.js",
         "/styles.427365f1d87749b3a265.css"
       ],
-      "patterns": []
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/\\.\\.\\.",
+        "https:\\/\\/fonts\\.gstatic\\.com\\/s\\/\\.\\.\\."
+      ]
     },
     {
       "name": "assets",
@@ -55,8 +58,8 @@
     "/assets/images/sidebar-1.jpg": "7e52f4c80ffbc51540150bd8a2f99e7851e6636b",
     "/assets/images/sky-background-unsplash.jpg": "469de67d1e227151ed58f4518ff7e73e5ee41bd6",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "65bbba595ec6117e92bdb2d390e250125e85240f",
-    "/main.70a8496101dc33cdd25f.js": "d8c2848ebccdbd47799eb94c0e5ec88fb730c435",
+    "/index.html": "c4ca0e97fe963d7711be0975114a1fd11527500e",
+    "/main.f8f7c86c9839dee871a5.js": "81399ec78c19915c9efb2b08f06abb7edfee8c2a",
     "/polyfills.b3499ebfac9adf753b7a.js": "32f45599e3c015a129302f438912b862a39e376a",
     "/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
     "/scripts.806effac119676237f10.js": "fde1e2ca22b32566f40e13fc1a318a0ec481bc5e",

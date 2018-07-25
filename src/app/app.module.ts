@@ -5,6 +5,7 @@ import { FormsModule, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CommonModule } from '@angular/common';
+import { PushNotificationModule } from 'ng-push-notification';
 
 import { DataService } from './data.service';
 import { AuthService } from './auth/auth.service';
@@ -58,7 +59,8 @@ import { CookieService } from 'ngx-cookie-service';
     FormsModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    PushNotificationModule.forRoot(/* Default settings here, interface PushNotificationSettings */)
   
   ],
   providers: [AuthService, DataService, PushNotificationsService, CookieService],
