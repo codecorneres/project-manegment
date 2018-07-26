@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {Md5} from "md5-typescript";
 import { CookieService } from 'ngx-cookie-service';
-
+import * as $ from 'jquery';
 import { Form } from '../form';
 import { DataService } from '../data.service';
 @Component({
@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   projectname;
   sesaction;
   sesprojectname;
+  resenddata;
  /* notificationidr;
   useremailr;
   actionr;
@@ -46,15 +47,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(form) {
-    console.log(this.sessionemail);
-    console.log(this.id);
-    console.log(this.form.email);
     this.form.password = Md5.init(this.form.password);
     this.dataService.login(this.form).subscribe(data =>  {
       if(data.data == "Matching"){
         this.auth.sendToken(this.form.email);
 
-      if(this.sessionemail != "undefined" && this.sessionemail != undefined && this.sessionemail != null){
+        if(this.sessionemail != "undefined" && this.sessionemail != undefined && this.sessionemail != null){
    
           sessionStorage.setItem('notificationid', this.sessionid);
           sessionStorage.setItem('useremail', this.sessionemail);
@@ -64,7 +62,6 @@ export class LoginComponent implements OnInit {
         }
         else if(this.id != "undefined" && this.id != null && this.id != undefined){
    
-    console.log("2");
           sessionStorage.setItem('notificationid', this.id);
           sessionStorage.setItem('useremail', this.useremail);
           sessionStorage.setItem('action', this.action);
@@ -73,16 +70,19 @@ export class LoginComponent implements OnInit {
         }
         else{
           this.router.navigate(['/home']);
-          console.log("0");
         }
       }
       else{
-
         this.datas = data.data;
       }
     }); 
   }
 
+resendpassword(form){
+  this.dataService.resendpassword(form).subscribe(data => this.resenddata = data.data);
+  $(".notreg").show();
+  setTimeout(function() { $(".notreg").hide(); }, 5000);
+}
   ngOnInit() { 
   if(this.id != "undefined" && this.id != undefined){
     sessionStorage.setItem('notificationid', this.id);
@@ -95,7 +95,6 @@ export class LoginComponent implements OnInit {
       this.sessionid = sessionStorage.getItem('notificationid');
       this.sesaction = sessionStorage.getItem("action");
       this.sesprojectname = sessionStorage.getItem("projectname");
-       console.log(this.sessionemail);
       if(this.sessionemail != "undefined"){
         this.form.email = this.sessionemail;  
       }

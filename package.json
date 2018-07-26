@@ -27,6 +27,8 @@
     "@types/socket.io-client": "^1.4.32",
     "@types/underscore": "^1.8.8",
     "angular-font-awesome": "^3.1.2",
+    "angular-notifier": "^4.0.0",
+    "angular4-notify": "^1.2.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.1",

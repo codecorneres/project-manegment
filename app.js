@@ -281,7 +281,7 @@ app.post("/api/inviteprojectuser",function(req,res){
                 to: req.body.assignuser, // list of receivers to: 'bar@example.com, baz@example.com',
                 subject: 'Notification', // Subject line
                 text: 'Node js App', // plain text body
-                html: '<b style="color: #080808; font-size:17px;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-size:16px; font-family: Helvetica,Arial,sans-serif; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:20px; width:40%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><p>Do you want to accept a request?</p><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: red;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:40px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>'
+                html: '<b style="color: #080808; font-size:17px;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-size:16px; font-family: Helvetica,Arial,sans-serif; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:20px; width:40%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><p>Do you want to accept a request?</p><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: red;" href="https://dashboard.heroku.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:40px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="https://dashboard.heroku.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>'
             };
             // send mail with defined transport object
             transporter.sendMail(mailOptions, (error, info) => {
@@ -594,6 +594,61 @@ app.post("/api/changepassword",function(req,res){
       }  
     } 
   }); 
+})
+app.post("/api/resendpassword",function(req,res){
+  user.find().where({"email": req.body.email})
+          .count(function(err,count, data){  
+      if(err){  
+         res.send(err);                
+      }  
+      else{    
+        if(count == "1")
+        {
+          
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                secure: false,
+                port: 25,
+                auth: {
+                  user: 'anniat44@gmail.com',
+                  pass: 'annyattri@#1'
+                },
+                tls: {
+                  rejectUnauthorized: false
+                }
+            });
+
+            let mailOptions = {
+                from: '"Admin" <dinesh.codecorners@gmail.com>', // sender address
+                to: req.body.email, // list of receivers to: 'bar@example.com, baz@example.com',
+                subject: 'Notification', // Subject line
+                text: 'Node js App', // plain text body
+                html: '<div class="row" style="color: #3f3f44; font-size:16px; font-family: Helvetica,Arial,sans-serif; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:20px; width:40%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="color: #080808; text-align: center; margin-bottom: 10px;"> Reset Password</h2><hr style="margin-bottom: 25px !important;"><b style="margin: 2px 0px 8px 0px;">If You Forgot Your Password</b><p>Please click the button below to change your password</p><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 10px 20px 10px 20px; text-decoration: none; color: #fff; background: #54c4ff;" href="https://dashboard.heroku.com/resetpassword?email='+req.body.email+'">Reset Password</a></span></div></div></div>'
+            };
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                res.send({data:"Send Email"});
+            });
+          
+           
+        }   
+        else{
+          res.send({data:"The email address you have entered is not registered"}); 
+        }  
+      } 
+ }); 
+})
+app.post("/api/resetpassword",function(req,res){
+  user.update({"email": req.body.email }, {$set:{"password": req.body.confirmpassword}}, function(err, result){
+    if (err) {
+        res.send({err});
+    } else {
+        res.send({data:"Password has been Updated..!!"});
+    }
+  });
 })
 /***********/
 /********/

@@ -43,7 +43,11 @@ registrationFormGroup: FormGroup;
   	form.password = Md5.init(form.oldpassword); 
   	form.confirmpassword = Md5.init(form.passwordFormGroup.repeatPassword);
     form.email = this.email;
-  	this.dataService.changepassword(form).subscribe(data => this.datas = data.data)
+  	this.dataService.changepassword(form).subscribe(data => {this.datas = data.data
+      $('#MessageBox').html(data.data);
+      $('#MessageBox').stop(true, true);
+      $('#MessageBox').slideDown(1000).delay(5000).slideUp(1000);
+      })
   	$("#error").show();
       setTimeout(function() { $("#error").hide(); }, 5000);
   }

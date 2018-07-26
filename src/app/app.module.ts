@@ -28,10 +28,10 @@ import { NotificationComponent } from './notification/notification.component';
 import { AssingtaskComponent } from './assingtask/assingtask.component';
 import { AcceptComponent } from './accept/accept.component';
 import { SettingComponent } from './setting/setting.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 import { PushNotificationsService } from './push-notifications.service';
 import { CookieService } from 'ngx-cookie-service';
-
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { CookieService } from 'ngx-cookie-service';
     NotificationComponent,
     AssingtaskComponent,
     AcceptComponent,
-    SettingComponent
+    SettingComponent,
+    ResetpasswordComponent
   ],
   imports: [
     CommonModule,

@@ -16,6 +16,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { AssingtaskComponent } from './assingtask/assingtask.component';
 import { AcceptComponent } from './accept/accept.component';
 import { SettingComponent } from './setting/setting.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -70,6 +72,11 @@ const routes: Routes = [
     path: 'setting',
     component: SettingComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'resetpassword',
+    component: ResetpasswordComponent
+    
   }
   
 ]; 

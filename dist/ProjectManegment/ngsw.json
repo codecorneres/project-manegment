@@ -9,11 +9,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.b2d99bf97116b62683bf.js",
+        "/main.82094c2abdb59d879084.js",
         "/polyfills.b3499ebfac9adf753b7a.js",
         "/runtime.a66f828dca56eeb90e02.js",
         "/scripts.806effac119676237f10.js",
-        "/styles.427365f1d87749b3a265.css"
+        "/styles.249056213c026c7e82f6.css"
       ],
       "patterns": [
         "https:\\/\\/fonts\\.googleapis\\.com\\/\\.\\.\\.",
@@ -59,12 +59,12 @@
     "/assets/images/sidebar-1.jpg": "7e52f4c80ffbc51540150bd8a2f99e7851e6636b",
     "/assets/images/sky-background-unsplash.jpg": "469de67d1e227151ed58f4518ff7e73e5ee41bd6",
     "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "144967651fb833954069d851df469a2e6764f5d0",
-    "/main.b2d99bf97116b62683bf.js": "149c36bc832900e780cd64a1e72fb92a95ec3c84",
+    "/index.html": "5d4cb455d652e2c82eb5aeba7687deb8bbbff3dd",
+    "/main.82094c2abdb59d879084.js": "a6884b90f79a425d6203c44780dc3f5235e149db",
     "/polyfills.b3499ebfac9adf753b7a.js": "32f45599e3c015a129302f438912b862a39e376a",
     "/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
     "/scripts.806effac119676237f10.js": "fde1e2ca22b32566f40e13fc1a318a0ec481bc5e",
-    "/styles.427365f1d87749b3a265.css": "69ef2eb5806eccfe2656e07c29557a2fe0a78d01"
+    "/styles.249056213c026c7e82f6.css": "1bab89734fae2c5e154031bae54e6153a09a6ca1"
   },
   "navigationUrls": [
     {

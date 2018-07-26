@@ -136,7 +136,14 @@ export class DataService {
      return this.http.post('api/changepassword/', JSON.stringify(form), {headers: this.headers}) 
             .map((response: Response) =>response.json())               
     }
-    
+     resendpassword(form){  
+     return this.http.post('api/resendpassword/', JSON.stringify(form), {headers: this.headers}) 
+            .map((response: Response) =>response.json())               
+    }
+    resetpassword(form){  
+     return this.http.post('api/resetpassword/', JSON.stringify(form), {headers: this.headers}) 
+            .map((response: Response) =>response.json())               
+    }
 /******/
 /****/
 /**/
