@@ -21,14 +21,12 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -41,50 +39,43 @@ const routes: Routes = [
   {
     path: 'createproject',
     component: CreateprojectComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'createtast',
     component: CreatetaskComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'invite',
     component: InviteComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'notification',
     component: NotificationComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'assigntask',
     component: AssingtaskComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'accept',
     component: AcceptComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   },
   {
     path: 'setting',
     component: SettingComponent,
-    canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always'
+    canActivate: [AuthGuard]
   }
   
 ]; 
 
 @NgModule({
-   	imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
+   	imports: [RouterModule.forRoot(routes)],
   	exports: [RouterModule],
     declarations: [],
   	providers: [AuthGuard]

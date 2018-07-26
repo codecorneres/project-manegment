@@ -26,8 +26,8 @@ headername;
   		//this.email = sessionStorage.getItem("LoggedInUser");
       this.email = this.cookieService.get('LoggedInUser');
   		this.dataService.GetUnseenNotification(this.email).subscribe(res=> { this.datas = res
-        /*this.length = res.length;
-        if(this.length <= '0' ){
+        this.length = res.length;
+        /*if(this.length <= '0' ){
         }
         else{
           for(this.i='0'; this.i<this.length; this.i++ ){

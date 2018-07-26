@@ -103,15 +103,7 @@ maildata;
       $(".divs").show();
     });
   }
-  /*GettaskDescription(taskid){
-    var forms = {
-              description : ""
-            };
-    this.dataService.GetTaskDescription(taskid).subscribe(form => {forms.description = form.data
-      console.log(forms.description);
-      console.log(form.data);
-    });
-  }*/
+
   createassignuser(assignuser){
     assignuser.user = this.user;
     this.dataService.createassignuser(assignuser).subscribe(data => {

@@ -27,6 +27,10 @@ export class LoginComponent implements OnInit {
   projectname;
   sesaction;
   sesprojectname;
+ /* notificationidr;
+  useremailr;
+  actionr;
+  projectnamer;*/
   //projectid;
   constructor(private dataService: DataService,
   private router: Router,
@@ -38,25 +42,29 @@ export class LoginComponent implements OnInit {
         this.useremail = params['user'];
         this.action = params['action'];
         this.projectname = params['projectname'];
-        //this.projectid = params['projectid'];
-         // Print the parameter to the console. 
     }); 
   }
 
   login(form) {
     console.log(this.sessionemail);
+    console.log(this.id);
+    console.log(this.form.email);
     this.form.password = Md5.init(this.form.password);
     this.dataService.login(this.form).subscribe(data =>  {
       if(data.data == "Matching"){
         this.auth.sendToken(this.form.email);
-        if(this.sessionemail != null){
+
+      if(this.sessionemail != "undefined" && this.sessionemail != undefined && this.sessionemail != null){
+   
           sessionStorage.setItem('notificationid', this.sessionid);
           sessionStorage.setItem('useremail', this.sessionemail);
           sessionStorage.setItem('action', this.sesaction);
           sessionStorage.setItem('projectname', this.sesprojectname);
           this.router.navigate(['/accept']);
         }
-        else if(this.id != undefined){
+        else if(this.id != "undefined" && this.id != null && this.id != undefined){
+   
+    console.log("2");
           sessionStorage.setItem('notificationid', this.id);
           sessionStorage.setItem('useremail', this.useremail);
           sessionStorage.setItem('action', this.action);
@@ -65,24 +73,40 @@ export class LoginComponent implements OnInit {
         }
         else{
           this.router.navigate(['/home']);
+          console.log("0");
         }
       }
       else{
+
         this.datas = data.data;
       }
     }); 
   }
 
   ngOnInit() { 
+  if(this.id != "undefined" && this.id != undefined){
+    sessionStorage.setItem('notificationid', this.id);
+    sessionStorage.setItem('useremail', this.useremail);
+    sessionStorage.setItem('action', this.action);
+    sessionStorage.setItem('projectname', this.projectname); 
+  }
+   
       this.sessionemail = sessionStorage.getItem('useremail');
       this.sessionid = sessionStorage.getItem('notificationid');
       this.sesaction = sessionStorage.getItem("action");
       this.sesprojectname = sessionStorage.getItem("projectname");
-     // console.log(this.sessionemail);
+       console.log(this.sessionemail);
+      if(this.sessionemail != "undefined"){
+        this.form.email = this.sessionemail;  
+      }
+      else{
+        this.form.email = '';
+      }
+
     this.loginuser = sessionStorage.getItem("LoggedInUser");
-    this.cookieValue = this.cookieService.get('LoggedInUser'); 
+    this.cookieValue = this.cookieService.get('LoggedInUser');
     if(this.cookieValue!=""){
-      if(this.id != undefined){
+      if(this.id != "undefined" || this.id != undefined){
         sessionStorage.setItem('notificationid', this.id);
         sessionStorage.setItem('useremail', this.useremail);
         sessionStorage.setItem('action', this.action);

@@ -33,8 +33,6 @@ import { PushNotificationsService } from './push-notifications.service';
 import { CookieService } from 'ngx-cookie-service';
 
 
-
- 
 @NgModule({
   declarations: [
     AppComponent,

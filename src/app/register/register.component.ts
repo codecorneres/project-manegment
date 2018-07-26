@@ -19,14 +19,33 @@ export class RegisterComponent implements OnInit {
   datas;
   loginuser;
   cookieValue = 'UNKNOWN';
-  constructor(private dataService: DataService, private router: Router,public auth: AuthService, private cookieService: CookieService) { }
+  sessionemail;
+  sessionid;
+  sesaction;
+  sesprojectname;
+  constructor(private dataService: DataService, 
+    private router: Router,
+    public auth: AuthService, 
+    private cookieService: CookieService) { }
 
   singUp(form){
     this.form.password = Md5.init(this.form.password);
     this.dataService.singUp(this.form).subscribe(data =>  {
       if(data.data == "Record has been Inserted"){
         this.auth.sendToken(this.form.email);
-        this.router.navigate(['/home']);
+        if(this.sessionemail == "undefined" || this.sessionemail == null){
+          console.log("haii1");
+          console.log(this.sessionemail);
+         this.router.navigate(['/home']);
+        }
+        else{
+          sessionStorage.setItem('notificationid', this.sessionid);
+          sessionStorage.setItem('useremail', this.sessionemail);
+          sessionStorage.setItem('action', this.sesaction);
+          sessionStorage.setItem('projectname', this.sesprojectname);
+          this.router.navigate(['/accept']);
+        
+        }
       }
       else{
         this.datas = data.data;
@@ -34,6 +53,18 @@ export class RegisterComponent implements OnInit {
     }); 
   }
   ngOnInit() {
+      this.sessionemail = sessionStorage.getItem('useremail');
+      this.sessionid = sessionStorage.getItem('notificationid');
+      this.sesaction = sessionStorage.getItem("action");
+      this.sesprojectname = sessionStorage.getItem("projectname");
+      if(this.sessionemail != "undefined"){
+        console.log(this.sessionemail);
+        this.form.email = this.sessionemail;
+          
+      }
+      else{
+        this.form.email = '';
+      }
     this.cookieValue = this.cookieService.get('LoggedInUser'); 
     if(this.cookieValue!=""){
        this.router.navigate(['/home']);

@@ -233,77 +233,70 @@ app.post("/api/inviteprojectuser",function(req,res){
   req.body.invite = "invite";
   req.body.status = "false";
   req.body.notify = ("You are invited by " +req.body.user+ " for " +req.body.projectname+" project");
-  user.find().where({"email": req.body.assignuser})
+  /*user.find().where({"email": req.body.assignuser})
   .count(function(err,count, data){  
     if(err){  
        res.send(err);                
     }  
     else{    
       if(count == "1")
-      {
-        project_user.find().where({projectid : req.body.projectid, assignuser: req.body.assignuser })
-        .count(function(err,count, data){  
+      {*/
+  project_user.find().where({projectid : req.body.projectid, assignuser: req.body.assignuser })
+  .count(function(err,count, data){  
+    if(err){  
+       res.send(err);                
+    }  
+    else{ 
+      if(count == "1")
+      { res.send({data:"The email address you have entered is already registered"}); }
+      else{
+        var assignuser = new project_user(req.body); 
+        assignuser.save(function(err,data){  
+        if(err){  
+           res.send(err);                
+        }  
+        else{  
+          req.body.action = "unseen";
+          var notifications = new notification(req.body); 
+          notifications.save(function(err,data){  
           if(err){  
              res.send(err);                
           }  
-          else{ 
-            if(count == "1")
-            { res.send({data:"The email address you have entered is already registered"}); }
-            else{
-              var assignuser = new project_user(req.body); 
-              assignuser.save(function(err,data){  
-              if(err){  
-                 res.send(err);                
-              }  
-              else{  
-                req.body.action = "unseen";
-                var notifications = new notification(req.body); 
-                notifications.save(function(err,data){  
-                if(err){  
-                   res.send(err);                
-                }  
-                else{       
-                     let transporter = nodemailer.createTransport({
-                      service: 'gmail',
-                      secure: false,
-                      port: 25,
-                      auth: {
-                        user: 'anniat44@gmail.com',
-                        pass: 'annyattri@#1'
-                      },
-                      tls: {
-                        rejectUnauthorized: false
-                      }
-                  });
+          else{       
+               let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                secure: false,
+                port: 25,
+                auth: {
+                  user: 'anniat44@gmail.com',
+                  pass: 'annyattri@#1'
+                },
+                tls: {
+                  rejectUnauthorized: false
+                }
+            });
 
-                  let mailOptions = {
-                      from: '"Admin" <dinesh.codecorners@gmail.com>', // sender address
-    
-                      to: req.body.assignuser, // list of receivers to: 'bar@example.com, baz@example.com',
-                      subject: 'Notification', // Subject line
-                      text: 'Node js App', // plain text body
-                      html: '<b style="color: #080808; font-size:17px;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-size:16px; font-family: Helvetica,Arial,sans-serif; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:20px; width:40%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><p>Do you want to accept a request?</p><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: red;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:40px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>'
-                  };
-                  // send mail with defined transport object
-                  transporter.sendMail(mailOptions, (error, info) => {
-                      if (error) {
-                          return console.log(error);
-                      }
-                      res.send({data:"Record has been Inserted"});
-                  });    
-                }   
-                })
-              }
-            })
-            }
-          }
-        }) 
-      }   
-      else{
-        res.send({data:"The email address you have entered is not registered"});  
+            let mailOptions = {
+                from: '"Admin" <dinesh.codecorners@gmail.com>', // sender address
+                to: req.body.assignuser, // list of receivers to: 'bar@example.com, baz@example.com',
+                subject: 'Notification', // Subject line
+                text: 'Node js App', // plain text body
+                html: '<b style="color: #080808; font-size:17px;">'+req.body.notify+'</b><div class="row" style="color: #3f3f44; font-size:16px; font-family: Helvetica,Arial,sans-serif; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:20px; width:40%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="margin: 2px 0px 8px 0px;">'+req.body.projectname+'</h2><p>Do you want to accept a request?</p><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: red;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=decline">Decline</a><a style="margin-left:40px; font-weight:bold; font-weight: bold; border: 1px solid; padding: 4px 10px 4px 10px; text-decoration: none; color: #fff; background: #ff5800;" href="https://project-managment-ap.herokuapp.com/login?projectid='+req.body.projectid+'&user='+req.body.assignuser+'&projectname='+req.body.projectname+'&action=accept">Accept</a></span></div></div></div>'
+            };
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                res.send({data:"Record has been Inserted"});
+            });    
+          }   
+          })
+        }
+      })
       }
     }
-  })
+  }) 
 })
 
 app.post("/api/createassignuser",function(req,res){ 
