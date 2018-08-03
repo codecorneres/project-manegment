@@ -35,8 +35,6 @@ export class RegisterComponent implements OnInit {
       if(data.data == "Record has been Inserted"){
         this.auth.sendToken(this.form.email);
         if(this.sessionemail == "undefined" || this.sessionemail == null){
-          console.log("haii1");
-          console.log(this.sessionemail);
          this.router.navigate(['/home']);
         }
         else{
@@ -54,13 +52,12 @@ export class RegisterComponent implements OnInit {
     }); 
   }
    singUp(form) {
-     console.log(this.sessionemail);
      if(this.sessionemail != "undefined" && this.sessionemail != "null" && this.sessionemail != null){
       if(this.form.email != this.sessionemail){
        $("#email").css({"border-color": "red", "border-width":"1px", "border-style":"solid"});
       $(".changerror").show();
           setTimeout(function() { $(".changerror").hide(); }, 3000);
-      this.form.email = this.sessionemail;
+          this.form.email = this.sessionemail;
       }
       else{
         this.save();

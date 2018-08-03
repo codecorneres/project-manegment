@@ -5,6 +5,7 @@ const http = require('http');
 var bodyParser = require('body-parser');  
 var mongoose = require("mongoose");
 var Promise = mongoose.Promise = require('bluebird');
+var multer  = require('multer')
 
 require('dotenv').config();
 const nodemailer = require('nodemailer');
@@ -15,9 +16,7 @@ var db = mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://dinesh:admin123
 const fs = require('fs');  
 var app = express();  
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })) 
-var Transport = require("transport"),
-  transport = new Transport();
+app.use(bodyParser.urlencoded({ extended: true }))
    
 app.use(function (req, res, next) {        
      res.setHeader('Access-Control-Allow-Origin', '*');    
@@ -84,8 +83,10 @@ var adminLogin = new Schema({
 var usersLogin = new Schema({    
  email :{ type: String, required: true },
  password : { type: String},
- name : { type: String}
+ name : { type: String},
+ profile : { type: String}
 });
+
 
 var UsersSchema = new Schema({
  projectid : { type: String}, 
@@ -104,7 +105,14 @@ var project_user = mongoose.model('project_user', UsersAssignProject);
 var task_user = mongoose.model('task_user', UsersAssigntask);
 var notification = mongoose.model('notification', notificationschema);
 
+/*---------for demo---------*/
+var checkboxValue = new Schema({    
+ checkedValue :{ type: String }
+});
 
+var checkbox = mongoose.model('checkbox', checkboxValue);
+/*---------*/
+/*----*/
 app.post("/api/login",function(req,res){ 
     user.find().where({"email": req.body.email,"password": req.body.password})
           .count(function(err,count, data){  
@@ -135,6 +143,7 @@ app.post("/api/singUp",function(req,res){
           res.send({data:"The email address you have entered is already registered"}); 
         }   
         else{
+          console.log(req.body);
           var mod = new user(req.body); 
           mod.save(function(err,data){  
             if(err){  
@@ -233,14 +242,6 @@ app.post("/api/inviteprojectuser",function(req,res){
   req.body.invite = "invite";
   req.body.status = "false";
   req.body.notify = ("You are invited by " +req.body.user+ " for " +req.body.projectname+" project");
-  /*user.find().where({"email": req.body.assignuser})
-  .count(function(err,count, data){  
-    if(err){  
-       res.send(err);                
-    }  
-    else{    
-      if(count == "1")
-      {*/
   project_user.find().where({projectid : req.body.projectid, assignuser: req.body.assignuser })
   .count(function(err,count, data){  
     if(err){  
@@ -625,7 +626,6 @@ app.post("/api/resendpassword",function(req,res){
                 text: 'Node js App', // plain text body
                 html: '<div class="row" style="color: #3f3f44; font-size:16px; font-family: Helvetica,Arial,sans-serif; font-weight: 400;line-height: 1.5"><div class="col-md-3" style="border:1px solid #ccc; background: #f5f5f5; padding:20px; width:60%; margin-top:10px; box-shadow: 1px 1px 0px 2px #e6e6e6; border-radius: 5px;"><h2 style="color: #080808; text-align: center; margin-bottom: 10px;"> Reset Password</h2><hr style="margin-bottom: 25px !important;"><b style="margin: 2px 0px 8px 0px;">If You Forgot Your Password</b><p>Please click the button below to change your password</p><div class="inln"><a class="pdngs" style="color:#fff; font-weight: bold; border: 1px solid; padding: 10px 20px 10px 20px; text-decoration: none; color: #fff; background: #54c4ff;" href="https://project-managment-ap.herokuapp.com/resetpassword?email='+req.body.email+'">Reset Password</a></span></div></div></div>'
             };
-            // send mail with defined transport object
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     return console.log(error);
@@ -650,10 +650,90 @@ app.post("/api/resetpassword",function(req,res){
     }
   });
 })
+app.post("/api/getUserProfile/",function(req,res){ 
+  user.find().where({ "email" : req.body.email}).
+  exec(function(err, data){  
+    if(err){  
+      res.send(err);  
+    }  
+    else{              
+      res.send(data);  
+    }  
+  });  
+});
+app.post("/api/updatusername/",function(req,res){  
+  user.update({"email": req.body.email }, {$set:{"name": req.body.name}}, function(err, result){
+    if (err) {
+        res.send({err});
+    } else {
+        res.send({data:"User Name has been Updated..!!"});
+    }
+  }); 
+});
 /***********/
 /********/
 /*****/
 /**/
+/*----for Checkbox----*/
 
 
+/*app.post("/api/checkboxValue",function(req,res){
+ console.log(req.body);
+ var checkvalue = "";
+for(var i = 0; i < req.body.checkValue.length; i++){
+   checkvalue += (req.body.checkValue[i]+",");
+}*/
 
+//req.body.checkedValue = checkvalue;
+
+ /*var checks = new checkbox(req.body);
+   checks.save(function(err,data){  
+    if(err){  
+       res.send(err);                
+    }  
+    else{        
+        res.send({data:"Record has been Inserted"});  
+    }  
+  });
+})*/
+/*--------------------------------*/
+/*-------------*/
+/*var upload = multer({ dest: 'assets/images/'});
+var type = upload.single('image'); */
+
+/*app.post("/api/uploadImage",function(req,res){
+  console.log(req.file);
+      var src = fs.createReadStream(target_path);
+      var dest = fs.createWriteStream(target_path);
+
+  user.update({"email": req.body.email }, {$set:{"profile": req.file.path}}, function(err, result){
+    if (err) {
+        res.send({err});
+    } else {
+        res.send({data:"Profile has been Added..!!"});
+    }
+  });
+});*/
+var imageName;
+
+var uploadStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/assets/images/');
+    },
+    filename: function (req, file, cb) {
+        imageName = file.originalname;
+        cb(null, imageName);
+    }
+});
+var upload = multer({storage: uploadStorage});
+var type = upload.single('image');
+
+app.post("/api/uploadImage",type,function(req,res){
+user.update({"email": req.body.email }, {$set:{"profile": req.file.path}}, function(err, result){
+    if (err) {
+        res.send({err});
+    } else {
+        res.send({data:"Profile has been Added..!!"});
+    }
+  });
+});

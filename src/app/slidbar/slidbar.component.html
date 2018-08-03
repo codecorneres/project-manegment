@@ -1,1 +1,59 @@
-   
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-7">
+      <div class="row">
+			<form class="frmcls">
+				<h5 class="login100-form-title">
+		           Edit Profile
+		        </h5>
+		        <hr>
+		        <div class="row" *ngFor="let users of user">
+		        	<div class="col-md-5" style="text-align: center;">
+		          		<div class="imgdiv" >
+		          			<div *ngIf = "users.profile== undefined;else assignTaskdiv">
+		          				<img src="assets/images/ninja-avatar-96x96.png" class="img">	 
+		          			</div>
+		          			<ng-template #assignTaskdiv>
+								<img [src]="users.profile" class="img">
+							</ng-template> 	
+							<img [src]="url" class="img2"/>
+						</div> 
+						
+							<div class="imgspn" >
+								<span class="clssp">Edit Profile</span>
+								<input type="file" name="file"  id="file"  (change) ="onFileSelecet($event)" >	
+							</div>
+							<button type="button" (click)="onUpload()" style="display: none;" id="bt1"> Upload</button> 
+						
+						<br><br>
+		          	</div>
+		          	<div class="col-md-7">
+		          		<span><b>UserName: </b></span><br><div class="hidediv"><span>{{users.name}}</span> <span class="icls"style="float: right;" (click) ="showtoggle()"> <i class="fa fa-pencil-square-o" aria-hidden="true" title="edit"></i></span></div>
+		          		<div class="showclstdiv" style="display: none">
+              				<form class="frm" id="commentform" #forms="ngForm" (ngSubmit)="updatusername(forms.value)">
+				                <div>
+				                    <input type="hidden" id="email" name="email" [(ngModel)]="users.email"/>
+				                    <div class="form-group">
+				                        <input type="text" id="name" name="name" class="form-control" required [(ngModel)]="users.name"/>
+				                    </div>
+				                </div>
+				                <div class="inln">
+					                <button type="submit" class="btn btn-primary cretsk" [disabled]="!forms.valid">Save</button>
+					                <span (click)="hidetoggle()" id="bt" class="hideshow">
+					                    <button type="button" class="close" style="font-size: 37px;">&times;</button>
+					                </span>
+				                </div>
+				            </form>
+				        </div><br>
+		          		<span><b>Email Id: </b></span><br><span>{{users.email}}</span><br><br>
+		          		<a routerLink="/setting" class="acls">If You Want To Change Your Password</a>
+		          	</div>
+		        </div>
+			</form>
+		</div>
+    </div>
+  </div>
+</div>

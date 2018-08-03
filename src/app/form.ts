@@ -4,4 +4,5 @@ export class Form {
   	password: string;
   	newpassword: string;
   	repeatPassword: string;
+  	profile: string;
 }

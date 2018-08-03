@@ -77,9 +77,13 @@ const routes: Routes = [
     path: 'resetpassword',
     component: ResetpasswordComponent
     
+  },
+  {
+    path: 'profile',
+    component: SlidbarComponent,
+    canActivate: [AuthGuard]
   }
-  
-]; 
+];
 
 @NgModule({
    	imports: [RouterModule.forRoot(routes)],

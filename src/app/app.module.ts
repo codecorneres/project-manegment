@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CommonModule } from '@angular/common';
 import { PushNotificationModule } from 'ng-push-notification';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DataService } from './data.service';
 import { AuthService } from './auth/auth.service';
@@ -55,6 +56,7 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     AngularFontAwesomeModule,

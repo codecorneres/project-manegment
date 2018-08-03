@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';     
+import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';  
+import { HttpClient } from '@angular/common/http';   
 import { Observable } from 'rxjs/Observable';  
 import 'rxjs/add/operator/map';  
 import 'rxjs/add/operator/do';
@@ -10,7 +11,7 @@ import { Form } from './form';
 
 export class DataService {
 
-  	constructor(private http: Http) { }
+  	constructor(private http: Http, private httpclient: HttpClient) { }
   	private headers = new Headers({'Content-Type': 'application/json'});
 
   	match(form : Form){     
@@ -144,19 +145,30 @@ export class DataService {
      return this.http.post('api/resetpassword/', JSON.stringify(form), {headers: this.headers}) 
             .map((response: Response) =>response.json())               
     }
+    getUserProfile(email){  
+     return this.http.post('api/getUserProfile/',{'email': email})  
+            .map((response: Response) =>response.json())               
+    }
+    updatusername(update){   
+     return this.http.post('api/updatusername/', JSON.stringify(update), {headers: this.headers})   
+            .map((response: Response) =>response.json())               
+    }
 /******/
 /****/
 /**/
-/*
-GetUsers(projectid){  
+/**/
+checkboxValue(form){  
+     return this.http.post('api/checkboxValue/', JSON.stringify(form), {headers: this.headers}) 
+            .map((response: Response) =>response.json())               
+    }
+/*GetUsers(projectid){  
      return this.http.post('api/GetUsers/',{'projectid': projectid}) 
             .map((response: Response) =>response.json())               
     }*/
-    /*uploadimage(fd){  
-    return this.httpclient.post('api/uploadImage/', fd) 
-           .map((response: Response) =>response.json()) 
-
-    } */ 
+    uploadimage(fd){  
+        return this.httpclient.post('api/uploadImage/', fd) 
+           .map((response: Response) =>response.json())
+    }                                                                                                                                                                                                                                                                                                                                                       
 
     private handleError(error: any): Promise<any> {
     console.error('Error', error); // for demo purposes only
