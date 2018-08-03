@@ -718,7 +718,7 @@ var imageName;
 
 var uploadStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'dist/ProjectManegment/assets/images/');
+        cb(null, 'dist/ProjectManegment/assets/images/upload');
     },
     filename: function (req, file, cb) {
         imageName = file.originalname;
