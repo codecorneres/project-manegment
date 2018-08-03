@@ -718,7 +718,7 @@ var imageName;
 
 var uploadStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/assets/images/');
+        cb(null, 'dist/ProjectManegment/assets/images/');
     },
     filename: function (req, file, cb) {
         imageName = file.originalname;
@@ -729,7 +729,7 @@ var upload = multer({storage: uploadStorage});
 var type = upload.single('image');
 
 app.post("/api/uploadImage",type,function(req,res){
-user.update({"email": req.body.email }, {$set:{"profile": req.file.path}}, function(err, result){
+user.update({"email": req.body.email }, {$set:{"profile": req.file.originalname}}, function(err, result){
     if (err) {
         res.send({err});
     } else {

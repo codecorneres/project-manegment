@@ -14,6 +14,7 @@ import { PushNotificationService } from 'ng-push-notification';
 export class HeaderComponent implements OnInit {
 datas;
 length;
+user;
 headername;
   constructor(public auth: AuthService, private dataService: DataService, private router: Router,
    private cookieService: CookieService,
@@ -25,6 +26,7 @@ headername;
       this.headername = sessionStorage.getItem("headername");
   		//this.email = sessionStorage.getItem("LoggedInUser");
       this.email = this.cookieService.get('LoggedInUser');
+      this.dataService.getUserProfile(this.email).subscribe(data => this.user = data);
   		this.dataService.GetUnseenNotification(this.email).subscribe(res=> { this.datas = res
         this.length = res.length;
         /*if(this.length <= '0' ){
