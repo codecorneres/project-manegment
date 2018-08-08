@@ -7,6 +7,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CommonModule } from '@angular/common';
 import { PushNotificationModule } from 'ng-push-notification';
 import { HttpClientModule } from '@angular/common/http';
+import { EmojiPickerModule } from 'ng-emoji-picker';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'
 
 import { DataService } from './data.service';
 import { AuthService } from './auth/auth.service';
@@ -61,7 +63,8 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     AngularFontAwesomeModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-    PushNotificationModule.forRoot(/* Default settings here, interface PushNotificationSettings */)
+    PushNotificationModule.forRoot(/* Default settings here, interface PushNotificationSettings */),
+    EmojiPickerModule
   
   ],
   providers: [AuthService, DataService, PushNotificationsService, CookieService],

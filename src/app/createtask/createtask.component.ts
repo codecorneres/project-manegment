@@ -15,6 +15,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class CreatetaskComponent implements OnInit {
 public show:boolean = false;
 public shows:boolean = false;
+public duedate:boolean = false;
+public moves:boolean = false;
 public buttonName:any = ' + Add new Tasks';
 public buttonsName:any = ' Add User';
 commentdata;
@@ -23,12 +25,19 @@ projectid;
 form;
 user;
 asign;
+time;
+date:any='';
 createtasks;
 maildata;
-  constructor(private dataService: DataService, private router: Router,private auth: AuthService, private cookieService: CookieService) { }
+selectedFile: File = null;
+  constructor(private dataService: DataService, 
+    private router: Router,
+    private auth: AuthService,
+    private cookieService: CookieService) { }
   datas;
+  datass;
   users;
-
+  taskuser
   ngOnInit() {
      sessionStorage.setItem('headername', 'Create Task');
 
@@ -38,8 +47,39 @@ maildata;
    this.user = this.cookieService.get('LoggedInUser');
     this.createtasks = sessionStorage.getItem("createtask");
       this.Gettasks(this.projectid); 
+      this.GettaskUsers(this.projectid);
+      this.time = "12:00"
+      /*$(document).ready(function(){
+        downloadFile(data: Response){
+          var blob = new Blob([data], { type: 'text/csv' });
+          var url= window.URL.createObjectURL(blob);
+          window.open(url);
+        }
+      })*/      
   }
-  
+  /*downloadFile(data){
+    var blob = new Blob([data], { type: 'text/csv' });
+    var url= window.URL.createObjectURL(blob);
+    window.open(url);
+  }*/
+  clickimageupload(){
+     $(".FileUpload2").click();
+     $(".FileUpload2").change(function () {
+             
+        var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
+        $(".spnFilePath2").html("<label for='attachment' class='control-label'><i class='fa fa-paperclip' aria-hidden='true'></i> Attachments:</label> <br> <a target='_blank' href=assets/images/fileUpload/"+fileName+ ">"+fileName +"</a>");
+        $(".attchdv").hide();
+      });
+  }
+  onFileSelecet(event,id){
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile.name);
+    const fd = new FormData();
+    fd.append('id', id);
+      fd.append('file', this.selectedFile, this.selectedFile.name); 
+      this.dataService.uploadattachment(fd).subscribe(data => {this.datas = data    
+      });
+  }
   toggle() {
     this.show = !this.show;
     if(this.show) { 
@@ -77,22 +117,48 @@ maildata;
       this.buttonsName = "Add Users";
     }
   }
+  /*--for due date*/
+  showduedate() {
+    this.duedate = !this.duedate;
+  }
+showmove(){
+  this.moves = !this.moves;
+}
   showDescriptionDiv(){
     $(".divd").show();
     $(".divs").hide();
+  }
+  /*---*/
+  showtasktoggle(arr) {
+    $(".hidetaskdiv"+ arr).hide();
+    $(".showtaskdiv"+ arr).show();
+  }
+
+  confirmtaskdelete(id){
+    $("#"+ id).show();
+  }
+  notaskdelete(id){
+    $("#"+ id).hide();
+
+  } 
+  hidetasktoggle(arr) {
+    $(".hidetaskdiv"+ arr).show();
+    $(".showtaskdiv"+ arr).hide();
   }
   
   Gettasks(projectid){
   	this.dataService.Gettasks(projectid).subscribe(form => {this.form = form});
   }
-  
+  GettaskUsers(projectid){
+    this.dataService.GettaskUsers(projectid).subscribe(form => {this.taskuser = form});
+  }
   GetassignUser(taskid){
    this.getcomments(taskid);
     this.dataService.GetassignUser(taskid,this.projectid).subscribe(data =>this.asign = data);
   }
   createtask(createtasks){
-  	this.dataService.createnewtasks(createtasks).subscribe(data => {this.datas = data.data
-      $("#email").val('');
+  	this.dataService.createnewtasks(createtasks).subscribe(data => {this.datass = data.data
+      createtasks.task == '';
   		this.Gettasks(this.projectid);  
   	});
   }
@@ -104,15 +170,21 @@ maildata;
     });
   }
 
-  createassignuser(assignuser){
+  createassignuser(ind,assignuser){
     assignuser.user = this.user;
+    assignuser.shortname = assignuser.assignuser.substring(0, 1);
+    assignuser.shortname = assignuser.shortname.toUpperCase();
     this.dataService.createassignuser(assignuser).subscribe(data => {
-        this.GetassignUser(assignuser.projecttaskid);
+    this.GetassignUser(assignuser.projecttaskid);
+    $("#hidemodaltemp"+ ind).click();
+    this.GettaskUsers(this.projectid);
     });
   }
-  deleteUser(userassigned,taskid,taskname){
-     this.dataService.deleteAssignUser(taskid,userassigned, this.user,  this.projectid, taskname).subscribe(data => {
-        this.GetassignUser(taskid);
+  deleteUser(userassigned,taskid,taskname,ind){
+    this.dataService.deleteAssignUser(taskid,userassigned, this.user,  this.projectid, taskname).subscribe(data => {
+      this.GetassignUser(taskid);
+      $("#hidemodaltemp"+ ind).click();
+      this.GettaskUsers(this.projectid);
     });
   }
   inviteuser = function(createmember){
@@ -151,4 +223,34 @@ maildata;
        
     });
   }
+  /*---*/
+ updateTask(form){
+    this.dataService.updateTask(form).subscribe(data =>  {this.Gettasks(this.projectid)});
+  }
+  deleteTask(id){
+    this.dataService.deleteTask(id).subscribe(data =>  {this.Gettasks(this.projectid)});
+
+  }
+  /*--for duedate and move--*/
+  sendDueDate(updatetask){
+    this.dataService.sendDueDate(updatetask).subscribe(data => this.datas = data)
+    $(".demoshow").show();
+    $(".demoshow").html("<label for='duedate' class='control-label'><i class='fa fa-clock-o' aria-hidden='true'></i> Due Date:</label><p>"+ updatetask.date +"at "+updatetask.time+"</p>");
+    $(".databaseshow").hide();
+  }
+  removedate(id){
+   this.date = "";
+    this.dataService.removedate(id,this.date).subscribe(data => this.datas = data);
+    $(".databaseshow").hide();
+    $(".demoshow").hide();
+  }
+  sendmove(ind,form){
+    this.dataService.sendMove(form).subscribe(data => { this.Gettasks(this.projectid); });
+    $("#hidemodaltemp"+ ind).click();
+  }
+  archive(ind,id){
+    $("#hidemodaltemp"+ ind).click();
+    this.dataService.archive(id).subscribe(data => { this.Gettasks(this.projectid) });
+  }
+
 }

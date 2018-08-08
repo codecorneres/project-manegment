@@ -16,7 +16,7 @@
               <span class="pdngs" (click) ="showtoggle(ind)"><i class="fa fa-pencil-square-o" aria-hidden="true" title="edit"></i></span>
               <span class="right" (click) = "confirmdelete('demo' +ind)"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></span>
               <div [attr.id]="'demo' +ind" class="collapse deletdm">
-                <p>Are you sure you want to delete the comment?</p>
+                <p>Are you sure to delete the Project?</p>
                 <button type="submit" class="btn-danger" (click) ="deleteProject(project._id)">Yes</button>
                 <button type="button" class="no" (click) = "nodelete('demo' +ind)">No</button>
               </div>

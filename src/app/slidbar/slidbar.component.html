@@ -23,17 +23,17 @@
 						</div> 
 						
 							<div class="imgspn" >
-								<span class="clssp">Edit Profile</span>
-								<input type="file" name="file"  id="file"  (change) ="onFileSelecet($event)" >	
-							</div>
-							<button type="button" (click)="onUpload()" style="display: none;" id="bt1"> Upload</button> 
+								 <span class="clssp">Edit Profile</span>
+								<input type="file" name="file"  id="file"  (change) ="onFileSelecet($event)" >
+							</div> 
+							<button type="button" (click)="onUpload()" style="display: none;" id="btss1"> Upload</button> 
 						
 						<br><br>
 		          	</div>
 		          	<div class="col-md-7">
 		          		<span><b>UserName: </b></span><br><div class="hidediv"><span>{{users.name}}</span> <span class="icls"style="float: right;" (click) ="showtoggle()"> <i class="fa fa-pencil-square-o" aria-hidden="true" title="edit"></i></span></div>
 		          		<div class="showclstdiv" style="display: none">
-              				<form class="frm" id="commentform" #forms="ngForm" (ngSubmit)="updatusername(forms.value)">
+              				<form class="frm" id="usrnm" #forms="ngForm" (ngSubmit)="updatusername(forms.value)">
 				                <div>
 				                    <input type="hidden" id="email" name="email" [(ngModel)]="users.email"/>
 				                    <div class="form-group">
@@ -53,6 +53,23 @@
 		          	</div>
 		        </div>
 			</form>
+			<!-- <form class="frm" id="commentform" #forms="ngForm" (ngSubmit)="emajivaluesave(forms.value)">
+			<div class="emoji">
+			<emoji-input
+			  [(model)]="text"
+			  [textArea]="{cols: 40, rows: 5}"
+			  [onEnter]="onEnterFunction"
+			  [closeAfterSelection]="false"
+			  [popupAnchor]="'top'"
+			  (click)="openPopup(false)"
+			  (setPopupAction)="setPopupAction($event)">
+			</emoji-input> 
+			<span name="button" class="emojispn" (click)="openPopup()">
+			    <img src="assets/images/smiley-163510_960_720.jpg" height="20px" width="20px">
+			</span>
+			</div>
+			</form> -->
+			
 		</div>
     </div>
   </div>

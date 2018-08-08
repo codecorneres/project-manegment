@@ -22,8 +22,8 @@ projectid;
 user;
 createtasks;
 commentdata;
-description;
-
+taskdata;
+taskuser;
   ngOnInit() {
     sessionStorage.setItem('headername', 'Add Task');
   	this.projectname = sessionStorage.getItem("projectname");
@@ -33,6 +33,7 @@ description;
     this.createtasks = sessionStorage.getItem("createtask");
 
       this.GetAssigntasks(this.projectid, this.user);
+      this.GettaskUsers(this.projectid);
   }
   showtoggle(arr) {
     $(".hidediv"+ arr).hide();
@@ -43,20 +44,14 @@ description;
     $(".hidediv"+ arr).show();
     $(".showclstdiv"+ arr).hide();
   }
-GetAssigntasks(projectid,user){
+  GetAssigntasks(projectid,user){
     this.dataService.GetAssigntasks(projectid,user).subscribe(form => {this.assingtaskform = form});
   }
-
+  GettaskUsers(projectid){
+    this.dataService.Gettasks(projectid).subscribe(form => {this.taskuser = form});
+  }
   GetassignUser(taskid){
-  	this.dataService.GetTaskDescription(taskid).subscribe(form => {
-      if(!form.data){
-        this.description = "No Description Here.......";
-      }
-      else{
-        this.description = form.data
-      }
-      	
-  	});
+  	this.dataService.GetTaskDescription(taskid).subscribe(form => this.taskdata = form);
   	this.getcomments(taskid);
   }
   

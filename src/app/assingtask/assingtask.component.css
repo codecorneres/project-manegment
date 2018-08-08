@@ -206,3 +206,8 @@ margin-left: 8px;
   height:250px;
   overflow-y: scroll;
 }
+.statsbtn{
+    font-size: 11px;
+    padding: 1px 4px;
+    border-radius: 3px;
+}

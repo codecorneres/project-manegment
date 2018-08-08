@@ -53,6 +53,10 @@ export class DataService {
      return this.http.post('api/getbyprojectid/',{'projectid': projectid})  
             .map((response: Response) =>response.json())               
     }
+    GettaskUsers(projectid){  
+     return this.http.post('api/GettaskUsers/',{'projectid': projectid})  
+            .map((response: Response) =>response.json())               
+    }
     GetAssigntasks(projectid,user){  
      return this.http.post('api/getbyassinedprojectid/',{'projectid': projectid, 'user': user})  
             .map((response: Response) =>response.json())               
@@ -137,7 +141,7 @@ export class DataService {
      return this.http.post('api/changepassword/', JSON.stringify(form), {headers: this.headers}) 
             .map((response: Response) =>response.json())               
     }
-     resendpassword(form){  
+    resendpassword(form){  
      return this.http.post('api/resendpassword/', JSON.stringify(form), {headers: this.headers}) 
             .map((response: Response) =>response.json())               
     }
@@ -151,6 +155,34 @@ export class DataService {
     }
     updatusername(update){   
      return this.http.post('api/updatusername/', JSON.stringify(update), {headers: this.headers})   
+            .map((response: Response) =>response.json())               
+    }
+    updateTask(update){   
+     return this.http.post('api/updateTask/', JSON.stringify(update), {headers: this.headers})   
+            .map((response: Response) =>response.json())               
+    }
+    deleteTask(id){  
+     return this.http.post('api/deleteTask/', {'id': id})   
+            .map((response: Response) =>response.json())               
+    }
+    uploadattachment(fd){  
+        return this.httpclient.post('api/uploadattachment/', fd) 
+           .map((response: Response) =>response.json())
+    }
+    sendDueDate(update){   
+     return this.http.post('api/sendDueDate/', JSON.stringify(update), {headers: this.headers})   
+            .map((response: Response) =>response.json())               
+    }
+    removedate(id,date){   
+     return this.http.post('api/removedate/',{'id': id, 'date':date})    
+            .map((response: Response) =>response.json())               
+    }
+    sendMove(update){   
+     return this.http.post('api/sendMove/', JSON.stringify(update), {headers: this.headers})   
+            .map((response: Response) =>response.json())               
+    }
+    archive(id){   
+     return this.http.post('api/archive/',{'id': id})    
             .map((response: Response) =>response.json())               
     }
 /******/

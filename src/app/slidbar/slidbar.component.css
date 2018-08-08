@@ -10,11 +10,6 @@
     box-shadow: 0 16px 38px -12px rgba(218, 212, 212, 0.56), 0 4px 25px 0px rgba(16, 16, 16, 0.12), 0 8px 10px -5px rgba(29, 28, 28, 0.2);
     margin-bottom: 1rem;
 }
-/*#file {
-   opacity: 0;
-   position: absolute;
-   z-index: -1;
-}*/
 .imgspn input[type=file] {
     position: absolute;
     left: 35px;
@@ -26,7 +21,7 @@
     overflow: hidden;
     margin-top: 35px;
   }
-#bt1 {
+#btss1 {
   border: 1px solid gray;
   color: gray;
   background-color: white;
@@ -65,6 +60,15 @@
 .icls:hover{
   color: #47c7f7;
 }
+.emojispn{
+  position: absolute;
+    /* top: -1px; */
+    bottom: 10px;
+    right: 16px;
+}
+.emoji{
+  position: relative;
+}
 h5{
   padding-left: 18px;
 }
@@ -72,4 +76,8 @@ h5{
 .frmcls{
     width: 100% !important;
 }
+}
+
+.emoji-search input{
+  width: 100% !important;
 }

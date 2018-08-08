@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit, OnChanges,Input, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data.service';
 import { Router, ActivatedRoute, Params} from '@angular/router';
@@ -7,7 +7,8 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-slidbar',
   templateUrl: './slidbar.component.html',
-  styleUrls: ['./slidbar.component.css']
+  styleUrls: ['./slidbar.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SlidbarComponent implements OnInit {
 	selectedValue = [];
@@ -22,11 +23,24 @@ export class SlidbarComponent implements OnInit {
   	private router: Router,
   	private cookieService: CookieService) { }
 
-	
+text: string = '';
+openPopup: Function;
+
+  setPopupAction(fn: any) {
+    console.log(fn);
+    this.openPopup = fn;
+    console.log(this.openPopup);
+  }
+
   ngOnInit() {
   	sessionStorage.setItem('headername', 'Profile');
   	this.email = this.cookieService.get('LoggedInUser');
   	this.dataService.getUserProfile(this.email).subscribe(data =>  this.user = data);
+     /*$(document).ready(function(){
+     	$("#mytext").emojioneArea({
+     		pickerPosition: "right"
+     	});
+     }) */  
   }
 	maintainanceTypeList = [
 	    {maintenancetype: 'Steak'},
@@ -61,14 +75,14 @@ export class SlidbarComponent implements OnInit {
 	        this.url = event.target.result;
 	      }
 	    }
-	    $("#bt1").show();
+	    $("#btss1").show();
 	  	this.selectedFile = <File>event.target.files[0];
 		if(!this.selectedFile.name){
-			$("#bt1").hide();
+			$("#btss1").hide();
 			$(".img").show();
 		}else{
 			
-			$("#bt1").show();
+			$("#btss1").show();
 			$(".img").hide();
 			$(".img2").show();
 			$(".clssp").hide();
@@ -76,12 +90,11 @@ export class SlidbarComponent implements OnInit {
 	}	
 	
 	onUpload(): void{
-		console.log("ggh");
 	  	const fd = new FormData();
 	  	fd.append('email', this.email);
 	  	fd.append('image', this.selectedFile, this.selectedFile.name); 
 	  	this.dataService.uploadimage(fd).subscribe(data =>  this.datas = data.data);
-	  	$("#bt1").hide();
+	  	$("#btss1").hide();
 	  	$(".clssp").show();
 	}
 

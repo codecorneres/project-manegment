@@ -32,7 +32,6 @@ app.get('/', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/ProjectManegment/index.html'));
 });
-
 const port = process.env.PORT || 8181;
 app.set('port', port);
 const server = http.createServer(app);
@@ -53,7 +52,8 @@ var UsersAssigntask = new Schema({
   projectname : { type: String},
   assignuser : { type: String},
   projecttaskid : { type: String},
-  projecttaskname : { type: String}
+  projecttaskname : { type: String},
+  shortname : { type: String}
 });
 
 var UsersAssignProject = new Schema({ 
@@ -71,8 +71,13 @@ var Userstask = new Schema({
  projectid : { type: String},
  projectname : { type: String},
  task : { type: String},
-description : { type: String},
- user : { type: String}
+ description : { type: String},
+ user : { type: String},
+ attachment : { type: String},
+ duedate : { type: String},
+ time: { type: String },
+ status: { type: String },
+ state: { type: String }
 });
 
 var adminLogin = new Schema({    
@@ -170,6 +175,7 @@ app.post("/api/createnewproject",function(req,res){
 
 })
 app.post("/api/createnewtasks",function(req,res){
+  req.body.state = "1";
   var tasks = new task(req.body); 
   tasks.save(function(err,data){  
     if(err){  
@@ -193,12 +199,30 @@ app.post("/api/GetAllProject/",function(req,res){
 });
  
 app.post("/api/getbyprojectid",function(req,res){     
-       task.find().where({ projectid : req.body.projectid}).
+  task.find().where({ projectid : req.body.projectid}).
+    exec(function(err, data){ 
+    if (err) {  
+      res.send(err);         
+    }  
+    else{   
+      var users = [];
+      for(var i =0; i<data.length; i++)
+      {
+        if(data[i].state == "1"){
+          users.push(data[i]);
+        }
+      }  
+      res.send(users);  
+    } 
+  });
+})
+app.post("/api/GettaskUsers",function(req,res){     
+      task_user.find().where({ projectid : req.body.projectid}).
           exec(function(err, data){ 
    if (err) {  
    res.send(err);         
    }  
-   else{        
+   else{   
         res.send(data);  
      } 
    });
@@ -215,14 +239,13 @@ app.post("/api/getbyassinedprojectid",function(req,res){
    });
 })
 app.post("/api/getTaskDescription",function(req,res){    
-console.log(req.body.taskid); 
-       task.findOne().where({ _id : req.body.taskid}).
+       task.find().where({ _id : req.body.taskid}).
           exec(function(err, data){ 
    if (err) {  
    res.send(err);         
    }  
    else{       
-        res.send({data: data.description});  
+        res.send(data);  
      } 
    });
 })
@@ -670,11 +693,141 @@ app.post("/api/updatusername/",function(req,res){
     }
   }); 
 });
+/*--Delete Update Task---*/
+app.post("/api/updateTask",function(req,res){ 
+    task.findByIdAndUpdate(req.body.id, { task: req.body.task},  
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{
+        task_user.update({"projecttaskid": req.body.id }, {$set:{"projecttaskname": req.body.task}}, function(err, result){
+          if (err) {
+              res.send({err});
+          } else {
+              res.send({data:"Task Name has been Updated..!!"});
+          }
+        });    
+     } 
+  });
+})
+app.post("/api/deleteTask",function(req,res){
+  task.remove({ _id: req.body.id }, function(err) {    
+   task_user.remove({ "taskid": req.body.id }, function(err) { 
+      comment.remove({ "taskid": req.body.id }, function(err) {
+        notification.remove({ "taskid": req.body.id }, function(err) { 
+            res.send({data:"Task has been Deleted..!!"
+            });       
+        });      
+      });        
+    });      
+  });   
+});
+app.post("/api/sendDueDate",function(req,res){ 
+    task.findByIdAndUpdate(req.body.id, { duedate: req.body.date,  time: req.body.time},  
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{
+      res.send({data:"Due Date has been Updated..!!"});
+    }
+  });  
+});
+app.post("/api/removedate",function(req,res){ 
+    task.findByIdAndUpdate(req.body.id, { duedate: req.body.date },  
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{
+      res.send({data:"Date has been Updated..!!"});
+    }
+  });  
+});
+app.post("/api/sendMove",function(req,res){ 
+    task.findByIdAndUpdate(req.body.id, { status: req.body.status},  
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{
+      res.send({data:"Status has been Updated..!!"});
+    }
+  });  
+});
+app.post("/api/archive",function(req,res){ 
+    req.body.state ="0";
+    task.findByIdAndUpdate(req.body.id, { state: req.body.state},  
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{
+      res.send({data:"task has been Deleted..!!"});
+    }
+  });  
+});
+/*app.get("/api",function(req,res){ 
+     //res.send({data:"Date has been Updated..!!"});
+     res.setHeader('Content-Type', 'application/json'); 
+     for(var i="1"; i<=5; i++)
+     {
+      console.log(i);
+     }
+
+  var defult = 50;   
+  var u = 10;
+  var total = '';
+  var c1 = 100;
+  var u1 = 60;
+  var u2 = 80;
+  var u3 = 90;
+  var tatal = '';
+  var tatalbill1 = '';
+  var tatalbill2 = '';
+  var frstb = '';
+  var scndb = '';
+  var thirdb = '';
+  var tt1 ='';
+  var tt2 ='';
+  if(u>=0 && u<=100)
+  { 
+    frstb = u*u1/100;
+    tatal =frstb + defult;
+  }
+  else if(u>100 && u<=200){
+    tt1 =(u-c1);
+    frstb = c1*u1/100;
+    tatalbill1 =frstb + defult;
+    scndb = tt1*u2/100;
+    tatal = tatalbill1 + scndb; 
+  }  
+  else
+  {
+    tt1 =(u-c1);
+    frstb = c1*u1/100;
+    tatalbill1 =frstb + defult;
+    tt2 = (tt1-c1);
+    scndb = c1*u2/100;
+    tatalbill2 = tatalbill1 + scndb;
+    thirdb = tt2*u3/100;
+    tatal = tatalbill2 + thirdb;
+  }
+  console.log(u+ 'unit');
+  console.log(tatal+ 'ruppes');
+   res.end();
+});*/
 /***********/
 /********/
 /*****/
 /**/
 /*----for Checkbox----*/
+/* +50r judenge
+agr bill 0r se greater 100r(<=) se less he to unit 60ps/u
+agr bill 100 se upr he or 200(<=) he to unit 80ps/u
+agr bill 200 se greater he to 90ps/u
+agr 150 he to 100 ki unit ktegi 60ps/u or baki ki 50 unit ke 80ps/s ktenge*/
 
 
 /*app.post("/api/checkboxValue",function(req,res){
@@ -714,6 +867,41 @@ var type = upload.single('image'); */
     }
   });
 });*/
+/*-------for file upload (Attachment of task)---------*/ 
+var fileName;
+
+var uploadfileStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'dist/ProjectManegment/assets/images/fileUpload/');
+    },
+    filename: function (req, file, cb) {
+        fileName = file.originalname;
+        cb(null, fileName);
+    }
+});
+var uploadFile = multer({storage: uploadfileStorage});
+var type = uploadFile.single('file');
+
+app.post("/api/uploadattachment",type,function(req,res){
+  task.findByIdAndUpdate(req.body.id, { attachment: req.file.originalname},  
+  function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{        
+          res.send({data:"Record has been Updated..!!"});  
+     } 
+   });
+})
+/*task.update({"id": req.body.id }, {$set:{"attachment": req.file.originalname}}, function(err, result){
+    if (err) {
+        res.send({err});
+    } else {
+        res.send({data:"Attachment has been Added..!!"});
+    }
+  });
+}); */
+/*----for User Proile images change---------*/
 var imageName;
 
 var uploadStorage = multer.diskStorage({

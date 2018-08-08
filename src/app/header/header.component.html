@@ -135,8 +135,8 @@
         <a class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="dropdown-divs"><i class="fa fa-user" aria-hidden="true"></i></div>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngFor="let users of user">
-          <a class="dropdown-item" routerLink = "/profile" style="text-align: center;">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+          <a class="dropdown-item" routerLink = "/profile" style="text-align: center;" *ngFor="let users of user">
             <div class="dropdown-div"><!-- <img class="dropdown-img" src="assets/images/ninja-avatar-96x96.png" alt="IMG"> -->
               <div *ngIf = "users.profile == undefined;else assignTaskdiv">
                 <img src="assets/images/ninja-avatar-96x96.png" class="dropdown-img">   
