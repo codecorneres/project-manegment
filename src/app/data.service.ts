@@ -14,8 +14,8 @@ export class DataService {
   	constructor(private http: Http, private httpclient: HttpClient) { }
   	private headers = new Headers({'Content-Type': 'application/json'});
     private httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
   	match(form : Form){     
     return this.http.post('api/Match/', JSON.stringify(form), {headers: this.headers}) 
            .map((response: Response) =>response.json())              
@@ -175,7 +175,7 @@ export class DataService {
             .map((response: Response) =>response.json())               
     }
     uploadattachment(fd){  
-        return this.httpclient.post('api/uploadattachment/', fd, this.httpOptions)
+        return this.httpclient.post('api/uploadattachment/', fd)
     }
     sendDueDate(update){   
      return this.http.post('api/sendDueDate/', JSON.stringify(update), {headers: this.headers})   
