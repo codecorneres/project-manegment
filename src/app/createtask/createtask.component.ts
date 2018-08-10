@@ -247,12 +247,11 @@ showmove(){
   sendDueDate(updatetask){
     this.dataService.sendDueDate(updatetask).subscribe(data => this.datas = data)
     $(".demoshow").show();
-    $(".demoshow").html("<label for='duedate' class='control-label'><i class='fa fa-clock-o' aria-hidden='true'></i> Due Date:</label><p>"+ updatetask.date +"at "+updatetask.time+"</p>");
+    $(".demoshow").html("<label for='duedate' class='control-label'><i class='fa fa-clock-o' aria-hidden='true'></i> Due Date:</label><p>"+ updatetask.date +" at "+updatetask.time+"</p>");
     $(".databaseshow").hide();
   }
   removedate(id){
-   this.date = "";
-    this.dataService.removedate(id,this.date).subscribe(data => this.datas = data);
+    this.dataService.removedate(id).subscribe(data => this.datas = data);
     $(".databaseshow").hide();
     $(".demoshow").hide();
   }

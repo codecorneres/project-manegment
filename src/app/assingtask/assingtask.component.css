@@ -211,3 +211,8 @@ margin-left: 8px;
     padding: 1px 4px;
     border-radius: 3px;
 }
+@media (max-width: 768px) {
+.modal-content {
+    width: 100% !important;
+}
+}

@@ -780,7 +780,9 @@ app.post("/api/sendDueDate",function(req,res){
   });  
 });
 app.post("/api/removedate",function(req,res){ 
-    task.findByIdAndUpdate(req.body.id, { duedate: req.body.date },  
+  req.body.date = "";
+   req.body.time = "";
+    task.findByIdAndUpdate(req.body.id, { duedate: req.body.date,time: req.body.time },  
    function(err,data) {  
    if (err) {  
    res.send(err);         
