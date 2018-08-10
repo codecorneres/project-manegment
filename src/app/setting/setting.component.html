@@ -1,9 +1,11 @@
 <app-header></app-header>
+<div id="MessageBox" class="NotifyBox" style="display: none;"></div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
     </div>
     <div class="col-md-7">
+
       <div class="row">
       	<form class="frmcls" #forms="ngForm" [formGroup]="registrationFormGroup" (ngSubmit)="changepassword(forms.value)">
  			<h5 class="login100-form-title">

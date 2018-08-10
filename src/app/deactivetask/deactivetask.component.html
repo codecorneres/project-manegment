@@ -1,0 +1,112 @@
+<div class="row">
+	<!-- <div class="col-sm-12 md3" *ngIf="form?.length <= 0;else assignTaskdiv">
+		<span> No Task Deactivated...</span> 
+	</div> 
+	<ng-template #assignTaskdiv>-->
+	<div class="col-sm-3" *ngFor="let forms of form;let ind = index ">
+	  	<div class="col-sm-12 md3">
+	  	<div [attr.class]="'hidetaskdiv' +ind">
+		  	<span class="spnsiz"> {{forms.task}} {{parentCount}}</span> 
+		  	<span *ngFor="let taskusershrt of taskuser">
+		  		<span *ngIf= "taskusershrt.projecttaskid ==forms._id" [attr.title]="taskusershrt.assignuser" class="shortnspn">{{taskusershrt.shortname}}</span>
+		  	</span>
+		  	<br><br>
+		  	<span class="ssd" data-toggle="modal" [attr.data-target]="'#ss' +ind +1" (click)="GetassignUser(forms._id)"><i class="fa fa-eye eys" aria-hidden="true" title="add user"></i></span>
+		  	<div class="modal fade" [attr.id]="'ss' +ind +1" role="dialog">
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			      	<div class="modal-header">
+			      		<i class="fa fa-th" aria-hidden="true" style="margin-top: 5px;"></i>  <span class="titlecl">{{forms.task}}</span>
+			      		<span *ngFor="let asigns of asign" style="margin-left: 5px;">{{asigns.assignuser}}</span>
+			      		<button type="button" class="close" [attr.id]="'hidetemp' +ind" data-dismiss="modal">&times;</button>
+			      	</div>
+			      	<div class="modal-body">
+			      		<div class="row">
+			      			<div class="col-md-8 md8">
+			      				<div class="form-group databaseshow" *ngIf="forms.duedate?.length > 0;">
+			      				<label for="duedate" class="control-label"><i class="fa fa-clock-o" aria-hidden="true"></i> Due Date:</label>
+			      					<p class=""> {{forms.duedate}} at {{forms.time}}</p>
+			      				</div>
+			      					<div class="form-group">
+			       	 					<label for="description" class="control-label"><i class="fa fa-indent" aria-hidden="true"></i> Description:</label>
+			       	 					<div *ngIf="forms.description?.length <= 0;else descriptiondiv">
+			       	 						<textarea rows="2" cols="50" class="form-control" id="description" name="description" disabled> There is no description.... </textarea>
+			       	 					</div>
+			       	 					<ng-template #descriptiondiv>
+			       	 						<textarea rows="2" cols="50" class="form-control" id="description" name="description" [(ngModel)]="forms.description" disabled> </textarea>
+			       	 					</ng-template>
+			       	 				</div>
+						        	<div class="form-group attchdv">
+							        	
+							        	<div *ngFor="let attachs of attach">
+							        	<label *ngIf="attachs.attachment?.length == '13'" for="attachment" class="control-label"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachments:</label> <br>
+							        	<a [attr.href]="'assets/images/fileUpload/'+attachs.attachment">{{attachs.attachment}}</a>
+							        	</div>
+							        </div>
+							    
+						       
+						        <div class="row" style="margin: 15px 0px;">
+						        	<span><i class="fa fa-hashtag" aria-hidden="true"></i></span><p class="cmnth3">Activity</p>
+						        </div>
+						        <div data-spy="scroll" data-target=".navbar" data-offset="5" class="anyClass">
+						        <div class="row" *ngFor="let comments of commentdata;let inds = index ">
+						        	<div class="col-md-12 cmntclm"  *ngIf="comments.user == user;else nextdiv">
+						        		<span class="clrs"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn clrs">{{comments.user}}</span>
+						        		<div [attr.class]="'hidediv' +inds">
+						        		<p class="cmntp">{{comments.comment}}</p>
+						        		</div>
+										<div [attr.class]="'showclstdiv' +inds" style="display: none">
+											<form class="forms" id="commentform" #forms="ngForm" (ngSubmit)="updatcomment(forms.value)">
+											    <div>
+											    	<input type="hidden" id="id" name="id" [(ngModel)]="comments._id"/>
+											    	<input type="hidden" id="taskid" name="taskid" [(ngModel)]="comments.taskid"/>
+										        	<div class="form-group">
+										        		<textarea rows="2" cols="20" class="form-control" id="comments" name="comment" [(ngModel)]="comments.comment" ></textarea>
+										        	</div>
+											    </div>
+											    <div class="inln">
+											    <button type="submit" class="btn btn-primary cretsk" [disabled]="!forms.valid">Save</button>
+											    <span (click)="hidetoggle(inds)" id="bt" class="hideshow">
+									    			<button type="button" class="close" style="font-size: 37px;">&times;</button>
+												</span>
+												</div>
+											</form>
+										</div>
+						        	</div>
+						        	<ng-template #nextdiv>
+						        	<div class="col-md-12 cmntclm" style="text-align: right;">
+						        		<span class="colr"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn colr">{{comments.user}}</span>
+						        		<p class="cmp">{{comments.comment}}</p>
+						        	</div>
+						        	</ng-template>
+						        </div>
+						        </div>
+						    </div>
+						    <div class="col-md-4 mdr4">
+					        	<button type="button" class="adbtn" (click)="archive(ind,forms._id)" id="showbtn4"><i class="fa fa-file-archive-o faic" aria-hidden="true"></i> <span class="fasp">Active Task</span></button>
+
+					        	<button type="button" class="adbtn" (click)="confirmdelete('demo' +ind)" id="showbtn4"><i class="fa fa-trash faic" aria-hidden="true" title="Delete Task"></i> <span class="fasp">Permanently Delete</span></button>
+					        	<div [attr.id]="'demo' +ind" class="deletdm" style="display: none;">
+			        		 		<p>Are you sure you want to delete the Task?</p>
+			        		 		<button type="submit" class="btn-danger" (click) ="deletetask(ind,forms._id)">Yes</button>
+			        		 		<button type="button" class="no" (click) ="nodelete('demo' +ind)">No</button>
+			        		 	</div>
+					        </div>
+					    </div>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+			
+             <span class="pdngs" *ngIf="forms.status =='complete'"><span class="statsbtn btn-success">{{forms.status}} <i class="fa fa-check" aria-hidden="true"></i></span></span>
+
+              <span class="pdngs" *ngIf="forms.status == 'Progress'"><span class="statsbtn btn-primary">{{forms.status}} <i class="fa fa-spinner" aria-hidden="true"></i></span></span> 
+
+              <span class="pdngs" *ngIf="forms.status == 'Pending'"><span class="statsbtn btn-info">{{forms.status}} ...</span> </span>
+		  		
+        </div>
+        </div>
+    
+	</div><!-- 
+	</ng-template> -->
+</div>

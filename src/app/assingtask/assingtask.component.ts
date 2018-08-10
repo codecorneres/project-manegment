@@ -24,6 +24,7 @@ createtasks;
 commentdata;
 taskdata;
 taskuser;
+attach;
   ngOnInit() {
     sessionStorage.setItem('headername', 'Add Task');
   	this.projectname = sessionStorage.getItem("projectname");
@@ -48,11 +49,15 @@ taskuser;
     this.dataService.GetAssigntasks(projectid,user).subscribe(form => {this.assingtaskform = form});
   }
   GettaskUsers(projectid){
-    this.dataService.Gettasks(projectid).subscribe(form => {this.taskuser = form});
+    this.dataService.GetAlltasks(projectid).subscribe(form => {this.taskuser = form});
   }
   GetassignUser(taskid){
   	this.dataService.GetTaskDescription(taskid).subscribe(form => this.taskdata = form);
   	this.getcomments(taskid);
+    this.getAttachment(taskid);
+  }
+  getAttachment(id){
+    this.dataService.getAttachment(id).subscribe(data =>this.attach = data);
   }
   
   confirmdelete(id){

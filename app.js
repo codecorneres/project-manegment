@@ -53,7 +53,8 @@ var UsersAssigntask = new Schema({
   assignuser : { type: String},
   projecttaskid : { type: String},
   projecttaskname : { type: String},
-  shortname : { type: String}
+  shortname : { type: String},
+  state: {type: String }
 });
 
 var UsersAssignProject = new Schema({ 
@@ -91,8 +92,6 @@ var usersLogin = new Schema({
  name : { type: String},
  profile : { type: String}
 });
-
-
 var UsersSchema = new Schema({
  projectid : { type: String}, 
  projectname : { type: String },
@@ -100,7 +99,12 @@ var UsersSchema = new Schema({
  task : { type: String },
  user : { type: String},
  comment : { type: String}
-});  
+}); 
+var AttachSchema = new Schema({
+  taskid : { type: String },
+  attachment : { type: String}
+ 
+}); 
 var user = mongoose.model('user', usersLogin);  
 var admin = mongoose.model('admin', adminLogin); 
 var project = mongoose.model('project', Usersproject);
@@ -109,6 +113,7 @@ var comment = mongoose.model('comment', UsersSchema);
 var project_user = mongoose.model('project_user', UsersAssignProject);
 var task_user = mongoose.model('task_user', UsersAssigntask);
 var notification = mongoose.model('notification', notificationschema);
+var attachment = mongoose.model('attachment', AttachSchema);
 
 /*---------for demo---------*/
 var checkboxValue = new Schema({    
@@ -212,7 +217,40 @@ app.post("/api/getbyprojectid",function(req,res){
           users.push(data[i]);
         }
       }  
-      res.send(users);  
+      res.send(users);
+      //res.write(users);  
+    } 
+  });
+})
+
+app.post("/api/Getdeactivetasks",function(req,res){     
+  task.find().where({ projectid : req.body.projectid}).
+    exec(function(err, data){ 
+    if (err) {  
+      res.send(err);         
+    }  
+    else{   
+      var users = [];
+      for(var i =0; i<data.length; i++)
+      {
+        if(data[i].state == "0"){
+          users.push(data[i]);
+        }
+      }  
+      res.send(users);
+      //res.write(users);  
+    } 
+  });
+})
+app.post("/api/GetAlltasks",function(req,res){     
+  task.find().where({ projectid : req.body.projectid}).
+    exec(function(err, data){ 
+    if (err) {  
+      res.send(err);         
+    }  
+    else{    
+      res.send(data);
+      //res.write(users);  
     } 
   });
 })
@@ -234,7 +272,14 @@ app.post("/api/getbyassinedprojectid",function(req,res){
    res.send(err);         
    }  
    else{        
-        res.send(data);  
+        var users = [];
+      for(var i =0; i<data.length; i++)
+      {
+        if(data[i].state == "1"){
+          users.push(data[i]);
+        }
+      }  
+      res.send(users);
      } 
    });
 })
@@ -764,91 +809,38 @@ app.post("/api/archive",function(req,res){
    res.send(err);         
    }  
    else{
-      res.send({data:"task has been Deleted..!!"});
+    task_user.update({"projecttaskid": req.body.id }, {$set:{"state": req.body.state}},{multi: true},
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{
+      res.send({data:"task has been deactive..!!"});
+    }
+  });
     }
   });  
 });
-/*app.get("/api",function(req,res){ 
-     //res.send({data:"Date has been Updated..!!"});
-     res.setHeader('Content-Type', 'application/json'); 
-     for(var i="1"; i<=5; i++)
-     {
-      console.log(i);
-     }
-
-  var defult = 50;   
-  var u = 10;
-  var total = '';
-  var c1 = 100;
-  var u1 = 60;
-  var u2 = 80;
-  var u3 = 90;
-  var tatal = '';
-  var tatalbill1 = '';
-  var tatalbill2 = '';
-  var frstb = '';
-  var scndb = '';
-  var thirdb = '';
-  var tt1 ='';
-  var tt2 ='';
-  if(u>=0 && u<=100)
-  { 
-    frstb = u*u1/100;
-    tatal =frstb + defult;
-  }
-  else if(u>100 && u<=200){
-    tt1 =(u-c1);
-    frstb = c1*u1/100;
-    tatalbill1 =frstb + defult;
-    scndb = tt1*u2/100;
-    tatal = tatalbill1 + scndb; 
-  }  
-  else
-  {
-    tt1 =(u-c1);
-    frstb = c1*u1/100;
-    tatalbill1 =frstb + defult;
-    tt2 = (tt1-c1);
-    scndb = c1*u2/100;
-    tatalbill2 = tatalbill1 + scndb;
-    thirdb = tt2*u3/100;
-    tatal = tatalbill2 + thirdb;
-  }
-  console.log(u+ 'unit');
-  console.log(tatal+ 'ruppes');
-   res.end();
-});*/
-/***********/
-/********/
-/*****/
-/**/
-/*----for Checkbox----*/
-/* +50r judenge
-agr bill 0r se greater 100r(<=) se less he to unit 60ps/u
-agr bill 100 se upr he or 200(<=) he to unit 80ps/u
-agr bill 200 se greater he to 90ps/u
-agr 150 he to 100 ki unit ktegi 60ps/u or baki ki 50 unit ke 80ps/s ktenge*/
-
-
-/*app.post("/api/checkboxValue",function(req,res){
- console.log(req.body);
- var checkvalue = "";
-for(var i = 0; i < req.body.checkValue.length; i++){
-   checkvalue += (req.body.checkValue[i]+",");
-}*/
-
-//req.body.checkedValue = checkvalue;
-
- /*var checks = new checkbox(req.body);
-   checks.save(function(err,data){  
-    if(err){  
-       res.send(err);                
-    }  
-    else{        
-        res.send({data:"Record has been Inserted"});  
-    }  
+app.post("/api/activeArchive",function(req,res){ 
+    req.body.state ="1";
+    task.findByIdAndUpdate(req.body.id, { state: req.body.state},  
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }
+   else{
+    task_user.update({"projecttaskid": req.body.id }, {$set:{"state": req.body.state}},{multi: true},
+   function(err,data) {  
+   if (err) {  
+   res.send(err);         
+   }  
+   else{
+      res.send({data:"task has been Active..!!"});
+    }
   });
-})*/
+    }  
+  });  
+});
 /*--------------------------------*/
 /*-------------*/
 /*var upload = multer({ dest: 'assets/images/'});
@@ -869,13 +861,14 @@ var type = upload.single('image'); */
 });*/
 /*-------for file upload (Attachment of task)---------*/ 
 var fileName;
-
+var uniqname;
 var uploadfileStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'dist/ProjectManegment/assets/images/fileUpload/');
     },
     filename: function (req, file, cb) {
-        fileName = file.originalname;
+        fileName = file.fieldname + "_" +Date.now() + "_" + file.originalname;
+        uniqname =fileName;
         cb(null, fileName);
     }
 });
@@ -883,16 +876,41 @@ var uploadFile = multer({storage: uploadfileStorage});
 var type = uploadFile.single('file');
 
 app.post("/api/uploadattachment",type,function(req,res){
-  task.findByIdAndUpdate(req.body.id, { attachment: req.file.originalname},  
-  function(err,data) {  
-   if (err) {  
-   res.send(err);         
-   }  
-   else{        
-          res.send({data:"Record has been Updated..!!"});  
-     } 
-   });
+  console.log(uniqname);
+  req.body.attachment =uniqname;
+  req.body.taskid = req.body.id;
+  var attach = new attachment(req.body); 
+  attach.save(function(err,data){  
+    if(err){  
+       res.send(err);                
+    }  
+    else{        
+        res.send({data:"Record has been Inserted"});  
+    }  
+  });
 })
+app.post("/api/getAttachment/",function(req,res){ 
+  attachment.find().where({ "taskid" : req.body.id}).
+  exec(function(err, data){  
+    if(err){  
+      res.send(err);  
+    }  
+    else{              
+      res.send(data);  
+    }  
+  });  
+});
+app.post("/api/removeattachment/",function(req,res){ 
+  attachment.remove({ "_id": req.body.id }, function(err) {    
+    if(err){    
+         res.send(err);    
+    }    
+    else{      
+        res.send({data:"Record has been Deleted..!!"});               
+    }    
+  });
+})
+ 
 /*task.update({"id": req.body.id }, {$set:{"attachment": req.file.originalname}}, function(err, result){
     if (err) {
         res.send({err});

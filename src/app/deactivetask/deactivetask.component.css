@@ -13,7 +13,7 @@
   font-family: Poppins-Regular;
 }
 .margntp{
-	margin-top: 20px;
+	margin-top: 30px;
 }
 .md3{
 	background: #f8f9fa;
@@ -312,17 +312,7 @@ p {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-#filtr{
-    border: 1px solid #ccc;
-    padding: 10px;
-    background: #fff;
-    border-radius: 3px;
-}
-.attachmntspn:hover{
-    background: #ddd;
-    text-decoration: underline;
-    padding: 0px 6px;
-}
+
 @media (max-width: 768px) {
 .modal-content {
     width: 100% !important;

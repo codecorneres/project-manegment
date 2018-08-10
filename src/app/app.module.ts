@@ -8,8 +8,9 @@ import { CommonModule } from '@angular/common';
 import { PushNotificationModule } from 'ng-push-notification';
 import { HttpClientModule } from '@angular/common/http';
 import { EmojiPickerModule } from 'ng-emoji-picker';
-import { PickerModule } from '@ctrl/ngx-emoji-mart'
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
+import { CallcomponentService } from './callcomponent.service';
 import { DataService } from './data.service';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard'; 
@@ -35,6 +36,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 
 import { PushNotificationsService } from './push-notifications.service';
 import { CookieService } from 'ngx-cookie-service';
+import { DeactivetaskComponent } from './deactivetask/deactivetask.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { CookieService } from 'ngx-cookie-service';
     AssingtaskComponent,
     AcceptComponent,
     SettingComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    DeactivetaskComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +70,7 @@ import { CookieService } from 'ngx-cookie-service';
     EmojiPickerModule
   
   ],
-  providers: [AuthService, DataService, PushNotificationsService, CookieService],
+  providers: [AuthService, DataService, PushNotificationsService, CookieService,CallcomponentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

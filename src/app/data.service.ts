@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';  
-import { HttpClient } from '@angular/common/http';   
+import { HttpClient, HttpHeaders } from '@angular/common/http';   
 import { Observable } from 'rxjs/Observable';  
 import 'rxjs/add/operator/map';  
 import 'rxjs/add/operator/do';
@@ -13,7 +13,9 @@ export class DataService {
 
   	constructor(private http: Http, private httpclient: HttpClient) { }
   	private headers = new Headers({'Content-Type': 'application/json'});
-
+    private httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
   	match(form : Form){     
     return this.http.post('api/Match/', JSON.stringify(form), {headers: this.headers}) 
            .map((response: Response) =>response.json())              
@@ -32,7 +34,6 @@ export class DataService {
     return this.http.post('api/createnewproject/', JSON.stringify(create), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
   	} 
-
     createnewtasks(createtask : String){     
     return this.http.post('api/createnewtasks/', JSON.stringify(createtask), {headers: this.headers}) 
            .map((response: Response) =>response.json())           
@@ -51,6 +52,14 @@ export class DataService {
     }
     Gettasks(projectid){  
      return this.http.post('api/getbyprojectid/',{'projectid': projectid})  
+            .map((response: Response) =>response.json())               
+    }
+    Getdeactivetasks(projectid){  
+     return this.http.post('api/Getdeactivetasks/',{'projectid': projectid})  
+            .map((response: Response) =>response.json())               
+    }
+    GetAlltasks(projectid){  
+     return this.http.post('api/GetAlltasks/',{'projectid': projectid})  
             .map((response: Response) =>response.json())               
     }
     GettaskUsers(projectid){  
@@ -166,8 +175,7 @@ export class DataService {
             .map((response: Response) =>response.json())               
     }
     uploadattachment(fd){  
-        return this.httpclient.post('api/uploadattachment/', fd) 
-           .map((response: Response) =>response.json())
+        return this.httpclient.post('api/uploadattachment/', fd)
     }
     sendDueDate(update){   
      return this.http.post('api/sendDueDate/', JSON.stringify(update), {headers: this.headers})   
@@ -185,6 +193,18 @@ export class DataService {
      return this.http.post('api/archive/',{'id': id})    
             .map((response: Response) =>response.json())               
     }
+    activeArchive(id){   
+     return this.http.post('api/activeArchive/',{'id': id})    
+            .map((response: Response) =>response.json())               
+    }
+    getAttachment(id){
+        return this.http.post('api/getAttachment/',{'id': id})  
+            .map((response: Response) =>response.json())  
+    }
+    removeattachment(id){
+        return this.http.post('api/removeattachment/',{'id': id})  
+            .map((response: Response) =>response.json())  
+    }
 /******/
 /****/
 /**/
@@ -197,9 +217,8 @@ checkboxValue(form){
      return this.http.post('api/GetUsers/',{'projectid': projectid}) 
             .map((response: Response) =>response.json())               
     }*/
-    uploadimage(fd){  
-        return this.httpclient.post('api/uploadImage/', fd) 
-           .map((response: Response) =>response.json())
+    uploadimage(fd) {  
+        return this.httpclient.post('api/uploadImage/', fd)
     }                                                                                                                                                                                                                                                                                                                                                       
 
     private handleError(error: any): Promise<any> {

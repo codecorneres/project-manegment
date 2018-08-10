@@ -7,6 +7,7 @@ import { DataService } from '../data.service';
 import {NgForm} from '@angular/forms';
 import * as $ from 'jquery';
 import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-createtask',
   templateUrl: './createtask.component.html',
@@ -33,11 +34,14 @@ selectedFile: File = null;
   constructor(private dataService: DataService, 
     private router: Router,
     private auth: AuthService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService) {   
+}
+
   datas;
   datass;
   users;
-  taskuser
+  taskuser;
+  attach;
   ngOnInit() {
      sessionStorage.setItem('headername', 'Create Task');
 
@@ -57,29 +61,35 @@ selectedFile: File = null;
         }
       })*/      
   }
-  /*downloadFile(data){
-    var blob = new Blob([data], { type: 'text/csv' });
-    var url= window.URL.createObjectURL(blob);
-    window.open(url);
-  }*/
   clickimageupload(){
      $(".FileUpload2").click();
      $(".FileUpload2").change(function () {
              
         var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
-        $(".spnFilePath2").html("<label for='attachment' class='control-label'><i class='fa fa-paperclip' aria-hidden='true'></i> Attachments:</label> <br> <a target='_blank' href=assets/images/fileUpload/"+fileName+ ">"+fileName +"</a>");
-        $(".attchdv").hide();
+        //$(".spnFilePath2").html("<a href=assets/images/fileUpload/"+fileName+ ">"+fileName +"</a>");
       });
   }
   onFileSelecet(event,id){
     this.selectedFile = <File>event.target.files[0];
-    console.log(this.selectedFile.name);
     const fd = new FormData();
     fd.append('id', id);
-      fd.append('file', this.selectedFile, this.selectedFile.name); 
-      this.dataService.uploadattachment(fd).subscribe(data => {this.datas = data    
-      });
+    fd.append('file', this.selectedFile, this.selectedFile.name); 
+      this.dataService.uploadattachment(fd).subscribe(respponse => {this.getAttachment(id)});  
   }
+  deactive(){
+    this.dataService.Getdeactivetasks(this.projectid).subscribe(form => {this.form = form});
+    $(".addtsk").hide();
+  }
+  active(){
+    this.Gettasks(this.projectid); 
+    $(".addtsk").show();;
+  }
+  all(){
+    this.dataService.GetAlltasks(this.projectid).subscribe(form => {this.form = form});
+    $(".addtsk").show();
+  }
+
+
   toggle() {
     this.show = !this.show;
     if(this.show) { 
@@ -152,8 +162,15 @@ showmove(){
   GettaskUsers(projectid){
     this.dataService.GettaskUsers(projectid).subscribe(form => {this.taskuser = form});
   }
+  getAttachment(id){
+    this.dataService.getAttachment(id).subscribe(data =>this.attach = data);
+  }
+  removeattachment(id,taskid){
+    this.dataService.removeattachment(id).subscribe(data =>{this.getAttachment(taskid)});
+  }
   GetassignUser(taskid){
    this.getcomments(taskid);
+   this.getAttachment(taskid);
     this.dataService.GetassignUser(taskid,this.projectid).subscribe(data =>this.asign = data);
   }
   createtask(createtasks){
@@ -164,7 +181,6 @@ showmove(){
   }
   Setdescription(updatetask){
   	this.dataService.Setdescription(updatetask).subscribe(data =>{
-      /*this.GettaskDescription(updatetask.task);*/
       $(".divd").hide();
       $(".divs").show();
     });
@@ -227,10 +243,6 @@ showmove(){
  updateTask(form){
     this.dataService.updateTask(form).subscribe(data =>  {this.Gettasks(this.projectid)});
   }
-  deleteTask(id){
-    this.dataService.deleteTask(id).subscribe(data =>  {this.Gettasks(this.projectid)});
-
-  }
   /*--for duedate and move--*/
   sendDueDate(updatetask){
     this.dataService.sendDueDate(updatetask).subscribe(data => this.datas = data)
@@ -252,5 +264,22 @@ showmove(){
     $("#hidemodaltemp"+ ind).click();
     this.dataService.archive(id).subscribe(data => { this.Gettasks(this.projectid) });
   }
+  activearchive(ind,id){
+    $("#hidemodaltemp"+ ind).click();
+    $(".addtsk").show();
+    this.dataService.activeArchive(id).subscribe(data => { this.Gettasks(this.projectid) });
+  }
+   confirmdeletetask(id){
+    $("#"+ id).show();
+  }
+  nodeletetask(id){
+    $("#"+ id).hide();
 
+  } 
+  deletetask(ind,id){
+    this.dataService.deleteTask(id).subscribe(data =>  {this.Gettasks(this.projectid)});
+    $("#hidemodaltemp"+ ind).click();
+    $(".addtsk").show();
+
+  }
 }

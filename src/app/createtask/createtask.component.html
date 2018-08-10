@@ -2,25 +2,21 @@
 <div class="container-fluid">
 <div class="row" *ngIf= "createtasks == 'createtask';else assignTaskdiv">
   <div class="col-md-2">
-    <!-- <app-slidbar></app-slidbar> -->
   </div>
   <div class="col-md-8">
-  <div class="row margntp">
-  	<div class="col-sm-12">
+  <div class="col-sm-12" style="margin-top: 20px;">
   		<h5>{{projectname}}</h5>
 	</div>
-	<div class="col-sm-3" *ngFor="let forms of form;let ind = index " >
-		
-	  	<div class="col-sm-12 md3" [attr.id]="'hidetasktemp' +ind">
+  <div class="row margntp" id="activetask">
+	<div class="col-sm-3" *ngFor="let forms of form;let ind = index ">
+	  	<div class="col-sm-12 md3">
 	  	<div [attr.class]="'hidetaskdiv' +ind">
 		  	<span class="spnsiz"> {{forms.task}}</span> 
 		  	<span *ngFor="let taskusershrt of taskuser">
-		  		<span *ngIf= "taskusershrt.projecttaskid ==forms._id" [attr.title]="taskusershrt.assignuser" class="shortnspn">
-		  			{{taskusershrt.shortname}}
-		  		</span>
+		  		<span *ngIf= "taskusershrt.projecttaskid ==forms._id" [attr.title]="taskusershrt.assignuser" class="shortnspn">{{taskusershrt.shortname}}</span>
 		  	</span>
 		  	<br><br>
-		  	<span class="ssd" data-toggle="modal" [attr.data-target]="'#s' +ind +1" (click)="GetassignUser(forms._id)"><i class="fa fa-eye eys" aria-hidden="true" title="add user"></i></span>
+		  	<span class="ssd" data-toggle="modal" [attr.data-target]="'#s' +ind +1" (click)="GetassignUser(forms._id)"><i class="fa fa-eye eys" aria-hidden="true" title="add user" *ngIf="forms.state=='1'"></i> <i class="fa fa-file-archive-o faic" aria-hidden="true" *ngIf="forms.state=='0'"></i></span>
 		  	<div class="modal fade" [attr.id]="'s' +ind +1" role="dialog">
 			    <div class="modal-dialog">
 			      <div class="modal-content">
@@ -35,10 +31,9 @@
 			      				<div class="form-group databaseshow" *ngIf="forms.duedate?.length > 0;">
 			      				<label for="duedate" class="control-label"><i class="fa fa-clock-o" aria-hidden="true"></i> Due Date:</label>
 			      					<p class=""> {{forms.duedate}} at {{forms.time}}</p>
-			      					
 			      				</div>
 			      				<div class="form-group demoshow"></div>
-						       <form class="frmclss" #setmembers="ngForm" (ngSubmit)="Setdescription(setmembers.value)">
+						       	<form class="frmclss" #setmembers="ngForm" (ngSubmit)="Setdescription(setmembers.value)" *ngIf="forms.state=='1'">
 						        	<input type="hidden" id="task" name="task" [(ngModel)]="forms._id"/>
 						        	<div class="" *ngIf="forms.description?.length <= 0;else descreptiondiv">
 						        	<div class="form-group">
@@ -48,7 +43,7 @@
 						        	<button type="submit" [disabled]="!setmembers.valid" class="btn btn-primary"> Save</button>
 						        	</div>
 						        	<ng-template #descreptiondiv>
-						        	<div class="form-group divs">
+						        	<div class="form-group divs" >
 			       	 					<label for="description" class="control-label"><i class="fa fa-indent" aria-hidden="true"></i> Description:</label><span class="desedit" (click)="showDescriptionDiv()"> edit </span>
 						        		<textarea rows="4" cols="50" class="form-control" id="description" name="description" [(ngModel)]="forms.description" placeholder="Add description...." readonly> </textarea>
 						        	</div>
@@ -61,19 +56,23 @@
 						        	</div>
 						        	</ng-template>
 						        </form>	
-						        <div *ngIf="forms.attachment?.length <= 0;else attachmentdiv">
-						       		<div class="form-group"></div>
-						       
+						        <div class="form-group" *ngIf="forms.state=='0'">
+			       	 					<label for="description" class="control-label"><i class="fa fa-indent" aria-hidden="true"></i> Description:</label>
+			       	 					<div *ngIf="forms.description?.length <= 0;else descriptiondiv">
+			       	 						<textarea rows="2" cols="50" class="form-control" id="description" name="description" disabled> There is no description.... </textarea>
+			       	 					</div>
+			       	 					<ng-template #descriptiondiv>
+			       	 						<textarea rows="2" cols="50" class="form-control" id="description" name="description" [(ngModel)]="forms.description" disabled> </textarea>
+			       	 					</ng-template>
+			       	 				</div>
+					        	<div class="form-group attchdv">
+						        	<div *ngFor="let attachs of attach;let ind = index ">
+						        	<label *ngIf="ind == '0'" for="attachment" class="control-label"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachments:</label> <br>
+						        	<a [attr.href]="'assets/images/fileUpload/'+attachs.attachment">{{attachs.attachment}}</a><span class="attachmntspn" style="float:right;" (click)="removeattachment(attachs._id,forms._id)" *ngIf="forms.state=='1'">Remove </span>
+						        	</div>
 						        </div>
-						        <ng-template #attachmentdiv>
-						        	<div class="form-group attchdv" >
-							        	<label for="attachment" class="control-label"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachments:</label> <br>
-							        	<!-- <span class="acls" (click)="downloadFile(forms.attachment)">{{forms.attachment}}</span> -->
-							        	<a [attr.href]="'assets/images/fileUpload/'+forms.attachment" target="_blank" >{{forms.attachment}}</a>
-							        </div>
-						        </ng-template>
 							    <div class="form-group spnFilePath2"></div>
-						        <form class="frmcls1" #comments="ngForm" (ngSubmit)="createcomments(comments.value)">
+						        <form class="frmcls1" #comments="ngForm" (ngSubmit)="createcomments(comments.value)" *ngIf="forms.state=='1'">
 						        	<input type="hidden" id="projectname" name="projectname" [(ngModel)]="projectname"/>
 						        	<input type="hidden" id="projectid" name="projectid" [(ngModel)]="projectid"/>
 						        	<input type="hidden" id="taskid" name="taskid" [(ngModel)]="forms._id"/>
@@ -95,8 +94,9 @@
 						        </div>
 						        <div data-spy="scroll" data-target=".navbar" data-offset="5" class="anyClass">
 						        <div class="row" *ngFor="let comments of commentdata;let inds = index ">
-						        	<div class="col-md-12 cmntclm"  *ngIf="comments.user == user;else nextdiv">
-						        		<span class="clrs"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn clrs">{{comments.user}}</span>
+						        	<div class="col-md-12"  *ngIf="forms.state =='1'">
+						        	<div class="col-md-12 cmntclm"  *ngIf="comments.user== user;else nextdiv">
+						        		<span class="clrs" ><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn clrs">{{comments.user}}</span>
 						        		<div [attr.class]="'hidediv' +inds">
 						        		<p class="cmntp">{{comments.comment}}</p>
 						        		<span class="btns" (click) ="showtoggle(inds)"><i class="fa fa-pencil-square-o" aria-hidden="true" title="edit comment"></i></span>
@@ -107,7 +107,6 @@
 						        		 		<button type="button" class="no" (click) ="nodelete('demo' +inds)">No</button>
 						        		 </div>
 						        		</div>
-						        		<!-- <ng-container *ngIf="showuser[ind]"> -->
 										<div [attr.class]="'showclstdiv' +inds" style="display: none">
 											<form class="forms" id="commentform" #forms="ngForm" (ngSubmit)="updatcomment(forms.value)">
 											    <div>
@@ -125,8 +124,14 @@
 												</div>
 											</form>
 										</div>
-										<!-- </ng-container> -->
 						        	</div>
+						        	</div>
+						        	<div class="col-md-12" *ngIf="forms.state =='0'">
+						        		<div class="col-md-12 cmntclm"  *ngIf="comments.user== user;else nextdiv">
+						        		<span class="clrs" ><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn clrs">{{comments.user}}</span>
+						        		<p class="cmp">{{comments.comment}}</p>
+						        		</div>
+								    </div>
 						        	<ng-template #nextdiv>
 						        	<div class="col-md-12 cmntclm" style="text-align: right;">
 						        		<span class="colr"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span><span class="cmntspn colr">{{comments.user}}</span>
@@ -136,7 +141,7 @@
 						        </div>
 						        </div>
 						    </div>
-						    <div class="col-md-4 mdr4">
+						    <div class="col-md-4 mdr4" *ngIf="forms.state=='1'">
 					        	<button type="button" class="adbtn" (click)="showdiv()" id="showbtn"><i class="fa fa-user-o faic" aria-hidden="true"></i> <span class="fasp">{{buttonsName}}</span></button>
 					        	<ng-container *ngIf="shows">
 					        	<div class="pop-over">
@@ -157,16 +162,17 @@
 			   							<input type="hidden"  name="projectname" [(ngModel)]="projectname">
 			   							<input type="hidden" name="projecttaskid" class="task" [(ngModel)]="forms._id">
 			   							<input type="hidden" name="projecttaskname" class="task" [(ngModel)]="forms.task">
+			   							<input type="hidden" name="state" class="task" [(ngModel)]="forms.state">
 			   							<input type="hidden" name="assignuser" class="task" [(ngModel)]= "assignuser.assignuserdata">
 			   							<button type="submit" class="pcls">{{assignuser.assignuserdata}}</button>
 					        		</form>
 			   						 </ng-template>
-
 					        		</div>
 					        		</ng-template>
 								</div>
 					        	</ng-container>
 					        	<button type="button" class="adbtn" (click)="clickimageupload()" id="showbtn1"><i class="fa fa-paperclip faic" aria-hidden="true"></i> <span class="fasp">Attachments</span></button>
+
 					        	<button type="button" class="adbtn" (click)="showduedate()"><i class="fa fa-clock-o faic" aria-hidden="true"></i> <span class="fasp">Due Date</span></button>
 					        	<ng-container *ngIf="duedate">
 					        		<form id="duedates" #duedates="ngForm" (ngSubmit)="sendDueDate(duedates.value)">
@@ -192,18 +198,23 @@
 					        	</ng-container>
 					        	<button type="button" class="adbtn" (click)="archive(ind,forms._id)" id="showbtn4"><i class="fa fa-file-archive-o faic" aria-hidden="true"></i> <span class="fasp">Delete</span></button>
 					        </div>
+					        <div class="col-md-4 mdr4" *ngIf="forms.state=='0'">
+					        	<button type="button" class="adbtn" (click)="activearchive(ind,forms._id)" id="showbtn4"><i class="fa fa-file-archive-o faic" aria-hidden="true"></i> <span class="fasp">Active Task</span></button>
+
+					        	<button type="button" class="adbtn" (click)="confirmdeletetask('demo' +ind)" id="showbtn4"><i class="fa fa-trash faic" aria-hidden="true" title="Delete Task"></i> <span class="fasp">Permanently Delete</span></button>
+					        	<div [attr.id]="'demo' +ind" class="deletdm" style="display: none;">
+			        		 		<p>Are you sure you want to delete the Task?</p>
+			        		 		<button type="submit" class="btn-danger" (click) ="deletetask(ind,forms._id)">Yes</button>
+			        		 		<button type="button" class="no" (click) ="nodeletetask('demo' +ind)">No</button>
+			        		 	</div>
+					        </div>
 					    </div>
 			        </div>
 			      </div>
 			    </div>
 			</div>
-			 <span class="righttask" (click) ="showtasktoggle(ind)"><i class="fa fa-pencil-square-o" aria-hidden="true" title="edit"></i></span>
-             <!--  <span class="righttask" (click) = "confirmtaskdelete('demos' +ind)"><i class="fa fa-trash" aria-hidden="true" title="Delete"></i></span>
-              <div [attr.id]="'demos' +ind" class="collapse deletdm">
-	                <p>Are you sure to delete Task?</p>
-	                <button type="submit" class="btn-danger" (click) ="deleteTask(forms._id)">Yes</button>
-	                <button type="button" class="no" (click) ="nodelete('demos' +ind)">No</button>
-              </div> -->
+			 <span class="righttask" (click) ="showtasktoggle(ind)" *ngIf="forms.state=='1'"><i class="fa fa-pencil-square-o" aria-hidden="true" title="edit"></i></span>
+            
              <span class="pdngs" *ngIf="forms.status =='complete'"><span class="statsbtn btn-success">{{forms.status}} <i class="fa fa-check" aria-hidden="true"></i></span></span>
 
               <span class="pdngs" *ngIf="forms.status == 'Progress'"><span class="statsbtn btn-primary">{{forms.status}} <i class="fa fa-spinner" aria-hidden="true"></i></span></span> 
@@ -228,8 +239,9 @@
           </form>
         </div>
         </div>
+    
 	</div>
-	<div class="col-sm-2" style="padding-right: 0px !important;">
+	<div class="col-sm-3 addtsk" style="padding-right: 0px !important;" >
 	  	<div class="col-sm-12 md3">
 	  		<p (click)="toggle()" id="bt1">{{buttonName}} </p>
 			<ng-container *ngIf="show">
@@ -250,13 +262,12 @@
 			</ng-container>
 		</div>
 	</div>
-  </div>		
+  </div>
   </div>
   <div class="col-md-2 marcltp">
 	<button type="button" class="adbtn" data-toggle="collapse" data-target="#demo"><i class="fa fa-user-o faic" aria-hidden="true"></i> Invite User</button>
 	<div id="demo" class="collapse">
 		<form class="frmcolaps" #createNewUser="ngForm" (ngSubmit)="inviteuser(createNewUser.value)">
-			<!-- <button type="button" class="close" data-dismiss="collapse">&times;</button> -->
 		    <div>
 		    	<input type="hidden" id="user" name="user" [(ngModel)]="user"/>
 		    	<input type="hidden" id="projectname" name="projectname" [(ngModel)]="projectname"/>
@@ -270,8 +281,13 @@
 	        <button type="submit" [disabled]="!createNewUser.valid" class="btn btn-primary form-control btnss"> Invite</button>
 		</form>
 	</div>
+	<button type="button" class="adbtn" data-toggle="collapse" data-target="#filtr"><i class="fa fa-search faic" aria-hidden="true"></i> Search Task</button>
+	  <div id="filtr" class="collapse">
+	  	<button type="button" data-toggle="collapse" id="all" (click)="all()" class="btn btn-primary ftlbtn" data-target="#filtr">All</button>
+	  	<button type="button" data-toggle="collapse" id="Active" (click)="active()" class="btn btn-primary ftlbtn" data-target="#filtr">Active</button>
+	  	<button type="button" data-toggle="collapse" id="Deactive" (click)="deactive()" class="btn btn-primary ftlbtn" data-target="#filtr">Deactive</button>
+	  </div>
   </div>
-
 </div>
 
 <ng-template #assignTaskdiv>
