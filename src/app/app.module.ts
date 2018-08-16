@@ -37,6 +37,8 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { PushNotificationsService } from './push-notifications.service';
 import { CookieService } from 'ngx-cookie-service';
 import { DeactivetaskComponent } from './deactivetask/deactivetask.component';
+import { FilterpipePipe } from './home/filterpipe.pipe';
+import { FilterPipe } from './createtask/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { DeactivetaskComponent } from './deactivetask/deactivetask.component';
     AcceptComponent,
     SettingComponent,
     ResetpasswordComponent,
-    DeactivetaskComponent
+    DeactivetaskComponent,
+    FilterpipePipe,
+    FilterPipe
   ],
   imports: [
     CommonModule,

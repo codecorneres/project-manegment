@@ -4,11 +4,17 @@
   <div class="col-md-2">
   </div>
   <div class="col-md-8">
+  <div class="col-sm-12">
+        <div class="col-md-3 fltrmd">
+     <input type="text" [(ngModel)]="searchText" placeholder="search text goes here" class="form-control searchflt">
+     <span class="searchspn"><i class="fa fa-search faic" aria-hidden="true"></i></span>
+     </div>
+     </div>
   <div class="col-sm-12" style="margin-top: 20px;">
   		<h5>{{projectname}}</h5>
 	</div>
   <div class="row margntp" id="activetask">
-	<div class="col-sm-3" *ngFor="let forms of form;let ind = index ">
+	<div class="col-sm-3" *ngFor="let forms of form | filter : searchText;let ind = index ">
 	  	<div class="col-sm-12 md3">
 	  	<div [attr.class]="'hidetaskdiv' +ind">
 		  	<span class="spnsiz"> {{forms.task}}</span> 
@@ -66,8 +72,8 @@
 			       	 					</ng-template>
 			       	 				</div>
 					        	<div class="form-group attchdv">
-						        	<div *ngFor="let attachs of attach;let ind = index ">
-						        	<label *ngIf="ind == '0'" for="attachment" class="control-label"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachments:</label> <br>
+						        	<div *ngFor="let attachs of attach;let indsa = index ">
+						        	<label *ngIf="indsa == '0'" for="attachment" class="control-label"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachments:</label> <br>
 						        	<a [attr.href]="'assets/images/fileUpload/'+attachs.attachment">{{attachs.attachment}}</a><span class="attachmntspn" style="float:right;" (click)="removeattachment(attachs._id,forms._id)" *ngIf="forms.state=='1'">Remove </span>
 						        	</div>
 						        </div>
@@ -82,9 +88,10 @@
 			       	 					<label for="comment" class="control-label"><i class="fa fa-comment-o" aria-hidden="true"></i> Add comment:</label>
 						        		<textarea rows="4" cols="50" class="form-control" id="comment" name="comment" [(ngModel)]="comment" placeholder="Add comment...." required value=""></textarea>
 
-  									<span class="btnFileUpload2" (click) ="clickimageupload()"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
-									<input type="file" name="file" (change) ="onFileSelecet($event,forms._id)" class="FileUpload2" style="display:none;">
+  									<span class="btnFileUpload2" (click) ="clickimageupload(ind)"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
+									<input type="file" name="file" (change) ="onFileSelecet($event,forms._id)" [attr.class]="'FileUpload2' +ind" style="display:none;">
 						        	</div>
+
 						        	
 						        	<button type="submit" [disabled]="!comments.valid" class="btn btn-primary"> Save</button>
 						        </form>
@@ -171,7 +178,7 @@
 					        		</ng-template>
 								</div>
 					        	</ng-container>
-					        	<button type="button" class="adbtn" (click)="clickimageupload()" id="showbtn1"><i class="fa fa-paperclip faic" aria-hidden="true"></i> <span class="fasp">Attachments</span></button>
+					        	<button type="button" class="adbtn" (click)="clickimageupload(ind)" id="showbtn1"><i class="fa fa-paperclip faic" aria-hidden="true"></i> <span class="fasp">Attachments</span></button>
 
 					        	<button type="button" class="adbtn" (click)="showduedate()"><i class="fa fa-clock-o faic" aria-hidden="true"></i> <span class="fasp">Due Date</span></button>
 					        	<ng-container *ngIf="duedate">

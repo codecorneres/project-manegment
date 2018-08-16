@@ -5,18 +5,19 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
 import { PushNotificationsService } from '../push-notifications.service'; 
 import * as $ from 'jquery'; 
 import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-forms;
+forms = [];
 datas;
 email;
 createtask;
-  cookieValue = 'UNKNOWN';
-
+cookieValue = 'UNKNOWN';
+searchText: string;
   constructor(
     private dataService: DataService, 
     private router: Router, 
@@ -24,9 +25,7 @@ createtask;
     private _notificationService: PushNotificationsService, 
     private cookieService: CookieService,
     private activatedRoute: ActivatedRoute)
-    { 
-      
-  }
+    {}
    createTask = function(projectname, projectid) {
     sessionStorage.setItem('projectname', projectname);
     sessionStorage.setItem('projectid', projectid);

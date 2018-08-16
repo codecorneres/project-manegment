@@ -66,3 +66,29 @@ a{
 .cretsk{
     margin-bottom: 10px;
 }
+.fltrmd{
+    position: absolute;
+    top: -45px;
+}
+.searchflt{
+    width:100%;
+}
+.searchspn{
+    position: absolute;
+    right: 25px;
+    top: 5px;
+    color: #8d8f92;
+}
+@media (max-width: 768px) {
+.searchflt{
+    width:81% !important;
+}
+.marcltp{
+    margin-top: 40px;
+    border-left: none;
+    height: auto !important;
+}
+.searchspn{
+    display: none;
+}
+}

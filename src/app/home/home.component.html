@@ -6,7 +6,18 @@
     </div>
     <div class="col-md-10">
       <div class="row">
-      	<div class="col-md-3" *ngFor="let project of forms;let ind = index ">
+       <div class="col-sm-12">
+        <div class="col-md-3 fltrmd">
+     <input type="text" [(ngModel)]="searchText" placeholder="search text goes here" class="form-control searchflt">
+     <span class="searchspn"><i class="fa fa-search faic" aria-hidden="true"></i></span>
+     </div>
+     </div>
+<!-- <ul>
+  <li *ngFor="let c of forms | filterpipe : searchText">
+    {{c.name}}
+  </li>
+</ul> -->
+      	<div class="col-md-3" *ngFor="let project of forms | filterpipe : searchText;let ind = index ">
           <div class="col-sm-12 md3" >
             <div [attr.class]="'hidediv' +ind">
               <div (click)= "createTask(project.name,project._id)">

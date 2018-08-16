@@ -61,9 +61,9 @@ selectedFile: File = null;
         }
       })*/      
   }
-  clickimageupload(){
-     $(".FileUpload2").click();
-     $(".FileUpload2").change(function () {
+  clickimageupload(ind){
+     $(".FileUpload2"+ind).click();
+     $(".FileUpload2"+ind).change(function () {
              
         var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
         //$(".spnFilePath2").html("<a href=assets/images/fileUpload/"+fileName+ ">"+fileName +"</a>");
