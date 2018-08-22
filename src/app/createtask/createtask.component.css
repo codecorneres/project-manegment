@@ -322,10 +322,9 @@ p {
 .fltrmd{
     position: absolute;
     top: -45px;
+    width:100% !important;
 }
-.searchflt{
-    width:100%;
-}
+
 .searchspn{
     position: absolute;
     right: 25px;
@@ -341,8 +340,8 @@ p {
     border-left: none;
     height: auto !important;
 }
-.searchflt{
-    width:81% !important;
+.fltrmd{
+    width:76% !important;
 }
 .marcltp{
     margin-top: 40px;

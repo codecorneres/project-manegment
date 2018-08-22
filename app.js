@@ -153,7 +153,6 @@ app.post("/api/singUp",function(req,res){
           res.send({data:"The email address you have entered is already registered"}); 
         }   
         else{
-          console.log(req.body);
           var mod = new user(req.body); 
           mod.save(function(err,data){  
             if(err){  

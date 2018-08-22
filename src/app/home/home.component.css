@@ -69,10 +69,9 @@ a{
 .fltrmd{
     position: absolute;
     top: -45px;
-}
-.searchflt{
     width:100%;
 }
+
 .searchspn{
     position: absolute;
     right: 25px;
@@ -80,8 +79,8 @@ a{
     color: #8d8f92;
 }
 @media (max-width: 768px) {
-.searchflt{
-    width:81% !important;
+.fltrmd{
+    width:76% !important;
 }
 .marcltp{
     margin-top: 40px;
