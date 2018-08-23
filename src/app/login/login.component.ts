@@ -104,8 +104,10 @@ resendpassword(form){
 
     this.loginuser = sessionStorage.getItem("LoggedInUser");
     this.cookieValue = this.cookieService.get('LoggedInUser');
-    if(this.cookieValue!=""){
-      if(this.id != "undefined" || this.id != undefined){
+    console.log(this.cookieValue);
+    if(this.cookieValue !=''){
+      console.log(this.id);
+      if(this.id != undefined){
         sessionStorage.setItem('notificationid', this.id);
         sessionStorage.setItem('useremail', this.useremail);
         sessionStorage.setItem('action', this.action);
@@ -115,6 +117,7 @@ resendpassword(form){
       else{
        this.router.navigate(['/home']);
       }
-      }
+    }
+
     }
 }
