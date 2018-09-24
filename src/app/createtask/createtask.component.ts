@@ -155,7 +155,7 @@ showmove(){
     $(".hidetaskdiv"+ arr).show();
     $(".showtaskdiv"+ arr).hide();
   }
-  
+
   Gettasks(projectid){
   	this.dataService.Gettasks(projectid).subscribe(form => {this.form = form});
   }

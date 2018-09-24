@@ -61,6 +61,7 @@ openPopup: Function;
 
 	     this.selectedValue.splice(index, 1);
 	    }
+	    
 	}
 	Getprofile(email){
 		this.dataService.getUserProfile(email).subscribe(data =>  this.user = data);
