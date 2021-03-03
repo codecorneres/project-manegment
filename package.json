@@ -54,7 +54,7 @@
     "ngx-cookie-service": "^1.0.10",
     "node-mailer": "^0.1.1",
     "nodemailer": "^2.7.2",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
     "sendmail": "^1.4.1",
