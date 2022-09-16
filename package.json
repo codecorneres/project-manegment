@@ -34,7 +34,7 @@
     "angular4-notify": "^1.2.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "dotenv": "^6.0.0",
     "email-templates": "^4.0.1",
